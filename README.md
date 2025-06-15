@@ -22,7 +22,7 @@ More details about the methodology and code can be found in [my thesis](https://
 
 # Running the code
 ## Code
-A `.py`  file can be added to the repository root, from which the desired functions can be imported from the [`src`](src) directory. [`main.py`](main.py) runs small program with functionalities of this repository. However, this repository contains only the framework for a tool, not the complete tool itself. Therefore, no GUI or fully integrated program that combines all functions is provided.
+A `.py`  file can be added to the repository root, from which the desired functions can be imported from the [`src`](src) directory. However, this repository contains only the framework for a tool, not the complete tool itself. Therefore, no GUI or fully integrated program that combines all functions is provided.
 
 ## Examples  
 [`main_jupyter.ipynb`](main_jupyter.ipynb) contains examples demonstrating all the functions in a logical, use-case-driven order.

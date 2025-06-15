@@ -3,6 +3,13 @@ import numpy as np
 cimport numpy as np
 # from cython.parallel import parallel, prange
 
+
+cdef extern from "numpy/arrayobject.h":
+    void import_array()
+
+# Call it once at module initialization
+import_array()
+
 def calculate_PET_grid(np.ndarray[np.float64_t, ndim=2] Ta, np.ndarray[np.float64_t, ndim=2] RH,
                        np.ndarray[np.float64_t, ndim=2] Tmrt, np.ndarray[np.float64_t, ndim=2] va, pet):
     '''

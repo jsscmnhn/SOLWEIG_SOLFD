@@ -2,7 +2,7 @@ import json
 from rusterizer_3d import rasterize_from_python
 import numpy as np
 from osgeo import gdal
-from ..util.misc import saveraster
+from src.util.misc import saveraster
 from scipy.ndimage import label
 
 class Surface_input:
@@ -220,48 +220,3 @@ class Building3d_input:
         dsms, highest_array = self.buildings_input(input_arrays, num_gaps)
 
         return dsms, highest_array, input_arrays
-
-
-if __name__ == "__main__":
-    data = Building3d_input(200, 200, 1)
-    tiff = "D:/Geomatics/thesis/_3drust/testing.tif"
-    geodataset = gdal.Open(tiff)
-    output = "D:/Geomatics/thesis/__newgaptesting/debug"
-
-    # path = "D:/Geomatics/thesis/__newgaptesting/example/building.obj"
-    # tiff =  "D:/Geomatics/thesis/oldwallvsnewwallmethod/option2/final_dsm.tif"
-    # dtm_path = "D:/Geomatics/thesis/oldwallvsnewwallmethod/option2/final_dtm.tif"
-    # geodataset = gdal.Open(tiff)
-    # output_file = "D:/Geomatics/thesis/oldwallvsnewwallmethod/userinput/examplecomb.tif"
-    #
-    obj_path = "D:/Geomatics/thesis/__newgaptesting/example/option3.obj"
-    dsm, highest, input_arrays = data.rasterize_3dbuilding(obj_path, 4)
-
-    i = 0
-    for array in input_arrays:
-        if i == 0:
-            array[np.isnan(array)] = 0
-        saveraster(geodataset, f"{output}/new_input_test_{i}.tiff", array)
-        i += 1
-
-    i=0
-
-    for array in dsm:
-        if i == 0:
-            array[np.isnan(array)] = 0
-        saveraster(geodataset, f"{output}/new_dsm_{i}.tiff", array)
-        i += 1
-
-    i=0
-    # for array in dsms:
-    #     if i == 0:
-    #         array[np.isnan(array)] = 0
-    #     saveraster(geodataset, f"D:/Geomatics/thesis/oldwallvsnewwallmethod/userinput/1gap_{i}.tiff", array)
-    #     i += 1
-    #
-    # i=0
-    # for array in dsm_new:
-    #     if i == 0:
-    #         array[np.isnan(array)] = 0
-    #     saveraster(geodataset, f"D:/Geomatics/thesis/oldwallvsnewwallmethod/userinput/new1gap_{i}.tiff", array)
-    #     i += 1

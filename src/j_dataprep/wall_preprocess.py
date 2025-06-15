@@ -258,24 +258,3 @@ class WallData:
         dirwalls = y
 
         return dirwalls
-
-
-if __name__ == "__main__":
-
-    folder_list = ['0.5', '1', '2']
-    D = 'D'
-
-    start = 'D:/Geomatics/thesis/__newres'
-    for folder in folder_list:
-        file = f"{start}/res{folder}/final_dsm_over.tif"
-
-        output_aspect = f"{start}/res{folder}/wallaspect.tif"
-        output_height = f"{start}/res{folder}/wallheight.tif"
-        gdal_dsms = gdal.Open(file)
-
-        walldata = WallData(gdal_dsms, 2)
-        wall_aspect = walldata.wall_aspect
-
-        saveraster(gdal_dsms, output_aspect, wall_aspect.get())
-        saveraster(gdal_dsms, output_height, walldata.wall_height.get())
-

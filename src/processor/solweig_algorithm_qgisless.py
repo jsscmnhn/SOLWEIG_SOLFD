@@ -38,11 +38,11 @@ import os
 # from qgis.PyQt.QtGui import QIcon
 from src.util.misc import saveraster
 import zipfile
-from functions.SOLWEIGpython.UTIL.Solweig_v2015_metdata_noload import Solweig_2015a_metdata_noload
+from src.functions.SOLWEIGpython.UTIL.Solweig_v2015_metdata_noload import Solweig_2015a_metdata_noload
 from src.functions.SOLWEIGpython.UTIL.clearnessindex_2013b import clearnessindex_2013b
 from src.functions.SOLWEIGpython.Tgmaps_v1 import Tgmaps_v1
 from src.functions.SOLWEIGpython import Solweig_2022a_calc_forprocessing as so
-from functions.SOLWEIGpython import WriteMetadataSOLWEIG
+from src.functions.SOLWEIGpython import WriteMetadataSOLWEIG
 import matplotlib.pyplot as plt
 from shutil import rmtree
 import string
@@ -507,11 +507,11 @@ class SOLWEIGAlgorithm():
             if np.min(radD) == -999:
                 raise Exception("Diffuse radiation include NoData values",
                                         'Tick in the box "Estimate diffuse and direct shortwave..." or aqcuire '
-                                        'observed values from external data sources.')
+                                        'observed values from external data sourced_data.')
             if np.min(radI) == -999:
                 raise Exception("Direct radiation include NoData values",
                                         'Tick in the box "Estimate diffuse and direct shortwave..." or aqcuire '
-                                        'observed values from external data sources.')
+                                        'observed values from external data sourced_data.')
 
 
         # %Parameterisarion for Lup
@@ -823,76 +823,3 @@ class SOLWEIGAlgorithm():
         rmtree(self.temp_dir, ignore_errors=True)  
      
         return {self.OUTPUT_DIR: outputDir}
-
-
-if __name__ == "__main__":
-    D = 'D'
-    # folder_list = ['2000']
-    front = "D:/Geomatics/optimization_tests"
-    front2 = "D:/Geomatics/optimization_tests_laptop"
-    INPUT_MET = f"{D}:/Geomatics/thesis/heattryout/preprocess/climatedata/UMEPclimate_oneday.txt"
-    #
-    # # f"{D}:/Geomatics/optimization_tests/
-    # for folder in folder_list:
-    #     INPUT_DSM = f"{front}/{folder}/final_dsm_over.tif"
-    #     INPUT_SVF = f"{front}/{folder}/svf_umep_trees/svfs.zip"
-    #     INPUT_ANISO = f"{front}/{folder}/svf_umep_trees/shadowmats.npz"
-    #     INPUT_LC = f"{front}/{folder}/landcover.tif"
-    #     INPUT_CDSM = f"{front}/{folder}/CHM.tif"
-    #     INPUT_HEIGHT = f"{front}/{folder}/wallheight.tif"
-    #     INPUT_ASPECT = f"{front}/{folder}/wallaspect.tif"
-    #     UTC = 0
-    #     OUTPUT_DIR =f"{front2}/{folder}/solweig_umep_chm"
-    #
-    #     dump_stats = f"{front2}/profile_results_umep_chm.prof"
-    #
-    #     test = SOLWEIGAlgorithm(INPUT_DSM, INPUT_SVF, INPUT_CDSM, INPUT_HEIGHT, INPUT_ASPECT, UTC, OUTPUT_DIR, INPUT_MET, INPUT_LC=INPUT_LC, INPUT_ANISO=INPUT_ANISO)
-    #
-    #     with cProfile.Profile() as profiler:
-    #         test.processAlgorithm()
-    #
-    #     # Print profiling results
-    #     stats = pstats.Stats(profiler)
-    #     stats.sort_stats('cumulative')
-    #     stats.print_stats(20)
-    #
-    #     stats.dump_stats(dump_stats)
-    #
-    #     txt_output = f"{front2}/{folder}/profile_results_umep_chm.txt"
-    #     with open(txt_output, "w") as f:
-    #         stats = pstats.Stats(profiler, stream=f)
-    #         stats.sort_stats('cumulative')
-    #         stats.print_stats(20)
-
-    folder_list = ['2000', '3000']
-
-    for folder in folder_list:
-        INPUT_DSM = f"{front}/{folder}/final_dsm_over.tif"
-        INPUT_SVF =f"{front2}/{folder}/svf_umep/svfs.zip"
-        INPUT_ANISO = f"{front2}/{folder}/svf_umep/shadowmats.npz"
-        INPUT_LC = f"{front}/{folder}/landcover.tif"
-        INPUT_CDSM = None
-        INPUT_HEIGHT =f"{front}/{folder}/wallheight.tif"
-        INPUT_ASPECT = f"{front}/{folder}/wallaspect.tif"
-        UTC = 0
-        OUTPUT_DIR =f"{front2}/{folder}/solweig_umep"
-
-        dump_stats = f"{front2}/{folder}/profile_results_umep.prof"
-
-        test = SOLWEIGAlgorithm(INPUT_DSM, INPUT_SVF, INPUT_CDSM, INPUT_HEIGHT, INPUT_ASPECT, UTC, OUTPUT_DIR, INPUT_MET, INPUT_LC=INPUT_LC, INPUT_ANISO=INPUT_ANISO)
-
-        with cProfile.Profile() as profiler:
-            test.processAlgorithm()
-
-        # Print profiling results
-        stats = pstats.Stats(profiler)
-        stats.sort_stats('cumulative')
-        stats.print_stats(20)
-
-        stats.dump_stats(dump_stats)
-
-        txt_output = f"{front2}/{folder}/profile_results_umep.txt"
-        with open(txt_output, "w") as f:
-            stats = pstats.Stats(profiler, stream=f)
-            stats.sort_stats('cumulative')
-            stats.print_stats(20)

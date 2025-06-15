@@ -1,0 +1,170 @@
+[
+  {
+    "latin name": "fraxinus",
+    "age": "early_mature",
+    "crown dia": 9.4,
+    "tree ht": 12.2,
+    "trunk ht": 3.7
+  },
+  {
+    "latin name": "platanus",
+    "age": "early_mature",
+    "crown dia": 12.4,
+    "tree ht": 15.9,
+    "trunk ht": 4.8
+  },
+  {
+    "latin name": "quercus",
+    "age": "early_mature",
+    "crown dia": 10.8,
+    "tree ht": 12.7,
+    "trunk ht": 3.8
+  },
+  {
+    "latin name": "salix",
+    "age": "early_mature",
+    "crown dia": 9.0,
+    "tree ht": 13.8,
+    "trunk ht": 4.1
+  },
+  {
+    "latin name": "tilia",
+    "age": "early_mature",
+    "crown dia": 7.2,
+    "tree ht": 8.7,
+    "trunk ht": 2.6
+  },
+  {
+    "latin name": "fraxinus",
+    "age": "late_mature",
+    "crown dia": 12.2,
+    "tree ht": 15.4,
+    "trunk ht": 4.6
+  },
+  {
+    "latin name": "quercus",
+    "age": "late_mature",
+    "crown dia": 15.6,
+    "tree ht": 16.0,
+    "trunk ht": 4.8
+  },
+  {
+    "latin name": "salix",
+    "age": "late_mature",
+    "crown dia": 11.6,
+    "tree ht": 18.2,
+    "trunk ht": 5.5
+  },
+  {
+    "latin name": "tilia",
+    "age": "late_mature",
+    "crown dia": 13.0,
+    "tree ht": 16.0,
+    "trunk ht": 4.8
+  },
+  {
+    "latin name": "fraxinus",
+    "age": "mature",
+    "crown dia": 11.2,
+    "tree ht": 13.7,
+    "trunk ht": 4.1
+  },
+  {
+    "latin name": "platanus",
+    "age": "mature",
+    "crown dia": 18.2,
+    "tree ht": 20.3,
+    "trunk ht": 6.1
+  },
+  {
+    "latin name": "quercus",
+    "age": "mature",
+    "crown dia": 14.8,
+    "tree ht": 16.5,
+    "trunk ht": 5.0
+  },
+  {
+    "latin name": "salix",
+    "age": "mature",
+    "crown dia": 14.2,
+    "tree ht": 21.1,
+    "trunk ht": 6.3
+  },
+  {
+    "latin name": "tilia",
+    "age": "mature",
+    "crown dia": 10.6,
+    "tree ht": 15.5,
+    "trunk ht": 4.6
+  },
+  {
+    "latin name": "fraxinus",
+    "age": "semi_mature",
+    "crown dia": 6.6,
+    "tree ht": 12.0,
+    "trunk ht": 3.6
+  },
+  {
+    "latin name": "platanus",
+    "age": "semi_mature",
+    "crown dia": 9.0,
+    "tree ht": 9.7,
+    "trunk ht": 2.9
+  },
+  {
+    "latin name": "quercus",
+    "age": "semi_mature",
+    "crown dia": 8.8,
+    "tree ht": 10.1,
+    "trunk ht": 3.0
+  },
+  {
+    "latin name": "salix",
+    "age": "semi_mature",
+    "crown dia": 4.0,
+    "tree ht": 9.7,
+    "trunk ht": 2.9
+  },
+  {
+    "latin name": "tilia",
+    "age": "semi_mature",
+    "crown dia": 8.6,
+    "tree ht": 10.1,
+    "trunk ht": 3.0
+  },
+  {
+    "latin name": "fraxinus",
+    "age": "young",
+    "crown dia": 3.8,
+    "tree ht": 5.8,
+    "trunk ht": 1.7
+  },
+  {
+    "latin name": "platanus",
+    "age": "young",
+    "crown dia": 7.8,
+    "tree ht": 8.0,
+    "trunk ht": 2.4
+  },
+  {
+    "latin name": "quercus",
+    "age": "young",
+    "crown dia": 4.6,
+    "tree ht": 5.8,
+    "trunk ht": 1.7
+  },
+  {
+    "latin name": "salix",
+    "age": "young",
+    "crown dia": 8.0,
+    "tree ht": 12.0,
+    "trunk ht": 3.6
+  },
+  {
+    "latin name": "tilia",
+    "age": "young",
+    "crown dia": 5.0,
+    "tree ht": 7.0,
+    "trunk ht": 2.1
+  }
+]

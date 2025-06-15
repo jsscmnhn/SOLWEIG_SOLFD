@@ -57,7 +57,7 @@ class TmrtOutput:
             self.valid_mask &= (water_mask != 0)
 
 
-    def get_pet_raster_from_lookup(self, tmrt_raster, wind_speed, air_temp, rh, body_type, lookup_file="src/j_output/pet_lookup.h5",
+    def get_pet_raster_from_lookup(self, tmrt_raster, wind_speed, air_temp, rh, body_type, lookup_file="src/databases/pet_lookup.h5",
                                tmrt_min=0, tmrt_max=65, tmrt_step=0.5, wind_speeds=None, rhs=None, temps=None):
         '''
         Returns the PET raster for the given TMRT raster and atmospheric conditions using a lookup table.
@@ -224,7 +224,7 @@ class TmrtOutput:
             dict: Statistics including mean, median, min, max, and bin area/percentage breakdown.
         '''
         if isTmrt:
-            bins = [-np.inf, 15, 20, 25, 30, 35, 40, 45, 50, np.inf]
+            bins = [-np.inf, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, np.inf]
         else:
             bins = [-np.inf, 4, 8, 13, 18, 23, 29, 35, 41, np.inf]
 
@@ -269,7 +269,7 @@ class TmrtOutput:
 
         return classified
 
-    def calc_pet(self, Ta, RH, va, body_type="standard_man", lookup_file="src/j_output/pet_lookup.h5"):
+    def calc_pet(self, Ta, RH, va, body_type="standard_man", lookup_file="src/databases/pet_lookup.h5"):
         '''
         Computes PET and classified PET for each timestep and averaged Tmrt using the lookup table.
 

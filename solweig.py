@@ -6,15 +6,100 @@ import cProfile
 import pstats
 
 
-"optimization tests"
+# GAP TESTING
+# begin = ('D:/Geomatics/thesis/oldwallvsnewwallmethod/option2')
+begin = ('D:/Geomatics/thesis/oldwallvsnewwallmethod/option2')
+output = 'D:/solfdoutputs'
+INPUT_MET = "C:/thesis/UMEP_thesis/src/j_dataprep/climate/avgday_2530_qgis.txt"
+folder_list = ['option2']
 
-begin = "C:/Users/jessi/OneDrive/Bureaublad/temp/optimization_tests"
-output = "C:/Users/jessi/OneDrive/Bureaublad/temp/laptop"
-output_opt = "C:/Users/jessi/OneDrive/Bureaublad/temp/timing_laptop"
-INPUT_MET = "C:/Users/jessi/OneDrive/Bureaublad/temp/UMEPclimate_oneday.txt"
 
-D = 'D'
-folder_list = ['250', '500', '1000', '1500']
+# INPUT_DSM = f"{begin}/final_dsm.tif"
+# INPUT_SVF = f"{output}/svf/svfs"
+# INPUT_ANISO = f"{output}//svf/shadowmats.npz"
+# INPUT_LC = f"{begin}/newlandcover.tif"
+# INPUT_CDSM =  f"{begin}/CHM.tif"
+# INPUT_HEIGHT = f"{begin}/wallheight.tif"
+# INPUT_ASPECT = f"{begin}/wallaspect.tif"
+# UTC = 0
+# OUTPUT_DIR_solweig = f"{output}/solweig"
+#
+# OUTPUT_DIR_SVF = f"{output}/svf"
+#
+INPUT_DSM = f"{begin}/final_dsm.tif"
+INPUT_SVF = f"{output}/svf/svfs"
+INPUT_ANISO = f"{output}/svf/shadowmats.npz"
+INPUT_LC = f"{begin}/newlandcover.tif"
+INPUT_CDSM =  f"{begin}/CHM.TIF"
+INPUT_HEIGHT = f"{begin}/wallheight.tif"
+INPUT_ASPECT = f"{begin}/wallaspect.tif"
+UTC = 0
+OUTPUT_DIR_solweig = f"{output}/solweig"
+
+OUTPUT_DIR_SVF = f"{output}/svf"
+
+
+test_SVF = SVF(INPUT_DSM=INPUT_DSM,INPUT_CDSM=INPUT_CDSM, OUTPUT_DIR=OUTPUT_DIR_SVF, OUTPUT_FILE='output.tif', USE_VEG=True)
+#
+test_SVF.processAlgorithm()
+
+test = SOLWEIGAlgorithm(INPUT_DSM, INPUT_SVF, INPUT_CDSM, INPUT_HEIGHT, INPUT_ASPECT, UTC, OUTPUT_DIR_solweig,
+                        INPUT_MET, INPUT_LC=INPUT_LC, INPUT_ANISO=INPUT_ANISO)
+
+test.processAlgorithm()
+
+    # Print profiling results
+    # stats = pstats.Stats(profiler)
+    # stats.sort_stats('cumulative')
+    # stats.print_stats(20)
+    #
+    # txt_output = f"{output}/{folder}/profile_results_2.5d.txt"
+    # with open(txt_output, "w") as f:
+    #     stats = pstats.Stats(profiler, stream=f)
+    #     stats.sort_stats('cumulative')
+    #     stats.print_stats(20)
+
+# "optimization tests"
+#
+# begin = "D:/Geomatics/thesis/oldwallvsnewwallmethod/option2"
+# output = "D:/Geomatics/thesis/oldwallvsnewwallmethod/new"
+# INPUT_MET = "C:/Users/jessi/OneDrive/Bureaublad/temp/UMEPclimate_oneday.txt"
+# folder = None
+#
+# method = ['oldmethod', 'newmethod']
+# j = 0
+# for aspect in ['wallaspect_old']:
+#    INPUT_DSM = f"{begin}//final_dsm.tif"
+#    INPUT_SVF =  f"{begin}//svfs"
+#    INPUT_ANISO =  f"{begin}//shadowmats.npz"
+#    INPUT_LC = f"{begin}//landcover.tif"
+#    INPUT_CDSM = None
+#    INPUT_DTM = f"{begin}//final_dtm.tif"
+#    # INPUT_DSMS = f"{begin}/{folder}/dsms.tif"
+#    INPUT_HEIGHT = f"{begin}//wallheight.tif"
+#    INPUT_ASPECT = f"{begin}//{aspect}.tif"
+#    UTC = 0
+#    OUTPUT_DIR_solweig = f"{output}/solweig_{aspect}"
+#
+#
+#    OUTPUT_DIR_SVF = f"{output}//svfs"
+#
+#    test = SOLWEIGAlgorithm(INPUT_DSM, INPUT_SVF, INPUT_CDSM, INPUT_HEIGHT, INPUT_ASPECT, UTC, OUTPUT_DIR_solweig,
+#                            INPUT_MET, INPUT_LC=INPUT_LC, INPUT_ANISO=INPUT_ANISO,  INPUT_DTM=INPUT_DTM)
+#
+#
+#    test.processAlgorithm()
+#
+#    j += 1
+#
+#
+#    # SVF
+#    # test_SVF = SVF(INPUT_DSM=INPUT_DSM, INPUT_CDSM=INPUT_CDSM, OUTPUT_DIR=OUTPUT_DIR_SVF, INPUT_DTM=INPUT_DTM, OUTPUT_FILE='output.tif',
+#    #                INPUT_MULT_DSMS=INPUT_DSMS, USE_VEG=True)
+#    # test_SVF.processAlgorithm()
+
+
+
 
 # ============== 3d =======================
 # for folder in folder_list:
@@ -72,63 +157,63 @@ folder_list = ['250', '500', '1000', '1500']
 #         stats.sort_stats('cumulative')
 #         stats.print_stats(20)
 #
-for folder in folder_list:
-    INPUT_DSM = f"{begin}/{folder}/final_dsm_over.tif"
-    INPUT_SVF = f"{output}/{folder}/svf_trees_3d/svfs"
-    INPUT_ANISO = f"{output}/{folder}/svf_trees_3d/shadowmats.npz"
-    INPUT_LC = f"{begin}/{folder}/landcover.tif"
-    INPUT_CDSM = f"{begin}/{folder}/CHM.tif"
-    INPUT_DSMS = f"{begin}/{folder}/dsms.tif"
-    INPUT_DTM = f"{begin}/{folder}/final_dtm.tif"
-    INPUT_HEIGHT = f"{begin}/{folder}/wallheight.tif"
-    INPUT_ASPECT = f"{begin}/{folder}/wallaspect.tif"
-    UTC = 0
-    OUTPUT_DIR_solweig = f"{output}/{folder}/solweig_chm_3d"
-
-    OUTPUT_DIR_SVF = f"{output}/{folder}/svf_trees_3d"
-
-    # SVF
-    dump_stats = f"{output_opt}/{folder}/svf_results_chm_3d.prof"
-
-    test_SVF = SVF(INPUT_DSM=INPUT_DSM, INPUT_CDSM=INPUT_CDSM, OUTPUT_DIR=OUTPUT_DIR_SVF, OUTPUT_FILE='output.tif',
-                   INPUT_MULT_DSMS=INPUT_DSMS, USE_VEG=True, INPUT_DTM=INPUT_DTM)
-
-    with cProfile.Profile() as profiler:
-        test_SVF.processAlgorithm_3d()
-
-    # Print profiling results
-    stats = pstats.Stats(profiler)
-    stats.sort_stats('cumulative')
-    stats.print_stats(20)
-
-    stats.dump_stats(dump_stats)
-    txt_output = f"{output_opt}/{folder}/svf_results_chm_3d.txt"
-    with open(txt_output, "w") as f:
-        stats = pstats.Stats(profiler, stream=f)
-        stats.sort_stats('cumulative')
-        stats.print_stats(20)
-
-    # SOLWEIG
-
-    dump_stats = f"{output_opt}/{folder}/profile_results_chm_3d.prof"
-
-    test = SOLWEIGAlgorithm(INPUT_DSM, INPUT_SVF, INPUT_CDSM, INPUT_HEIGHT, INPUT_ASPECT, UTC, OUTPUT_DIR_solweig,
-                            INPUT_MET, INPUT_LC=INPUT_LC, INPUT_ANISO=INPUT_ANISO, INPUT_MULT_DSMS=INPUT_DSMS, INPUT_DTM=INPUT_DTM)
-
-    with cProfile.Profile() as profiler:
-        test.processAlgorithm_3d()
-
-    # Print profiling results
-    stats = pstats.Stats(profiler)
-    stats.sort_stats('cumulative')
-    stats.print_stats(20)
-
-    stats.dump_stats(dump_stats)
-    txt_output = f"{output_opt}/{folder}/profile_results_chm_3d.txt"
-    with open(txt_output, "w") as f:
-        stats = pstats.Stats(profiler, stream=f)
-        stats.sort_stats('cumulative')
-        stats.print_stats(20)
+# for folder in folder_list:
+#     INPUT_DSM = f"{begin}/{folder}/final_dsm_over.tif"
+#     INPUT_SVF = f"{output}/{folder}/svf_trees_3d/svfs"
+#     INPUT_ANISO = f"{output}/{folder}/svf_trees_3d/shadowmats.npz"
+#     INPUT_LC = f"{begin}/{folder}/landcover.tif"
+#     INPUT_CDSM = f"{begin}/{folder}/CHM.tif"
+#     INPUT_DSMS = f"{begin}/{folder}/dsms.tif"
+#     INPUT_DTM = f"{begin}/{folder}/final_dtm.tif"
+#     INPUT_HEIGHT = f"{begin}/{folder}/wallheight.tif"
+#     INPUT_ASPECT = f"{begin}/{folder}/wallaspect.tif"
+#     UTC = 0
+#     OUTPUT_DIR_solweig = f"{output}/{folder}/solweig_chm_3d"
+#
+#     OUTPUT_DIR_SVF = f"{output}/{folder}/svf_trees_3d"
+#
+#     # SVF
+#     dump_stats = f"{output_opt}/{folder}/svf_results_chm_3d.prof"
+#
+#     test_SVF = SVF(INPUT_DSM=INPUT_DSM, INPUT_CDSM=INPUT_CDSM, OUTPUT_DIR=OUTPUT_DIR_SVF, OUTPUT_FILE='output.tif',
+#                    INPUT_MULT_DSMS=INPUT_DSMS, USE_VEG=True, INPUT_DTM=INPUT_DTM)
+#
+#     with cProfile.Profile() as profiler:
+#         test_SVF.processAlgorithm_3d()
+#
+#     # Print profiling results
+#     stats = pstats.Stats(profiler)
+#     stats.sort_stats('cumulative')
+#     stats.print_stats(20)
+#
+#     stats.dump_stats(dump_stats)
+#     txt_output = f"{output_opt}/{folder}/svf_results_chm_3d.txt"
+#     with open(txt_output, "w") as f:
+#         stats = pstats.Stats(profiler, stream=f)
+#         stats.sort_stats('cumulative')
+#         stats.print_stats(20)
+#
+#     # SOLWEIG
+#
+#     dump_stats = f"{output_opt}/{folder}/profile_results_chm_3d.prof"
+#
+#     test = SOLWEIGAlgorithm(INPUT_DSM, INPUT_SVF, INPUT_CDSM, INPUT_HEIGHT, INPUT_ASPECT, UTC, OUTPUT_DIR_solweig,
+#                             INPUT_MET, INPUT_LC=INPUT_LC, INPUT_ANISO=INPUT_ANISO, INPUT_MULT_DSMS=INPUT_DSMS, INPUT_DTM=INPUT_DTM)
+#
+#     with cProfile.Profile() as profiler:
+#         test.processAlgorithm_3d()
+#
+#     # Print profiling results
+#     stats = pstats.Stats(profiler)
+#     stats.sort_stats('cumulative')
+#     stats.print_stats(20)
+#
+#     stats.dump_stats(dump_stats)
+#     txt_output = f"{output_opt}/{folder}/profile_results_chm_3d.txt"
+#     with open(txt_output, "w") as f:
+#         stats = pstats.Stats(profiler, stream=f)
+#         stats.sort_stats('cumulative')
+#         stats.print_stats(20)
 
 
 # =============================== 2d ==========================================================

@@ -1,7 +1,7 @@
 Running the code
 ================
 
-A ``.py`` file can be added to the repository root, from which the desired functions can be imported from the ``src`` directory. The file ``main.py`` runs a small program demonstrating functionalities of this repository. However, this repository contains only the framework for a tool, not a complete tool itself. Therefore, no GUI or fully integrated program that combines all functions is provided.
+A ``.py`` file can be added to the repository root, from which the desired functions can be imported from the ``src`` directory. However, this repository contains only the framework for a tool, not a complete tool itself. Therefore, no GUI or fully integrated program that combines all functions is provided.
 
 Examples
 ----------

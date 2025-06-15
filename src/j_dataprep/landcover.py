@@ -46,7 +46,7 @@ class LandCover:
     """
     #src/j_dataprep/
     def __init__(self, bbox, crs="http://www.opengis.net/def/crs/EPSG/0/28992", use_bgt=True, main_roadtype=0, resolution=0.5, building_data=None, dataset=None,
-                 dataset_path=None, buildings_path=None, layer=None, nodata_fill=0, roads_on_top=True, landcover_path_bgt="landcover_bgt.json",  landcover_top="src/j_dataprep/landcover_top.json"):
+                 dataset_path=None, buildings_path=None, layer=None, nodata_fill=0, roads_on_top=True, landcover_path_bgt="src/databases/landcover_bgt.json",  landcover_top="src/databases/landcover_top.json"):
         self.bbox = bbox
         self.transform = None
         self.crs = crs
@@ -1001,90 +1001,3 @@ class Buildings:
 
     def retrieve_user_buildings(self, identification):
         self.removed_user_buildings.remove(identification)
-
-
-if __name__ == "__main__":
-    # bbox_dict = {
-    #     'historisch': [(175905, 317210, 176505, 317810), (84050, 447180, 84650, 447780), (80780, 454550, 81380, 455150),
-    #                    (233400, 581500, 234000, 582100), (136600, 455850, 137200, 456450),
-    #                    (121500, 487000, 122100, 487600)
-    #                    ],
-    #     'tuindorp': [(76800, 455000, 78200, 455700), (152600, 463250, 153900, 463800), (139140, 469570, 139860, 470400),
-    #                  (190850, 441790, 191750, 442540), (113100, 551600, 113650, 552000), (32050, 391900, 32850, 392500)
-    #
-    #                  ],
-    #     'vinex': [(146100, 486500, 147000, 487400), (153750, 467550, 154650, 468450), (115300, 517400, 116100, 518250),
-    #               (102000, 475900, 103100, 476800), (160750, 388450, 161650, 389350), (84350, 449800, 85250, 450700)
-    #
-    #               ],
-    #     'volkswijk': [(104200, 490550, 105100, 491450), (78200, 453900, 79100, 454800), (83500, 447020, 84050, 447900),
-    #                   (136200, 456500, 137100, 457300), (182700, 579200, 183800, 579750),
-    #                   (233400, 582800, 234300, 583700)
-    #
-    #                   ],
-    #     'bloemkool': [(81700, 427490, 82700, 428200), (84050, 444000, 84950, 444900), (116650, 518700, 117550, 519600),
-    #                   (235050, 584950, 235950, 585850), (210500, 473900, 211400, 474800),
-    #                   (154700, 381450, 155700, 382150)
-    #
-    #                   ],
-    #
-    #     'stedelijk': [
-    #         (90300, 436900, 91300, 437600), (91200, 438500, 92100, 439300), (121350, 483750, 122250, 484650),
-    #         (118400, 486400, 119340, 487100)
-    #     ]
-    # }
-
-    bbox = (121500, 487000, 122100, 487600)
-
-    # bbox_list = [(120000, 485700, 120126, 485826), (120000, 485700, 120251, 485951), (120000, 485700, 120501, 486201), (120000, 485700, 120751, 486451), (120000, 485700, 121001, 486701), (120000, 485700, 121501, 487201) ]
-    # folder_list = ['250', '500', '1000', '1500', '2000', '3000']
-    #
-    # bbox_list = [ (120000, 485700, 121501, 487201)]
-    crs = "http://www.opengis.net/def/crs/EPSG/0/28992"
-    start = 'd:/Geomatics/thesis/_analysisfinalfurther'
-    D = 'D'
-    i = 0
-
-    output =  f"{start}/landcover_debug.tif"
-    dataset_path = f"{start}/historisch/loc_5/final_dsm_over.tif"
-    buildings_path = (f"{start}/historisch/loc_5/buildings.gpkg")
-    landcover = LandCover(bbox, crs, dataset_path=dataset_path, buildings_path=buildings_path, layer="buildings")
-    landcover.save_raster(output, False)
-    # for folder in folder_list:
-    #     dataset_path = f"{D}:/Geomatics/optimization_tests/{folder}/final_dsm_over.tif"
-    #     buildings_path = f"{D}:/Geomatics/optimization_tests/{folder}/buildings.gpkg"
-    #     output = f"{D}:/Geomatics/optimization_tests/{folder}/landcover.tif"
-    #     landcover = LandCover(bbox_list[i], crs, dataset_path=dataset_path, buildings_path=buildings_path, layer="buildings")
-    #     landcover.save_raster(output, False)
-    #     i += 1
-
-    # crs = "http://www.opengis.net/def/crs/EPSG/0/28992"
-    # for nbh_type in ['historisch', 'tuindorp', 'vinex', 'volkswijk', 'bloemkool']:
-    #     for i in [0, 1, 2, 3, 4, 5]:
-    #         output =  f"{start}/{nbh_type}/loc_{i}/landcover_stone.tif"
-    #         bbox = bbox_dict[nbh_type][i]
-    #         dataset_path = f"{start}/{nbh_type}/loc_{i}/final_dsm_over.tif"
-    #         buildings_path = (f"{start}/{nbh_type}/loc_{i}/buildings.gpkg")
-    #         landcover = LandCover(bbox, crs, dataset_path=dataset_path, buildings_path=buildings_path, layer="buildings")
-    #         landcover.save_raster(output, False)
-    #
-    # for nbh_type in ['stedelijk']:
-    #     for i in [0, 1, 2, 3]:
-    #         output =  f"{start}/{nbh_type}/loc_{i}/landcover_stone.tif"
-    #         bbox = bbox_dict[nbh_type][i]
-    #         dataset_path = f"{start}/{nbh_type}/loc_{i}/final_dsm_over.tif"
-    #         buildings_path = (f"{start}/{nbh_type}/loc_{i}/buildings.gpkg")
-    #         landcover = LandCover(bbox, crs, dataset_path=dataset_path, buildings_path=buildings_path, layer="buildings")
-    #         landcover.save_raster(output, False)
-
-
-    # crs = "http://www.opengis.net/def/crs/EPSG/0/28992"
-    # for nbh_type in ['vinex', 'volkswijk', 'bloemkool']:
-    #     for i in [0, 1, 2, 3, 4, 5]:
-    #         output =  f"E:/Geomatics/thesis/_analysisfinal/{nbh_type}/loc_{i}/landcover_stone.tif"
-    #         bbox = bbox_dict[nbh_type][i]
-    #         dataset_path = f"E:/Geomatics/thesis/_analysisfinal/{nbh_type}/loc_{i}/final_dsm_over.tif"
-    #         buildings_path = (f"E:/Geomatics/thesis/_analysisfinal/{nbh_type}/loc_{i}/buildings.gpkg")
-    #         landcover = LandCover(bbox, crs, dataset_path=dataset_path, buildings_path=buildings_path, layer="buildings")
-    #         landcover.save_raster(output, False)
-

@@ -1,0 +1,25 @@
+life_stage,latin_name_clean,average_height_m,minimum_crown_radius_m
+early_mature,fraxinus excelsior,12.2,4.7
+early_mature,platanus x hispanica,15.9,6.2
+early_mature,quercus robur,12.7,5.4
+early_mature,salix alba,13.8,4.5
+early_mature,tilia x europaea,8.7,3.6
+late_mature,fraxinus excelsior,15.4,6.1
+late_mature,quercus robur,16.0,7.8
+late_mature,salix alba,18.2,5.8
+late_mature,tilia x europaea,16.0,6.5
+mature,fraxinus excelsior,13.7,5.6
+mature,platanus x hispanica,20.3,9.1
+mature,quercus robur,16.5,7.4
+mature,salix alba,21.1,7.1
+mature,tilia x europaea,15.5,5.3
+semi_mature,fraxinus excelsior,12.0,3.3
+semi_mature,platanus x hispanica,9.7,4.5
+semi_mature,quercus robur,10.1,4.4
+semi_mature,salix alba,9.7,2.0
+semi_mature,tilia x europaea,10.1,4.3
+young,fraxinus excelsior,5.8,1.9
+young,platanus x hispanica,8.0,3.9
+young,quercus robur,5.8,2.3
+young,salix alba,12.0,4.0
+young,tilia x europaea,7.0,2.5

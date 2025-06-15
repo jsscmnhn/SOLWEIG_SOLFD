@@ -24,7 +24,6 @@ import json
 from shapely.affinity import translate
 from rasterio.enums import Resampling
 from rasterio.warp import reproject
-# from landcover import LandCover
 
 def edit_bounds(bounds, buffer, shrink=False):
     '''
@@ -1495,7 +1494,7 @@ class CHM:
         self.trunk_array = np.where(tree_mask, 0, self.trunk_array)
         write_output(None, self.crs, self.chm, self.transform, "output/updated_chm.tif")
 
-    def insert_tree(self, position, height, crown_radius, resolution=0.5, trunk_height=5.0, type='parabolic', randomness=0.8, canopy_base_height=0.0):
+    def insert_tree(self, position, height, crown_radius, resolution=0.5, trunk_height=5.0, tree_shape='parabolic', randomness=0.8, canopy_base_height=0.0):
         '''
         Insert a parametric tree model into the CHM and trunk height array at the specified location.
 
@@ -1505,7 +1504,7 @@ class CHM:
             crown_radius (float):           Radius of the crown in real-world units.
             resolution (float):             Real-world size of each pixel (default = 0.5).
             trunk_height (float):           Height of the trunk (default = 0.0).
-            type (str):                     Canopy shape type ('gaussian', 'cone', 'parabolic', 'hemisphere').
+            tree_shape (str):                     Canopy shape type ('gaussian', 'cone', 'parabolic', 'hemisphere').
             randomness (float):             Standard deviation for random noise applied to canopy (default = 0.8).
             canopy_base_height (float):     Height at which the canopy starts above the trunk (default = 0.0).
 
@@ -1527,20 +1526,20 @@ class CHM:
         canopy_start_height = trunk_height + canopy_base_height
 
         # Create canopy shape
-        if type == 'gaussian':
+        if tree_shape == 'gaussian':
             canopy = (height - canopy_start_height) * np.exp(
                 -distance ** 2 / (2 * (crown_radius_px / 2) ** 2)) + canopy_start_height
-        elif type == 'cone':
+        elif tree_shape == 'cone':
             canopy = np.clip((height - canopy_start_height) * (1 - distance / crown_radius_px), 0,
                              height - canopy_start_height) + canopy_start_height
-        elif type == 'parabolic':
+        elif tree_shape == 'parabolic':
             canopy = (height - canopy_start_height) * (1 - (distance / crown_radius_px) ** 2)
             canopy = np.clip(canopy, 0, height - canopy_start_height) + canopy_start_height
-        elif type == 'hemisphere':
+        elif tree_shape == 'hemisphere':
             canopy = np.sqrt(np.clip(crown_radius_px ** 2 - distance ** 2, 0, None)) / crown_radius_px * (
                         height - canopy_start_height) + canopy_start_height
         else:
-            raise ValueError("Unsupported tree type.")
+            raise ValueError("Unsupported tree shape.")
 
         mask = (distance <= crown_radius_px) & (canopy >= canopy_start_height)
 
@@ -1595,7 +1594,7 @@ class CHM:
                            canopy_base_range=(0.0, 0.8),
                            resolution=0.5,
                            min_canopy_height = 3.0,
-                           type='parabolic',
+                           tree_shape='parabolic',
                            randomness=0.8):
         '''
         Insert a tree with randomized dimensions and properties at a specified position. Random values are drawn from
@@ -1610,7 +1609,7 @@ class CHM:
             canopy_base_range (tuple):    Range of canopy base height in meters.
             resolution (float):           Spatial resolution of the map.
             min_canopy_height (float):    Minimum allowable canopy height (tree - trunk).
-            type (str):                   Shape type of the canopy (e.g., 'parabolic').
+            shape (str):                   Shape type of the canopy (e.g., 'parabolic').
             randomness (float):           Amount of shape noise to apply.
 
         Returns:
@@ -1632,11 +1631,11 @@ class CHM:
             trunk_height=trunk_height,
             canopy_base_height=canopy_base_height,
             resolution=resolution,
-            type=type,
+            tree_shape=tree_shape,
             randomness=randomness
         )
 
-    def insert_type_tree(self, age, position, tree_genus="fraxinus", resolution=0.5, canopy_base=0.0):
+    def insert_type_tree(self, age, position, tree_type="fraxinus", resolution=0.5, canopy_base=0.0):
         '''
         Insert a tree of a specific type and age using pre-defined growth parameters.
 
@@ -1646,7 +1645,7 @@ class CHM:
         Parameters:
             age (int, str):               Age of the tree in years or life stage (young, early_mature, mature, late_mature, semi_mature).
             position (tuple):            (row, col) position where the tree will be placed.
-            tree_genus (str):                  Tree species (default is 'fraxinus').
+            tree_type (str):              Tree species (default is 'fraxinus').
             resolution (float):          Spatial resolution of the map.
             canopy_base (float):         Height of the base of the canopy in meters.
 
@@ -1657,10 +1656,10 @@ class CHM:
         -   ValueError: If no data exists for the specified tree age.
         '''
 
-        tree_genus = type.lower()
+        tree_genus = tree_type.lower()
         if tree_genus =="fraxinus" and type(age) == int:
             # Find the tree data for the specified age
-            with open("src/j_dataprep/fraxinus_excelsior_database.json") as f:
+            with open("src/databases/fraxinus_excelsior_database.json") as f:
                 tree_db = json.load(f)
 
             tree_data = next((item for item in tree_db if item["age"] == age), None)
@@ -1679,7 +1678,7 @@ class CHM:
 
         else:
             # Find the tree data for the specified age
-            with open("src/j_dataprep/obard_trees.json") as f:
+            with open("src/databases/obard_trees.json") as f:
                 tree_db = json.load(f)
 
             tree_data = next(
@@ -1695,14 +1694,12 @@ class CHM:
             trunk_height = tree_data["trunk ht"]
             crown_dia = tree_data["crown dia"]
 
-            # Calculate derived values
-            trunk_height = max(0, tree_height - crown_height)
             crown_radius = crown_dia / 2
 
-            if type =="fraxinus" or type== "tilia" or type== "salix" or type =="platanus":
-                tree_type = 'parabolic'
-            if type == "quercus":
-                tree_type = 'hempisphere'
+        if tree_type =="fraxinus" or tree_type== "tilia" or tree_type== "salix" or tree_type =="platanus":
+            tree_shape = 'parabolic'
+        if tree_type == "quercus":
+            tree_shape = 'hempisphere'
 
         # Set defaults for type and randomness
 
@@ -1716,190 +1713,6 @@ class CHM:
             trunk_height=trunk_height,
             canopy_base_height=canopy_base,
             resolution=resolution,
-            type=tree_type,
+            tree_shape=tree_shape,
             randomness=randomness
         )
-
-# def load_buildings(buildings_path, layer):
-#     """
-#     Load in the building shapes from a geopackage file.
-#     ----
-#     Input:
-#     - buildings_path (string):   path to the geopackage file.
-#     - layer (string):            (Tile) name of the layer of buildings to be used
-#
-#     Output:
-#     - List of dictionaries: A list of dictionaries containing:
-#       - "geometry": building geometry in GeoJSON-like format.
-#       - "parcel_id": corresponding parcel ID.
-#     """
-#     buildings_gdf = gpd.read_file(buildings_path, layer=layer)
-#
-#     if 'identificatie' not in buildings_gdf.columns:
-#         raise ValueError("Column 'identificatie' not found in the dataset")
-#
-#     return [{"geometry": mapping(geom), "parcel_id": identificatie} for geom, identificatie in zip(buildings_gdf.geometry, buildings_gdf["identificatie"])]
-
-
-if __name__ == "__main__":
-    # bbox = (120570, 487570, 120970, 487870)
-    bbox = (121116, 492813, 121986, 493213)
-    # "D:/Geomatics/thesis/__newgaptesting/option1"
-    res = 0.5
-    output_dir= f"D:/Geomatics/thesis/__newres/otherplace"
-    buildings = Buildings(bbox, output_folder=output_dir).building_geometries
-    dems = DEMS(bbox, buildings, bridge=True, output_dir=output_dir, resolution=res)
-    dtm = dems.dtm
-    dsm = dems.dsm
-    merged_output= f'D:/Geomatics/thesis/__newres/otherplacepointcloud.las'
-    chm = CHM(bbox, dtm, dsm,0.25, "output", "temp2", output_dir, merged_output=merged_output, resolution=res).chm
-
-    output = f"{output_dir}/landcover.tif"
-    dataset = f"{output_dir}/final_dtm.tif"
-    # landcover = LandCover(bbox,  resolution = 1, building_data=buildings, dataset_path=dataset)
-    # landcover.save_raster(output, False)
-
-    # bbox_list = [(120000, 485700, 120126, 485826), (120000, 485700, 120251, 485951), (120000, 485700, 120501, 486201), (120000, 485700, 120751, 486451), (120000, 485700, 121001, 486701), (120000, 485700, 121501, 487201) ]
-    # folder_list = ['250', '500', '1000', '1500', '2000', '3000']
-    # folder = '250',
-    # bbox = 120000, 485700, 120126, 485826
-
-    # bbox_list = [(120000, 485700, 121001, 486701), (120000, 485700, 121501, 487201) ]
-    # folder_list = ['2000', '3000']
-    # i = 0
-    # for folder in folder_list:
-    #     output_dir=f"D:/Geomatics/optimization_tests/{folder}"
-    #     buildings = Buildings(bbox_list[i], output_folder=output_dir).building_geometries
-    #     dems = DEMS(bbox_list[i], buildings, bridge=True, output_dir=output_dir)
-    #     dtm = dems.dtm
-    #     merged_output= f'pointcloud_{i}.las'
-    #     chm = CHM(bbox_list[i], dtm, 0.25, "output", "temp2", output_dir, merged_output=merged_output).chm
-    #     i += 1
-    # bbox_list = [(175905, 317210, 176505, 317810), (84050, 447180, 84650, 447780),(80780, 454550, 81380, 455150),(233400, 581500, 234000, 582100),(136600, 455850, 137200, 456450),(121500, 487000, 122100, 487600)]
-    # for i in [1, 2, 3, 4, 5]:
-    #     output_dir=f"D:/Geomatics/thesis/_analysisfinal/historisch/loc_{i}"
-    #     buildings = Buildings(bbox_list[i]).building_geometries
-    #     dems = DEMS(bbox_list[i], buildings, bridge=True, output_dir=output_dir)
-    #     dtm = dems.dtm
-    #     merged_output= f'his_{i}_pointcloud.las'
-    #     chm = CHM(bbox_list[i], dtm, 0.25, "output", "temp2", output_dir, merged_output=merged_output).chm
-    #
-    # bbox_list = [(146100, 486500, 147000, 487400),(153750, 467550, 154650, 468450),(115300, 517400, 116100, 518250),(102000, 475900, 103100, 476800),(160750, 388450, 161650, 389350),(84350, 449800, 85250, 450700)]
-    # for i in [0, 1, 2, 3, 4, 5]:
-    #     output_dir = f"D:/Geomatics/thesis/_analysisfinal/vinex/loc_{i}"
-    #     buildings = Buildings(bbox_list[i]).building_geometries
-    #     dems = DEMS(bbox_list[i], buildings, bridge=True, output_dir=output_dir)
-    #     dtm = dems.dtm
-    #     merged_output = f'vinex_{i}_pointcloud.las'
-    #     chm = CHM(bbox_list[i], dtm, 0.25, "output", "temp2", output_dir, merged_output=merged_output).chm
-    #
-    # bbox_list = [(90300, 436900, 91300, 437600),(91200, 438500, 92100, 439300),(121350, 483750, 122250, 484650),(118400, 486400, 119340, 487100)]
-    # for i in [0, 1, 2, 3]:
-    #     output_dir = f"D:/Geomatics/thesis/_analysisfinal/stedelijk/loc_{i}"
-    #     buildings = Buildings(bbox_list[i]).building_geometries
-    #     dems = DEMS(bbox_list[i], buildings, bridge=True, output_dir=output_dir)
-    #     dtm = dems.dtm
-    #     merged_output = f'sted_{i}_pointcloud.las'
-    #     chm = CHM(bbox_list[i], dtm, 0.25, "output", "temp2", output_dir, merged_output=merged_output).chm
-    #
-   # bbox_list = [(81700, 427490, 82700, 428200),(84050, 444000, 84950, 444900),(116650, 518700, 117550, 519600),(235050, 584950, 235950, 585850),(210500, 473900, 211400, 474800),(154700, 381450, 155700, 382150)]
-    # for i in [0, 1, 2, 3, 4, 5]:
-    #     output_dir = f"D:/Geomatics/thesis/_analysisfinal/bloemkool/loc_{i}"
-    #     buildings = Buildings(bbox_list[i]).building_geometries
-    #     dems = DEMS(bbox_list[i], buildings, bridge=True, output_dir=output_dir)
-    #     dtm = dems.dtm
-    #     merged_output = f'bloem_{i}_pointcloud.las'
-    #     chm = CHM(bbox_list[i], dtm, 0.25, "output", "temp2", output_dir, merged_output=merged_output).chm
-    #
-     #bbox_list = [(76800, 455000, 78200, 455700),(152600, 463250, 153900, 463800),(139140, 469570, 139860, 470400),(190850, 441790, 191750, 442540),(113100, 551600, 113650, 552000),(32050, 391900, 32850, 392500)]
-    # for i in [0, 1, 2, 3, 4, 5]:
-    #     output_dir = f"D:/Geomatics/thesis/_analysisfinal/tuindorp/loc_{i}"
-    #     buildings = Buildings(bbox_list[i]).building_geometries
-    #     dems = DEMS(bbox_list[i], buildings, bridge=True, output_dir=output_dir)
-    #     dtm = dems.dtm
-    #     merged_output = f'tuin_{i}_pointcloud.las'
-    #     chm = CHM(bbox_list[i], dtm, 0.25, "output", "temp2", output_dir, merged_output=merged_output).chm
-
-    # bbox_dict = {
-    #     'historisch': [(175905, 317210, 176505, 317810), (84050, 447180, 84650, 447780),(80780, 454550, 81380, 455150),(233400, 581500, 234000, 582100),(136600, 455850, 137200, 456450),(121500, 487000, 122100, 487600)
-    #     ],
-    #     'tuindorp': [(76800, 455000, 78200, 455700),(152600, 463250, 153900, 463800),(139140, 469570, 139860, 470400),(190850, 441790, 191750, 442540),(113100, 551600, 113650, 552000),(32050, 391900, 32850, 392500)
-    #
-    #     ],
-    #     'vinex': [(146100, 486500, 147000, 487400),(153750, 467550, 154650, 468450),(115300, 517400, 116100, 518250),(102000, 475900, 103100, 476800),(160750, 388450, 161650, 389350),(84350, 449800, 85250, 450700)
-    #
-    #     ],
-    #     'volkswijk': [(104200, 490550, 105100, 491450), (78200, 453900, 79100, 454800), (83500, 447020, 84050, 447900),
-    #              (136200, 456500, 137100, 457300), (182700, 579200, 183800, 579750),
-    #              (233400, 582800, 234300, 583700)
-    #
-    #     ],
-    #     'bloemkool': [(81700, 427490, 82700, 428200),(84050, 444000, 84950, 444900),(116650, 518700, 117550, 519600),(235050, 584950, 235950, 585850),(210500, 473900, 211400, 474800),(154700, 381450, 155700, 382150)
-    #
-    #     ],
-    #
-    #     'stedelijk':[
-    #         (90300, 436900, 91300, 437600), (91200, 438500, 92100, 439300), (121350, 483750, 122250, 484650),
-    #         (118400, 486400, 119340, 487100)
-    #     ]
-    # }
-
-    # for nbh_type in ['historisch', 'tuindorp', 'vinex', 'volkswijk', 'bloemkool']:
-    #     for i in [0, 1, 2, 3, 4, 5]:
-    #         output_dir = f"E:/Geomatics/thesis/_analysisfinal/{nbh_type}/loc_{i}"
-    #         buildings = Buildings(bbox_dict[nbh_type][i],
-    #                               gpkg_name=f"E:/Geomatics/thesis/_analysisfinal/{nbh_type}/loc_{i}/buildings").building_geometries
-
-    # for nbh_type in ['stedelijk']:
-    #     for i in [0, 1, 2, 3]:
-    #         output_dir = f"E:/Geomatics/thesis/_analysisfinal/{nbh_type}/loc_{i}"
-    #         buildings = Buildings(bbox_dict[nbh_type][i],
-    #                               gpkg_name=f"E:/Geomatics/thesis/_analysisfinal/{nbh_type}/loc_{i}/buildings").building_geometries
-
-
-    # for i in [0, 1, 2, 3, 4, 5]:
-    #     output_dir = f"E:/Geomatics/thesis/_analysisfinal/volkswijk/loc_{i}"
-
-        # dems = DEMS(bbox_list[i], buildings, bridge=True, output_dir=output_dir)
-        # dtm = dems.dtm
-        # merged_output = f'volk_{i}_pointcloud.las'
-        # chm = CHM(bbox_list[i], dtm, 0.25, "output", "temp2", output_dir, merged_output=merged_output).chm
-    #
-    # for i in [0, 1, 2, 3, 4, 5]:
-    #     output_dir = f"D:/Geomatics/thesis/_analysisfinal/volkswijk/loc_{i}"
-    #     buildings = Buildings(bbox_list[i]).building_geometries
-    #     dems = DEMS(bbox_list[i], buildings, bridge=True, output_dir=output_dir)
-    #     dtm = dems.dtm
-    #     merged_output = f'volk_{i}_pointcloud.las'
-    #     chm = CHM(bbox_list[i], dtm, 0.25, "output", "temp2", output_dir, merged_output=merged_output).chm
-
-
-    # buildings = Buildings(bbox).data
-    # # buildings_data = load_buildings("temp/buildings_test.gpkg", "buildings")
-    #
-    # # DEMS = DEMS(bbox, buildings_data)
-    # # dtm = DEMS.dtm
-    # # dsm = DEMS.dsm
-    # with rasterio.open("output/final_dtm_test.tif") as src:
-    #     dtm = src.read(1)
-    # chm = CHM(bbox, dtm, "output", "temp2").chm
-
-
-    # def plot_raster(filepath, title="Raster Data"):
-    #     with rasterio.open(filepath) as src:
-    #         array = src.read(1)
-    #         plt.figure(figsize=(10, 8))
-    #         plt.imshow(array, cmap="viridis", origin="upper")
-    #         plt.colorbar(label="Elevation (m)")
-    #         plt.title(title)
-    #         plt.show()
-
-    # plot_raster("output/final_dtm_test.tif", "Final Filled DTM")
-    # plot_raster("output/final_dsm_test.tif", "Final filled DSM")
-    # plot_raster("output/CHM_test.tif", "Final CHM")
-    #
-    # with rasterio.open("output/CHM_test.tif") as src:
-    #     tree_height = src.read(1)
-    #     transform = src.transform
-    #     crs = src.crs
-
