@@ -1,0 +1,37 @@
+This file provides run settings for the SOLWEIG run initiated at: Mon, 16 Jun 2025 16:45:04
+Version: SOLWEIG v2022a
+
+SURFACE DATA
+Digital surface model (DSM): output/run_data/dsms.tif
+Model domain: rows = 500, columns = 500
+Projected reference system: Amersfoort / RD New
+Geographical coordinate system: Amersfoort
+Latitude: 52.34480783771364
+Longitude: 4.924206395264258
+UTC: 0.0
+Transmissivity of light through vegetation: 0.15
+Digital vegetation canopy model (CDSM): output/run_data/chm.tif
+Trunkzone estimated from CDSM
+Trunkzone as percent of canopy height: 0.25
+Landcover scheme active. Parameters taken from: /landcoverclasses_2016a.txt
+Landcover grid: output/run_data/landcover.tif
+
+Land cover used to identify buildings
+
+METEOROLOGICAL FORCING DATA
+Meteorological file: src/j_dataprep/climate/extday_30plus_qgis.txt
+Diffuse and direct shortwave radiation estimated from global radiation
+
+HUMAN EXPOSURE PARAMETERS
+Absorption, shortwave radiation: 0.7
+Absorption, longwave radiation: 0.95
+Posture of human body: Standing
+ENVIRONMENTAL PARAMETERS
+Albedo of walls: 0.2
+Albedo of ground (not used if land cover scheme is active): 0.15
+Emissivity (walls): 0.9
+Emissivity of ground (not used if land cover scheme is active): 0.95
+
+ADDITIONAL SETTINGS
+Human considered as a standing cylinder
+Anisotropic sky diffuse shortwave (Perez et al. 1993) and longwave (Martin & Berdahl, 1984) radiation

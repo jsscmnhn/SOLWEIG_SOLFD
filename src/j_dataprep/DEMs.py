@@ -970,7 +970,7 @@ class CHM:
         og_polygons (geopandas.GeoDataFrame):           Copy of original tree polygons.
         original_trunk (numpy.ndarray):                 Copy of original trunk array.
     '''
-    def __init__(self, bbox, dtm, dsm, trunk_height, output_folder_chm='output', output_folder_las='temp', resolution=0.5, merged_output='pointcloud.las'):
+    def __init__(self, bbox, dtm, dsm, trunk_height, output_folder_chm='output', output_folder_las='temp', resolution=0.5, merged_output='pointcloud.las', ndvi_threshold=0.05):
         '''
         Initialize the CHM class with bounding box, DTM, DSM, trunk height and folder paths.
 
@@ -978,12 +978,13 @@ class CHM:
             bbox (tuple):                                     Bounding box as (min_x, min_y, max_x, max_y).
             dtm (numpy.ndarray or rasterio dataset):          Digital Terrain Model raster.
             dsm (numpy.ndarray or rasterio dataset):          Digital Surface Model raster.
-            trunk_height (float):                             Factor or scalar to multiply the CHM for trunk height approximation.
+            trunk_height (float):                             Trunk height as a percentage of total tree height (e.g., 20 for 20%).
             output_folder_las (str):                          Folder path for output LAS files.
             input_folder (str):                               Folder path for input files.
             output_folder_chm (str):                          Folder path for CHM-specific output.
             resolution (float, optional):                     Resolution for raster grid cells. Defaults to 0.5.
             merged_output (str, optional):                    Filename for merged LAS output. Defaults to 'pointcloud.las'.
+            ndvi_threshold (float, optional):                 NDVI index to use for vegetation extraction.
         '''
         self.bbox = bbox
         self.bufferedbbox = edit_bounds(bbox, 2)
@@ -993,8 +994,8 @@ class CHM:
         self.tree_mask = None
         self.output_folder_chm = output_folder_chm
         self.gdf = gpd.read_file("src/j_dataprep/geotiles/AHN_lookup.geojson")
-        self.chm, self.tree_polygons, self.transform = self.init_chm(bbox, output_folder=output_folder_las, input_folder=output_folder_las, merged_output=merged_output, resolution=resolution)
-        self.trunk_array = self.chm * trunk_height
+        self.chm, self.tree_polygons, self.transform = self.init_chm(bbox, output_folder=output_folder_las, input_folder=output_folder_las, merged_output=merged_output,  ndvi_threshold=ndvi_threshold, resolution=resolution)
+        self.trunk_array = self.chm * (trunk_height / 100 )
         self.original_chm, self.og_polygons, self.original_trunk = self.chm, self.tree_polygons, self.trunk_array
 
     def save_las(self, merged_las, veg_points, output_name="veg_points.las"):
@@ -1640,7 +1641,7 @@ class CHM:
         Insert a tree of a specific type and age using pre-defined growth parameters.
 
         Parameters are loaded from a JSON database and used to compute the
-        trunk height and crown radius. The canopy type is fixed as parabolic.
+        trunk height and crown radius. The canopy type is fixed.
 
         Parameters:
             age (int, str):               Age of the tree in years or life stage (young, early_mature, mature, late_mature, semi_mature).

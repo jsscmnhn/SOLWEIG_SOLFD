@@ -22,7 +22,7 @@ class Surface_input:
     '''
 
     def __init__(self, ncols, nrows, resolution):
-        self.dictionary = json.load(open("src/j_dataprep/landcover_bgt.json", "r", encoding="utf-8"))
+        self.dictionary = json.load(open("src/databases/landcover_bgt.json", "r", encoding="utf-8"))
         self.res = resolution
         self.ncols = ncols
         self.nrows = nrows
