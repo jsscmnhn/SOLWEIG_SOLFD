@@ -18,7 +18,7 @@ SOLFD is meant to enhance the original SOLWEIG functionalities to better support
 # Documentation
 https://solweig-solfd.readthedocs.io
 
-More details about the methodology and code can be found in [my thesis](https://repository.tudelft.nl/)
+More details about the methodology and code can be found in [my thesis](https://resolver.tudelft.nl/uuid:02dbba26-0535-4c05-a39b-e5b09c3d0712).
 
 # Running the code
 ## Code
