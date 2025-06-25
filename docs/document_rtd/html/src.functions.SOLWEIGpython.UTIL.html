@@ -1,0 +1,664 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="src.j_analysis package" href="src.j_analysis.html" /><link rel="prev" title="functions.SOLWEIGpython" href="src.functions.SOLWEIGpython.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>src.functions.SOLWEIGpython.UTIL - SOLFD 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">SOLFD 1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">SOLFD 1.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="runningthecode.html">Running the Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howworks.html">How SOLFD works</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="src.html">src package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of src package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="src.functions.html">src.functions</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of src.functions</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current has-children"><a class="reference internal" href="src.functions.SOLWEIGpython.html">functions.SOLWEIGpython</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of functions.SOLWEIGpython</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">src.functions.SOLWEIGpython.UTIL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.j_analysis.html">src.j_analysis package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="src.j_dataprep.html">src.j_dataprep package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of src.j_dataprep package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.j_dataprep.climate.html">src.j_dataprep.climate package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.j_dataprep.geotiles.html">src.j_dataprep.geotiles package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.j_output.html">src.j_output package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src.preprocessor.html">src.preprocessor package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src.processor.html">src.processor package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src.util.html">src.util package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/src.functions.SOLWEIGpython.UTIL.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="src-functions-solweigpython-util">
+<h1>src.functions.SOLWEIGpython.UTIL<a class="headerlink" href="#src-functions-solweigpython-util" title="Link to this heading">¶</a></h1>
+<section id="module-src.functions.SOLWEIGpython.UTIL.Perez_v3">
+<span id="functions-solweigpython-util-perez-v3"></span><h2>functions.SOLWEIGpython.UTIL.Perez_v3<a class="headerlink" href="#module-src.functions.SOLWEIGpython.UTIL.Perez_v3" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.functions.SOLWEIGpython.UTIL.Perez_v3.Perez_v3">
+<span class="sig-prename descclassname"><span class="pre">src.functions.SOLWEIGpython.UTIL.Perez_v3.</span></span><span class="sig-name descname"><span class="pre">Perez_v3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azimuth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jday</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patchchoice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch_option</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/functions/SOLWEIGpython/UTIL/Perez_v3.html#Perez_v3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.functions.SOLWEIGpython.UTIL.Perez_v3.Perez_v3" title="Link to this definition">¶</a></dt>
+<dd><p>This unchanged function calculates distribution of luminance on the skyvault based on
+Perez luminince distribution model.</p>
+<p>Created by:
+Fredrik Lindberg 20120527, <a class="reference external" href="mailto:fredrikl&#37;&#52;&#48;gvc&#46;gu&#46;se">fredrikl<span>&#64;</span>gvc<span>&#46;</span>gu<span>&#46;</span>se</a>
+Gothenburg University, Sweden
+Urban Climte Group</p>
+<dl class="simple">
+<dt>Inputs:</dt><dd><p>zen:     Zenith angle of the Sun (in degrees)
+azimuth: Azimuth angle of the Sun (in degrees)
+radD:    Horizontal diffuse radiation (W m-2)
+radI:    Direct radiation perpendicular to the Sun beam (W m-2)
+jday:    Day of year</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lv</strong> – Relative luminance map (same dimensions as theta. gamma)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.functions.SOLWEIGpython.UTIL.Solweig_v2015_metdata_noload">
+<span id="functions-solweigpython-util-solweig-v2015-metdata-noload"></span><h2>functions.SOLWEIGpython.UTIL.Solweig_v2015_metdata_noload<a class="headerlink" href="#module-src.functions.SOLWEIGpython.UTIL.Solweig_v2015_metdata_noload" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.functions.SOLWEIGpython.UTIL.Solweig_v2015_metdata_noload.Solweig_2015a_metdata_noload">
+<span class="sig-prename descclassname"><span class="pre">src.functions.SOLWEIGpython.UTIL.Solweig_v2015_metdata_noload.</span></span><span class="sig-name descname"><span class="pre">Solweig_2015a_metdata_noload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">UTC</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/functions/SOLWEIGpython/UTIL/Solweig_v2015_metdata_noload.html#Solweig_2015a_metdata_noload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.functions.SOLWEIGpython.UTIL.Solweig_v2015_metdata_noload.Solweig_2015a_metdata_noload" title="Link to this definition">¶</a></dt>
+<dd><p>This function is used to process the input meteorological file.
+It also calculates Sun position based on the time specified in the met-file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputdata</strong></p></li>
+<li><p><strong>location</strong></p></li>
+<li><p><strong>UTC</strong></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.functions.SOLWEIGpython.UTIL.clearnessindex_2013b">
+<span id="functions-solweigpython-util-clearnessindex-2013b"></span><h2>functions.SOLWEIGpython.UTIL.clearnessindex_2013b<a class="headerlink" href="#module-src.functions.SOLWEIGpython.UTIL.clearnessindex_2013b" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.functions.SOLWEIGpython.UTIL.clearnessindex_2013b.clearnessindex_2013b">
+<span class="sig-prename descclassname"><span class="pre">src.functions.SOLWEIGpython.UTIL.clearnessindex_2013b.</span></span><span class="sig-name descname"><span class="pre">clearnessindex_2013b</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jday</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/functions/SOLWEIGpython/UTIL/clearnessindex_2013b.html#clearnessindex_2013b"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.functions.SOLWEIGpython.UTIL.clearnessindex_2013b.clearnessindex_2013b" title="Link to this definition">¶</a></dt>
+<dd><p>Unchanged function: Clearness Index at the Earth’s surface calculated from Crawford and Duchon 1999</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zen</strong> – zenith angle in radians</p></li>
+<li><p><strong>jday</strong> – day of year</p></li>
+<li><p><strong>Ta</strong> – air temperature</p></li>
+<li><p><strong>RH</strong> – relative humidity</p></li>
+<li><p><strong>radG</strong> – global shortwave radiation</p></li>
+<li><p><strong>location</strong> – distionary including lat, lon and alt</p></li>
+<li><p><strong>P</strong> – pressure</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.functions.SOLWEIGpython.UTIL.create_patches">
+<span id="functions-solweigpython-util-create-patches"></span><h2>functions.SOLWEIGpython.UTIL.create_patches<a class="headerlink" href="#module-src.functions.SOLWEIGpython.UTIL.create_patches" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.functions.SOLWEIGpython.UTIL.create_patches.create_patches">
+<span class="sig-prename descclassname"><span class="pre">src.functions.SOLWEIGpython.UTIL.create_patches.</span></span><span class="sig-name descname"><span class="pre">create_patches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">patch_option</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/functions/SOLWEIGpython/UTIL/create_patches.html#create_patches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.functions.SOLWEIGpython.UTIL.create_patches.create_patches" title="Link to this definition">¶</a></dt>
+<dd><p>Unchanged function generating a discretized sky vault with altitude and azimuth angles corresponding to a
+specific patch configuration.  Patch configurations divide the hemisphere into discrete sky segments (patches)
+according to different established or experimental schemes.</p>
+<dl class="simple">
+<dt>Input:</dt><dd><dl class="simple">
+<dt>patch_option (int):</dt><dd><dl class="simple">
+<dt>Patch discretization scheme:</dt><dd><ul class="simple">
+<li><p>1: 145 patches (Robinson &amp; Stone, 2004 based on Tregenza, 1987)</p></li>
+<li><p>2: 153 patches (Wallenberg et al., 2022 modification)</p></li>
+<li><p>3: 306 patches (experimental: doubling patch count of option 2)</p></li>
+<li><p>4: 612 patches (experimental: finer resolution using 15 annuli)</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>skyvaultalt</strong> (<em>np.ndarray</em>) – 1D array of patch center altitudes (in degrees).</p></li>
+<li><p><strong>skyvaultazi</strong> (<em>np.ndarray</em>) – 1D array of patch center azimuths (in degrees).</p></li>
+<li><p><strong>annulino</strong> (<em>np.ndarray</em>) – Altitude angles (in degrees) marking the annular boundaries from zenith to horizon.</p></li>
+<li><p><strong>skyvaultaltint</strong> (<em>np.ndarray</em>) – Altitude angles (in degrees) for patch center positions in each annulus.</p></li>
+<li><p><strong>patches_in_band</strong> (<em>np.ndarray</em>) – Number of azimuthal patches per annular band.</p></li>
+<li><p><strong>skyvaultaziint</strong> (<em>np.ndarray</em>) – Angular width of each patch in azimuth (degrees).</p></li>
+<li><p><strong>azistart</strong> (<em>np.ndarray</em>) – Azimuth offset for each band, used to rotate starting position to avoid patch alignment across bands.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.functions.SOLWEIGpython.UTIL.diffusefraction">
+<span id="functions-solweigpython-util-diffusefraction"></span><h2>functions.SOLWEIGpython.UTIL.diffusefraction<a class="headerlink" href="#module-src.functions.SOLWEIGpython.UTIL.diffusefraction" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.functions.SOLWEIGpython.UTIL.diffusefraction.diffusefraction">
+<span class="sig-prename descclassname"><span class="pre">src.functions.SOLWEIGpython.UTIL.diffusefraction.</span></span><span class="sig-name descname"><span class="pre">diffusefraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Kt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RH</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/functions/SOLWEIGpython/UTIL/diffusefraction.html#diffusefraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.functions.SOLWEIGpython.UTIL.diffusefraction.diffusefraction" title="Link to this definition">¶</a></dt>
+<dd><p>Unchanged function: Estimate diffuse and direct beam solar radiation using the Reindl et al. (1990) model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>radG</strong> (<em>float</em>) – Global horizontal irradiance [W/m²].</p></li>
+<li><p><strong>altitude</strong> (<em>float</em>) – Solar altitude angle [degrees].</p></li>
+<li><p><strong>Kt</strong> (<em>float</em>) – Clearness index (ratio of global radiation at surface to that at the top of atmosphere).</p></li>
+<li><p><strong>Ta</strong> (<em>float</em>) – Air temperature [°C].</p></li>
+<li><p><strong>RH</strong> (<em>float</em>) – Relative humidity [%].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>radI</strong> (<em>float</em>) – Direct beam radiation [W/m²].</p></li>
+<li><p><strong>radD</strong> (<em>float</em>) – Diffuse radiation [W/m²].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_13_cupy">
+<span id="functions-solweigpython-util-shadowingfunction-wallheight-13-cupy"></span><h2>functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_13_cupy<a class="headerlink" href="#module-src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_13_cupy" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_13_cupy.shadowingfunction_wallheight_13">
+<span class="sig-prename descclassname"><span class="pre">src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_13_cupy.</span></span><span class="sig-name descname"><span class="pre">shadowingfunction_wallheight_13</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amaxvalue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azimuth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">walls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aspect</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/functions/SOLWEIGpython/UTIL/shadowingfunction_wallheight_13_cupy.html#shadowingfunction_wallheight_13"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_13_cupy.shadowingfunction_wallheight_13" title="Link to this definition">¶</a></dt>
+<dd><p>Computes shadow masks for buildings on a terrain, and shadow height for on building walls, using a stepped
+projection method, based on sun position (azimuth, altitude) and elevation data. This is a CuPy-accelerated
+version optimized for GPU use.</p>
+<p>The function simulates shadow casting by iteratively stepping through the DSM grid
+along the direction of the sun, lowering the sun’s ray with each step, and comparing
+it to terrain heights to determine shadowed pixels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>cp.ndarray</em>) – DSM.</p></li>
+<li><p><strong>azimuth</strong> (<em>float</em>) – Sun azimuth in degrees (clockwise from north).</p></li>
+<li><p><strong>altitude</strong> (<em>float</em>) – Sun altitude in degrees  (0° = horizon, 90° = zenith).</p></li>
+<li><p><strong>scale</strong> (<em>float</em>) – Scale factor (pixel size in meters)</p></li>
+<li><p><strong>amaxvalue</strong> (<em>float</em>) – Maximum vertical height to simulate in the shadow projection.</p></li>
+<li><p><strong>walls</strong> (<em>cp.ndarray</em>) – DSM layer representing wall heights [m].</p></li>
+<li><p><strong>aspect</strong> (<em>cp.ndarray</em>) – Aspect (orientation) of building walls [radians].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>sh (cp.ndarray)</em> – Shadow map of ground and roof (1 = shadow, 0 = sunlit).</p></li>
+<li><p><em>wallsh (cp.ndarray)</em> – Shadow height on walls [m].</p></li>
+<li><p><em>wallsun (cp.ndarray)</em> – Sunlit height of walls [m].</p></li>
+<li><p><em>facesh (cp.ndarray)</em> – Shadow mask from wall self-shadowing (1 = shadow, 0 = sunlit).</p></li>
+<li><p><em>facesun (cp.ndarray)</em> – Sunlit mask of walls (1 = sunlit, 0 = shadow).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_13_cupy.shadowingfunction_wallheight_13_3d">
+<span class="sig-prename descclassname"><span class="pre">src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_13_cupy.</span></span><span class="sig-name descname"><span class="pre">shadowingfunction_wallheight_13_3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amaxvalue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azimuth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">walls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aspect</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/functions/SOLWEIGpython/UTIL/shadowingfunction_wallheight_13_cupy.html#shadowingfunction_wallheight_13_3d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_13_cupy.shadowingfunction_wallheight_13_3d" title="Link to this definition">¶</a></dt>
+<dd><p>Computes 3D building shadows based on sun position using stepped projection.</p>
+<p>This CuPy-accelerated method calculates shadow masks from a layered DSM (building &amp; gap heights), and
+calculates shadow height for on building walls. It simulates how shadows are cast given sun azimuth and
+altitude. Works on a 3D stack of DSM layers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>cp.ndarray</em>) – 3D Layered DSM.</p></li>
+<li><p><strong>azimuth</strong> (<em>float</em>) – Sun azimuth in degrees (clockwise from north).</p></li>
+<li><p><strong>altitude</strong> (<em>float</em>) – Sun altitude in degrees  (0° = horizon, 90° = zenith).</p></li>
+<li><p><strong>scale</strong> (<em>float</em>) – Scale factor (pixel size in meters)</p></li>
+<li><p><strong>amaxvalue</strong> (<em>float</em>) – Maximum vertical height to simulate in the shadow projection.</p></li>
+<li><p><strong>walls</strong> (<em>cp.ndarray</em>) – DSM layer representing wall heights at base layer [m].</p></li>
+<li><p><strong>aspect</strong> (<em>cp.ndarray</em>) – Aspect (orientation) of building walls at base layer[radians].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>sh (cp.ndarray)</em> – Shadow map of ground and roof at base layer (1 = shadow, 0 = sunlit).</p></li>
+<li><p><em>wallsh (cp.ndarray)</em> – Shadow height on walls at base layer [m].</p></li>
+<li><p><em>wallsun (cp.ndarray)</em> – Sunlit height of walls at base layer [m].</p></li>
+<li><p><em>facesh (cp.ndarray)</em> – Shadow mask from wall self-shadowing at base layer (1 = shadow, 0 = sunlit).</p></li>
+<li><p><em>facesun (cp.ndarray)</em> – Sunlit mask of walls at base layer (1 = sunlit, 0 = shadow).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_23_cupy">
+<span id="functions-solweigpython-util-shadowingfunction-wallheight-23-cupy"></span><h2>functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_23_cupy<a class="headerlink" href="#module-src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_23_cupy" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_23_cupy.shadowingfunction_23_3d">
+<span class="sig-prename descclassname"><span class="pre">src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_23_cupy.</span></span><span class="sig-name descname"><span class="pre">shadowingfunction_23_3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vegdem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vegdem2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azimuth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amaxvalue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bush</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">walls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aspect</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/functions/SOLWEIGpython/UTIL/shadowingfunction_wallheight_23_cupy.html#shadowingfunction_23_3d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_23_cupy.shadowingfunction_23_3d" title="Link to this definition">¶</a></dt>
+<dd><p>Computes 3D building shadows and Vegetation shadows based on sun position using stepped projection.
+This CuPy-accelerated method calculates shadow masks from a layered DSM (building &amp; gap heights) &amp; a CHM,
+and calculates shadow height for on building walls. It simulates how shadows are cast given sun azimuth and
+altitude. Works on a 3D stack of DSM layers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>cp.ndarray</em>) – 3D Layered DSM.</p></li>
+<li><p><strong>vegdem</strong> (<em>cp.ndarray</em>) – Vegetation height layer (CHM).</p></li>
+<li><p><strong>vegdem2</strong> (<em>cp.ndarray</em>) – Secondary vegetation height layer (trunk heights).</p></li>
+<li><p><strong>azimuth</strong> (<em>float</em>) – Sun azimuth in degrees (clockwise from north).</p></li>
+<li><p><strong>altitude</strong> (<em>float</em>) – Sun altitude in degrees  (0° = horizon, 90° = zenith).</p></li>
+<li><p><strong>scale</strong> (<em>float</em>) – Scale factor (pixel size in meters)</p></li>
+<li><p><strong>amaxvalue</strong> (<em>float</em>) – Maximum vertical height to simulate in the shadow projection.</p></li>
+<li><p><strong>bush</strong> (<em>cp.ndarray</em>) – Bush indicator array (values &gt; 1 indicate presence).</p></li>
+<li><p><strong>walls</strong> (<em>cp.ndarray</em>) – DSM layer representing wall heights [m].</p></li>
+<li><p><strong>aspect</strong> (<em>cp.ndarray</em>) – Aspect (orientation) of building walls [radians].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>vegsh (cp.ndarray)</em> – Vegetation shadow mask (1 = sunlit, 0 = shadow).</p></li>
+<li><p><em>sh (cp.ndarray)</em> – Shadow map of ground and roof (1 = shadow, 0 = sunlit).</p></li>
+<li><p><em>wallsh (cp.ndarray)</em> – Shadow height on walls [m].</p></li>
+<li><p><em>wallshve (cp.ndarray)</em> – Additional wall shadowing caused by vegetation [m].</p></li>
+<li><p><em>wallsun (cp.ndarray)</em> – Sunlit height of walls [m].</p></li>
+<li><p><em>facesh (cp.ndarray)</em> – Shadow mask from wall self-shadowing (1 = shadow, 0 = sunlit).</p></li>
+<li><p><em>facesun (cp.ndarray)</em> – Sunlit mask of walls (1 = sunlit, 0 = shadow).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_23_cupy.shadowingfunction_wallheight_23">
+<span class="sig-prename descclassname"><span class="pre">src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_23_cupy.</span></span><span class="sig-name descname"><span class="pre">shadowingfunction_wallheight_23</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vegdem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vegdem2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azimuth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amaxvalue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bush</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">walls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aspect</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/functions/SOLWEIGpython/UTIL/shadowingfunction_wallheight_23_cupy.html#shadowingfunction_wallheight_23"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_23_cupy.shadowingfunction_wallheight_23" title="Link to this definition">¶</a></dt>
+<dd><p>Computes shadow masks for buildings and vegetation on a terrain, and shadow height on building walls, using a
+stepped projection method, based on sun position (azimuth, altitude) and elevation data. This is a CuPy-accelerated
+version optimized for GPU use.</p>
+<p>The function simulates shadow casting by iteratively stepping through the DSM and CHM
+along the direction of the sun, lowering the sun’s ray with each step, and comparing
+it to terrain heights to determine shadowed pixels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>cp.ndarray</em>) – DSM.</p></li>
+<li><p><strong>vegdem</strong> (<em>cp.ndarray</em>) – Vegetation height layer (CHM).</p></li>
+<li><p><strong>vegdem2</strong> (<em>cp.ndarray</em>) – Secondary vegetation height layer (trunk heights).</p></li>
+<li><p><strong>azimuth</strong> (<em>float</em>) – Sun azimuth in degrees (clockwise from north).</p></li>
+<li><p><strong>altitude</strong> (<em>float</em>) – Sun altitude in degrees  (0° = horizon, 90° = zenith).</p></li>
+<li><p><strong>scale</strong> (<em>float</em>) – Scale factor (pixel size in meters)</p></li>
+<li><p><strong>amaxvalue</strong> (<em>float</em>) – Maximum vertical height to simulate in the shadow projection.</p></li>
+<li><p><strong>bush</strong> (<em>cp.ndarray</em>) – Bush indicator array (values &gt; 1 indicate presence).</p></li>
+<li><p><strong>walls</strong> (<em>cp.ndarray</em>) – DSM layer representing wall heights [m].</p></li>
+<li><p><strong>aspect</strong> (<em>cp.ndarray</em>) – Aspect (orientation) of building walls [radians].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>vegsh (cp.ndarray)</em> – Vegetation shadow mask (1 = sunlit, 0 = shadow).</p></li>
+<li><p><em>sh (cp.ndarray)</em> – Shadow map of ground and roof (1 = shadow, 0 = sunlit).</p></li>
+<li><p><em>wallsh (cp.ndarray)</em> – Shadow height on walls [m].</p></li>
+<li><p><em>wallshve (cp.ndarray)</em> – Additional wall shadowing caused by vegetation [m].</p></li>
+<li><p><em>wallsun (cp.ndarray)</em> – Sunlit height of walls [m].</p></li>
+<li><p><em>facesh (cp.ndarray)</em> – Shadow mask from wall self-shadowing (1 = shadow, 0 = sunlit).</p></li>
+<li><p><em>facesun (cp.ndarray)</em> – Sunlit mask of walls (1 = sunlit, 0 = shadow).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="functions-solweigpython-util-sun-distance">
+<h2>functions.SOLWEIGpython.UTIL.sun_distance<a class="headerlink" href="#functions-solweigpython-util-sun-distance" title="Link to this heading">¶</a></h2>
+<hr class="docutils" />
+<span class="target" id="module-src.functions.SOLWEIGpython.UTIL"></span></section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="src.j_analysis.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">src.j_analysis package</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="src.functions.SOLWEIGpython.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">functions.SOLWEIGpython</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, Jessica Monahan
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">src.functions.SOLWEIGpython.UTIL</a><ul>
+<li><a class="reference internal" href="#module-src.functions.SOLWEIGpython.UTIL.Perez_v3">functions.SOLWEIGpython.UTIL.Perez_v3</a><ul>
+<li><a class="reference internal" href="#src.functions.SOLWEIGpython.UTIL.Perez_v3.Perez_v3"><code class="docutils literal notranslate"><span class="pre">Perez_v3()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.functions.SOLWEIGpython.UTIL.Solweig_v2015_metdata_noload">functions.SOLWEIGpython.UTIL.Solweig_v2015_metdata_noload</a><ul>
+<li><a class="reference internal" href="#src.functions.SOLWEIGpython.UTIL.Solweig_v2015_metdata_noload.Solweig_2015a_metdata_noload"><code class="docutils literal notranslate"><span class="pre">Solweig_2015a_metdata_noload()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.functions.SOLWEIGpython.UTIL.clearnessindex_2013b">functions.SOLWEIGpython.UTIL.clearnessindex_2013b</a><ul>
+<li><a class="reference internal" href="#src.functions.SOLWEIGpython.UTIL.clearnessindex_2013b.clearnessindex_2013b"><code class="docutils literal notranslate"><span class="pre">clearnessindex_2013b()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.functions.SOLWEIGpython.UTIL.create_patches">functions.SOLWEIGpython.UTIL.create_patches</a><ul>
+<li><a class="reference internal" href="#src.functions.SOLWEIGpython.UTIL.create_patches.create_patches"><code class="docutils literal notranslate"><span class="pre">create_patches()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.functions.SOLWEIGpython.UTIL.diffusefraction">functions.SOLWEIGpython.UTIL.diffusefraction</a><ul>
+<li><a class="reference internal" href="#src.functions.SOLWEIGpython.UTIL.diffusefraction.diffusefraction"><code class="docutils literal notranslate"><span class="pre">diffusefraction()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_13_cupy">functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_13_cupy</a><ul>
+<li><a class="reference internal" href="#src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_13_cupy.shadowingfunction_wallheight_13"><code class="docutils literal notranslate"><span class="pre">shadowingfunction_wallheight_13()</span></code></a></li>
+<li><a class="reference internal" href="#src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_13_cupy.shadowingfunction_wallheight_13_3d"><code class="docutils literal notranslate"><span class="pre">shadowingfunction_wallheight_13_3d()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_23_cupy">functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_23_cupy</a><ul>
+<li><a class="reference internal" href="#src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_23_cupy.shadowingfunction_23_3d"><code class="docutils literal notranslate"><span class="pre">shadowingfunction_23_3d()</span></code></a></li>
+<li><a class="reference internal" href="#src.functions.SOLWEIGpython.UTIL.shadowingfunction_wallheight_23_cupy.shadowingfunction_wallheight_23"><code class="docutils literal notranslate"><span class="pre">shadowingfunction_wallheight_23()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#functions-solweigpython-util-sun-distance">functions.SOLWEIGpython.UTIL.sun_distance</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>

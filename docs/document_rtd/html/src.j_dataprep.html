@@ -1,0 +1,2460 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="src.j_dataprep.climate" href="src.j_dataprep.climate.html" /><link rel="prev" title="src.j_analysis" href="src.j_analysis.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>src.j_dataprep - SOLFD 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">SOLFD 1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">SOLFD 1.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="runningthecode.html">Running the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howworks.html">How SOLFD works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets Used</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="src.html">src package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of src package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="src.functions.html">src.functions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of src.functions</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="src.functions.SOLWEIGpython.html">functions.SOLWEIGpython</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of functions.SOLWEIGpython</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="src.functions.SOLWEIGpython.UTIL.html">src.functions.SOLWEIGpython.UTIL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.j_analysis.html">src.j_analysis</a></li>
+<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">src.j_dataprep</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of src.j_dataprep</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.j_dataprep.climate.html">src.j_dataprep.climate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.j_dataprep.geotiles.html">src.j_dataprep.geotiles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.j_output.html">src.j_output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src.preprocessor.html">src.preprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src.processor.html">src.processor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src.util.html">src.util</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/src.j_dataprep.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="src-j-dataprep">
+<h1>src.j_dataprep<a class="headerlink" href="#src-j-dataprep" title="Link to this heading">¶</a></h1>
+<section id="directories">
+<h2>Directories<a class="headerlink" href="#directories" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="src.j_dataprep.climate.html">src.j_dataprep.climate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.j_dataprep.geotiles.html">src.j_dataprep.geotiles</a></li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-src.j_dataprep.DEMs">
+<span id="src-j-dataprep-dems"></span><h2>src.j_dataprep.DEMs<a class="headerlink" href="#module-src.j_dataprep.DEMs" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.j_dataprep.DEMs.</span></span><span class="sig-name descname"><span class="pre">Buildings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfs_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://data.3dbag.nl/api/BAG3D/wfs'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'BAG3D:lod13'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpkg_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'buildings'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'output'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_layer_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'buildings'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#Buildings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Manage 3D building data within a bounding box by downloading, loading,
+and modifying building geometries from a WFS service.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.bbox">
+<span class="sig-name descname"><span class="pre">bbox</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.bbox" title="Link to this definition">¶</a></dt>
+<dd><p>Bounding box (min_x, min_y, max_x, max_y) for the area of interest.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.bufferbbox">
+<span class="sig-name descname"><span class="pre">bufferbbox</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.bufferbbox" title="Link to this definition">¶</a></dt>
+<dd><p>Buffered bounding box expanded by 2 units.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.wfs_url">
+<span class="sig-name descname"><span class="pre">wfs_url</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.wfs_url" title="Link to this definition">¶</a></dt>
+<dd><p>URL of the WFS service to download building data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.layer_name">
+<span class="sig-name descname"><span class="pre">layer_name</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.layer_name" title="Link to this definition">¶</a></dt>
+<dd><p>WFS layer name to query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.data" title="Link to this definition">¶</a></dt>
+<dd><p>Downloaded building data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>GeoDataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.building_geometries">
+<span class="sig-name descname"><span class="pre">building_geometries</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.building_geometries" title="Link to this definition">¶</a></dt>
+<dd><p>List of building geometries with parcel IDs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.removed_buildings">
+<span class="sig-name descname"><span class="pre">removed_buildings</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.removed_buildings" title="Link to this definition">¶</a></dt>
+<dd><p>List of parcel IDs of removed buildings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.user_buildings">
+<span class="sig-name descname"><span class="pre">user_buildings</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.user_buildings" title="Link to this definition">¶</a></dt>
+<dd><p>List of user-inserted building geometries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.user_buildings_higher">
+<span class="sig-name descname"><span class="pre">user_buildings_higher</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.user_buildings_higher" title="Link to this definition">¶</a></dt>
+<dd><p>List of user buildings with height info.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.removed_user_buildings">
+<span class="sig-name descname"><span class="pre">removed_user_buildings</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.removed_user_buildings" title="Link to this definition">¶</a></dt>
+<dd><p>List of user building IDs that are removed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.is3D">
+<span class="sig-name descname"><span class="pre">is3D</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.is3D" title="Link to this definition">¶</a></dt>
+<dd><p>Flag indicating if 3D building data is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.download_wfs_data">
+<span class="sig-name descname"><span class="pre">download_wfs_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gpkg_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#Buildings.download_wfs_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.download_wfs_data" title="Link to this definition">¶</a></dt>
+<dd><p>Download building features from the WFS service within the buffered bounding box.
+Saves the data as a GeoPackage file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gpkg_name</strong> (<em>str</em>) – Filename for the GeoPackage (without extension).</p></li>
+<li><p><strong>output_folder</strong> (<em>str</em>) – Folder to save the GeoPackage.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – Layer name to use inside the GeoPackage.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Downloaded building features concatenated, or None if no features were downloaded.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>GeoDataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.insert_user_buildings">
+<span class="sig-name descname"><span class="pre">insert_user_buildings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">highest_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">footprint_array</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#Buildings.insert_user_buildings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.insert_user_buildings" title="Link to this definition">¶</a></dt>
+<dd><p>Insert user-defined buildings based on arrays of building heights and optional footprints.
+Assigns unique parcel IDs and matches footprint buildings with highest buildings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>highest_array</strong> (<em>np.ndarray</em>) – Array representing the highest building heights.</p></li>
+<li><p><strong>transform</strong> (<em>Affine</em>) – Rasterio affine transform for spatial referencing.</p></li>
+<li><p><strong>footprint_array</strong> (<em>np.ndarray</em><em> or </em><em>None</em>) – Optional array representing building footprints.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Effects:</dt><dd><p>Updates self.user_buildings, self.user_buildings_higher, and self.is3D.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.load_buildings">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_buildings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buildings_gdf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buildings_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#Buildings.load_buildings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.load_buildings" title="Link to this definition">¶</a></dt>
+<dd><p>Load building geometries from a GeoDataFrame or from a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buildings_gdf</strong> (<em>GeoDataFrame</em><em> or </em><em>None</em>) – Building data GeoDataFrame.</p></li>
+<li><p><strong>buildings_path</strong> (<em>str</em><em> or </em><em>None</em>) – Path to building file to load if GeoDataFrame is None.</p></li>
+<li><p><strong>layer</strong> (<em>str</em><em> or </em><em>None</em>) – Layer name to read from file if applicable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of dicts with ‘geometry’ (GeoJSON mapping) and ‘parcel_id’. None if no data could be loaded.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.remove_buildings">
+<span class="sig-name descname"><span class="pre">remove_buildings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identification</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#Buildings.remove_buildings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.remove_buildings" title="Link to this definition">¶</a></dt>
+<dd><p>Mark a building as removed by adding its parcel ID to the removed list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>identification</strong> (<em>str</em>) – Parcel ID of the building to remove.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.remove_user_buildings">
+<span class="sig-name descname"><span class="pre">remove_user_buildings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identification</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#Buildings.remove_user_buildings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.remove_user_buildings" title="Link to this definition">¶</a></dt>
+<dd><p>Mark a user building as removed by adding its parcel ID to the removed list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>identification</strong> (<em>str</em>) – Parcel ID of the user building to remove.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.retrieve_buildings">
+<span class="sig-name descname"><span class="pre">retrieve_buildings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identification</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#Buildings.retrieve_buildings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.retrieve_buildings" title="Link to this definition">¶</a></dt>
+<dd><p>Undo the removal of a building by removing its parcel ID from the removed list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>identification</strong> (<em>str</em>) – Parcel ID of the building to retrieve.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.Buildings.retrieve_user_buildings">
+<span class="sig-name descname"><span class="pre">retrieve_user_buildings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identification</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#Buildings.retrieve_user_buildings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.Buildings.retrieve_user_buildings" title="Link to this definition">¶</a></dt>
+<dd><p>Undo the removal of a user building by removing its parcel ID from the removed list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>identification</strong> (<em>str</em>) – Parcel ID of the user building to retrieve.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.j_dataprep.DEMs.</span></span><span class="sig-name descname"><span class="pre">CHM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dsm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trunk_height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_folder_chm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'output'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_folder_las</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'temp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merged_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pointcloud.las'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndvi_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for creating and managing Canopy Height Models (CHMs) from LiDAR data.
+This class handles downloading and merging LAS/LAZ tiles, filtering vegetation points
+based on classification and NDVI, rasterizing vegetation using interpolation, applying
+smoothing filters, and generating final CHM raster outputs.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.bbox">
+<span class="sig-name descname"><span class="pre">bbox</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.bbox" title="Link to this definition">¶</a></dt>
+<dd><p>Bounding box coordinates (min_x, min_y, max_x, max_y) defining the area of interest.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.bufferedbbox">
+<span class="sig-name descname"><span class="pre">bufferedbbox</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.bufferedbbox" title="Link to this definition">¶</a></dt>
+<dd><p>Buffered bounding box extended by a fixed margin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.crs">
+<span class="sig-name descname"><span class="pre">crs</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.crs" title="Link to this definition">¶</a></dt>
+<dd><p>Coordinate reference system used (default EPSG:28992).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>rasterio.crs.CRS</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.dtm">
+<span class="sig-name descname"><span class="pre">dtm</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.dtm" title="Link to this definition">¶</a></dt>
+<dd><p>Digital Terrain Model raster data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray or rasterio object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.dsm">
+<span class="sig-name descname"><span class="pre">dsm</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.dsm" title="Link to this definition">¶</a></dt>
+<dd><p>Digital Surface Model raster data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray or rasterio object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.output_folder_chm">
+<span class="sig-name descname"><span class="pre">output_folder_chm</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.output_folder_chm" title="Link to this definition">¶</a></dt>
+<dd><p>Folder path where CHM outputs are saved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.gdf">
+<span class="sig-name descname"><span class="pre">gdf</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.gdf" title="Link to this definition">¶</a></dt>
+<dd><p>GeoDataFrame containing tile lookup information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>geopandas.GeoDataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.chm">
+<span class="sig-name descname"><span class="pre">chm</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.chm" title="Link to this definition">¶</a></dt>
+<dd><p>Initial Canopy Height Model raster array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.tree_polygons">
+<span class="sig-name descname"><span class="pre">tree_polygons</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.tree_polygons" title="Link to this definition">¶</a></dt>
+<dd><p>Polygons representing tree footprints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>geopandas.GeoDataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.transform" title="Link to this definition">¶</a></dt>
+<dd><p>Affine transform for raster coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>affine.Affine</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.trunk_array">
+<span class="sig-name descname"><span class="pre">trunk_array</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.trunk_array" title="Link to this definition">¶</a></dt>
+<dd><p>Array representing estimated trunk heights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.original_chm">
+<span class="sig-name descname"><span class="pre">original_chm</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.original_chm" title="Link to this definition">¶</a></dt>
+<dd><p>Copy of the original CHM before processing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.og_polygons">
+<span class="sig-name descname"><span class="pre">og_polygons</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.og_polygons" title="Link to this definition">¶</a></dt>
+<dd><p>Copy of original tree polygons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>geopandas.GeoDataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.original_trunk">
+<span class="sig-name descname"><span class="pre">original_trunk</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.original_trunk" title="Link to this definition">¶</a></dt>
+<dd><p>Copy of original trunk array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.chm_creation">
+<span class="sig-name descname"><span class="pre">chm_creation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LasData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vegetation_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smooth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodata_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-9999</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.chm_creation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.chm_creation" title="Link to this definition">¶</a></dt>
+<dd><p>Create and optionally smooth a CHM from vegetation data, then save it as a GeoTIFF and extract tree polygons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>LasData</strong> (<em>laspy.LasData</em>) – LAS metadata for writing the output raster.</p></li>
+<li><p><strong>vegetation_data</strong> (<em>tuple</em>) – Tuple of (veg_raster, grid_centers) for CHM generation.</p></li>
+<li><p><strong>output_filename</strong> (<em>str</em>) – Path to save the output CHM raster.</p></li>
+<li><p><strong>resolution</strong> (<em>float</em>) – Spatial resolution of the raster (default = 0.5).</p></li>
+<li><p><strong>smooth</strong> (<em>bool</em>) – Whether to apply a median filter to the CHM (default = False).</p></li>
+<li><p><strong>nodata_value</strong> (<em>float</em>) – Value to assign to NoData cells in the raster (default = -9999).</p></li>
+<li><p><strong>filter_size</strong> (<em>int</em>) – Size of median filter kernel (default = 3).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(chm_array, polygons, transform) where polygons are tree regions as GeoJSON-like dicts.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.chm_finish">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">chm_finish</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chm_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtm_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dsm_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.chm_finish"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.chm_finish" title="Link to this definition">¶</a></dt>
+<dd><p>Finalize CHM by removing terrain and filtering by vegetation height.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chm_array</strong> (<em>np.ndarray</em>) – Initial canopy height model array.</p></li>
+<li><p><strong>dtm_array</strong> (<em>np.ndarray</em>) – Digital terrain model array.</p></li>
+<li><p><strong>dsm_array</strong> (<em>np.ndarray</em>) – Digital surface model array.</p></li>
+<li><p><strong>min_height</strong> (<em>float</em>) – Minimum height threshold to keep vegetation (default = 2).</p></li>
+<li><p><strong>max_height</strong> (<em>float</em>) – Maximum height threshold to keep vegetation (default = 40).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Processed CHM with invalid or noisy values removed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.download_las_tiles">
+<span class="sig-name descname"><span class="pre">download_las_tiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matching_tiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_folder</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.download_las_tiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.download_las_tiles" title="Link to this definition">¶</a></dt>
+<dd><p>Download AHN5 or AHN4 LAZ tiles based on a list of matching tile names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matching_tiles</strong> (<em>list</em><em> of </em><em>str</em>) – List of tile identifiers (e.g., ‘31FN2_01’) to be downloaded.</p></li>
+<li><p><strong>output_folder</strong> (<em>str</em>) – Directory where downloaded LAZ files will be saved.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.extract_vegetation_points">
+<span class="sig-name descname"><span class="pre">extract_vegetation_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LasData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndvi_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.extract_vegetation_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.extract_vegetation_points" title="Link to this definition">¶</a></dt>
+<dd><p>Extract vegetation points based on classification and NDVI threshold.</p>
+<p>Parameters:
+- LasData (laspy.LasData):          Input LAS point cloud data.
+- ndvi_threshold (float, optional): NDVI cutoff for vegetation points. Defaults to 0.1.
+- pre_filter (bool, optional):      If True, filter out vegetation points below 1.5m above lowest vegetation point. Defaults to False.</p>
+<p>Returns:
+- veg_points (laspy.LasData):       LAS data filtered to vegetation points based on NDVI and optional height filtering.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.filter_points_within_bounds">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filter_points_within_bounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">las_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.filter_points_within_bounds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.filter_points_within_bounds" title="Link to this definition">¶</a></dt>
+<dd><p>Filter LAS points that lie within the given bounding box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>las_data</strong> (<em>laspy.LasData</em>) – Input LAS point cloud.</p></li>
+<li><p><strong>bounds</strong> (<em>tuple</em>) – Bounding box as (x_min, y_min, x_max, y_max).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered LAS data containing only points within bounds.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>laspy.LasData</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.find_tiles">
+<span class="sig-name descname"><span class="pre">find_tiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.find_tiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.find_tiles" title="Link to this definition">¶</a></dt>
+<dd><p>Find geotile names overlapping the specified bounding box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_min</strong> (<em>float</em>) – Coordinates defining the bounding box.</p></li>
+<li><p><strong>y_min</strong> (<em>float</em>) – Coordinates defining the bounding box.</p></li>
+<li><p><strong>x_max</strong> (<em>float</em>) – Coordinates defining the bounding box.</p></li>
+<li><p><strong>y_max</strong> (<em>float</em>) – Coordinates defining the bounding box.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of geotile names that intersect with the bounding box.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.init_chm">
+<span class="sig-name descname"><span class="pre">init_chm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'output'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'temp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merged_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'output/pointcloud.las'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smooth_chm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndvi_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.init_chm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.init_chm" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize and generate a CHM by downloading, merging, filtering, and interpolating LiDAR data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox</strong> (<em>tuple</em>) – Bounding box (xmin, ymin, xmax, ymax) for the area of interest.</p></li>
+<li><p><strong>output_folder</strong> (<em>str</em>) – Directory for saving output files (default = ‘output’).</p></li>
+<li><p><strong>input_folder</strong> (<em>str</em>) – Directory where LAZ files are stored or downloaded (default = ‘temp’).</p></li>
+<li><p><strong>merged_output</strong> (<em>str</em>) – Path to save the merged LAS point cloud (default = ‘output/pointcloud.las’).</p></li>
+<li><p><strong>smooth_chm</strong> (<em>bool</em>) – Whether to smooth the CHM using a median filter (default = True).</p></li>
+<li><p><strong>resolution</strong> (<em>float</em>) – Output raster resolution (default = 0.5).</p></li>
+<li><p><strong>ndvi_threshold</strong> (<em>float</em>) – NDVI threshold for filtering vegetation points (default = 0.05).</p></li>
+<li><p><strong>filter_size</strong> (<em>int</em>) – Size of median filter kernel (default = 3).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(chm_array, polygons, transform) or (None, None, None) if process fails.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.insert_random_tree">
+<span class="sig-name descname"><span class="pre">insert_random_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(12.0,</span> <span class="pre">18.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crown_radius_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(2.0,</span> <span class="pre">5.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trunk_height_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(4.0,</span> <span class="pre">12.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">canopy_base_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">0.8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_canopy_height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'parabolic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.insert_random_tree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.insert_random_tree" title="Link to this definition">¶</a></dt>
+<dd><p>Insert a tree with randomized dimensions and properties at a specified position. Random values are drawn from
+The specified ranges for height, crown radius, trunk height, and canopy base height. Ensures that the canopy height meets
+a minimum value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position</strong> (<em>tuple</em>) – (row, col) position where the tree will be placed.</p></li>
+<li><p><strong>height_range</strong> (<em>tuple</em>) – Range of tree height in meters.</p></li>
+<li><p><strong>crown_radius_range</strong> (<em>tuple</em>) – Range of crown radius in meters.</p></li>
+<li><p><strong>trunk_height_range</strong> (<em>tuple</em>) – Range of trunk height in meters.</p></li>
+<li><p><strong>canopy_base_range</strong> (<em>tuple</em>) – Range of canopy base height in meters.</p></li>
+<li><p><strong>resolution</strong> (<em>float</em>) – Spatial resolution of the map.</p></li>
+<li><p><strong>min_canopy_height</strong> (<em>float</em>) – Minimum allowable canopy height (tree - trunk).</p></li>
+<li><p><strong>shape</strong> (<em>str</em>) – Shape type of the canopy (e.g., ‘parabolic’).</p></li>
+<li><p><strong>randomness</strong> (<em>float</em>) – Amount of shape noise to apply.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.insert_tree">
+<span class="sig-name descname"><span class="pre">insert_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crown_radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trunk_height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'parabolic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">canopy_base_height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.insert_tree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.insert_tree" title="Link to this definition">¶</a></dt>
+<dd><p>Insert a parametric tree model into the CHM and trunk height array at the specified location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position</strong> (<em>tuple</em>) – (row, col)    indices for tree center insertion.</p></li>
+<li><p><strong>height</strong> (<em>float</em>) – Total height of the tree.</p></li>
+<li><p><strong>crown_radius</strong> (<em>float</em>) – Radius of the crown in real-world units.</p></li>
+<li><p><strong>resolution</strong> (<em>float</em>) – Real-world size of each pixel (default = 0.5).</p></li>
+<li><p><strong>trunk_height</strong> (<em>float</em>) – Height of the trunk (default = 0.0).</p></li>
+<li><p><strong>tree_shape</strong> (<em>str</em>) – Canopy shape type (‘gaussian’, ‘cone’, ‘parabolic’, ‘hemisphere’).</p></li>
+<li><p><strong>randomness</strong> (<em>float</em>) – Standard deviation for random noise applied to canopy (default = 0.8).</p></li>
+<li><p><strong>canopy_base_height</strong> (<em>float</em>) – Height at which the canopy starts above the trunk (default = 0.0).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updates CHM and trunk arrays in-place.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.insert_type_tree">
+<span class="sig-name descname"><span class="pre">insert_type_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">age</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fraxinus'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">canopy_base</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.insert_type_tree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.insert_type_tree" title="Link to this definition">¶</a></dt>
+<dd><p>Insert a tree of a specific type and age using pre-defined growth parameters.</p>
+<p>Parameters are loaded from a JSON database and used to compute the
+trunk height and crown radius. The canopy type is fixed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>age</strong> (<em>int</em><em>, </em><em>str</em>) – Age of the tree in years or life stage (young, early_mature, mature, late_mature, semi_mature).</p></li>
+<li><p><strong>position</strong> (<em>tuple</em>) – (row, col) position where the tree will be placed.</p></li>
+<li><p><strong>tree_type</strong> (<em>str</em>) – Tree species (default is ‘fraxinus’).</p></li>
+<li><p><strong>resolution</strong> (<em>float</em>) – Spatial resolution of the map.</p></li>
+<li><p><strong>canopy_base</strong> (<em>float</em>) – Height of the base of the canopy in meters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Raises:
+-   ValueError: If no data exists for the specified tree age.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.interpolation_vegetation">
+<span class="sig-name descname"><span class="pre">interpolation_vegetation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">veg_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-9999</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.interpolation_vegetation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.interpolation_vegetation" title="Link to this definition">¶</a></dt>
+<dd><p>Create a vegetation raster by interpolating vegetation points using Laplace interpolation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>veg_points</strong> (<em>laspy.LasData</em>) – Vegetation points to interpolate.</p></li>
+<li><p><strong>resolution</strong> (<em>float</em>) – Desired raster resolution.</p></li>
+<li><p><strong>no_data_value</strong> (<em>int</em><em>, </em><em>optional</em>) – Value to assign NoData cells. Defaults to -9999.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>interpolated_grid (np.ndarray)</em> – Raster grid with interpolated vegetation heights.</p></li>
+<li><p><em>grid_center_xy (tuple of np.ndarray)</em> – Grid center coordinates (x, y).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.median_filter_chm">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">median_filter_chm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chm_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodata_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-9999</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.median_filter_chm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.median_filter_chm" title="Link to this definition">¶</a></dt>
+<dd><p>Apply a median filter to smooth the CHM, preserving NoData areas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chm_array</strong> (<em>np.ndarray</em>) – CHM raster array.</p></li>
+<li><p><strong>nodata_value</strong> (<em>float</em><em>, </em><em>optional</em>) – NoData value in the array. Defaults to -9999.</p></li>
+<li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Median filter size (window). Defaults to 3.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Smoothed CHM array with NoData preserved.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>smoothed_chm (np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.merge_las_files">
+<span class="sig-name descname"><span class="pre">merge_las_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laz_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merged_output</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.merge_las_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.merge_las_files" title="Link to this definition">¶</a></dt>
+<dd><p>Merge and crop multiple LAZ files into a single LAS file within the specified bounds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laz_files</strong> (<em>list</em><em> of </em><em>str</em>) – Paths to the input LAZ files.</p></li>
+<li><p><strong>bounds</strong> (<em>tuple</em>) – Bounding box (xmin, ymin, xmax, ymax) to crop point clouds.</p></li>
+<li><p><strong>merged_output</strong> (<em>str</em><em> or </em><em>Path</em>) – File path to write the merged output LAS file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Merged and cropped point cloud data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>laspy.LasData</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.raster_center_coords">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">raster_center_coords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.raster_center_coords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.raster_center_coords" title="Link to this definition">¶</a></dt>
+<dd><p>Compute center coordinates of each cell in a raster grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_x</strong> (<em>float</em>) – Bounding box coordinates.</p></li>
+<li><p><strong>max_x</strong> (<em>float</em>) – Bounding box coordinates.</p></li>
+<li><p><strong>min_y</strong> (<em>float</em>) – Bounding box coordinates.</p></li>
+<li><p><strong>max_y</strong> (<em>float</em>) – Bounding box coordinates.</p></li>
+<li><p><strong>resolution</strong> (<em>float</em>) – Cell size; assumed square cells.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>grid_center_x (np.ndarray)</em> – X cell center coordinates.</p></li>
+<li><p><em>grid_center_y (np.ndarray)</em> – Y cell center coordinates.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.remove_trees">
+<span class="sig-name descname"><span class="pre">remove_trees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.remove_trees"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.remove_trees" title="Link to this definition">¶</a></dt>
+<dd><p>Remove a tree (or cluster of trees) from the CHM and trunk arrays by polygon ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tree_id</strong> (<em>int</em>) – Identifier of the tree polygon to remove.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.CHM.save_las">
+<span class="sig-name descname"><span class="pre">save_las</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">merged_las</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">veg_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'veg_points.las'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#CHM.save_las"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.CHM.save_las" title="Link to this definition">¶</a></dt>
+<dd><p>Save filtered vegetation points as a LAS file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>merged_las</strong> (<em>laspy.LasData</em>) – Original merged LAS data with header info.</p></li>
+<li><p><strong>veg_points</strong> (<em>laspy.LasData</em>) – Filtered LAS points representing vegetation.</p></li>
+<li><p><strong>output_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Output filename. Defaults to “veg_points.las”.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Creates the output folder if it does not exist and writes the LAS file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.j_dataprep.DEMs.</span></span><span class="sig-name descname"><span class="pre">DEMS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">building_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bridge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resampling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Resampling.cubic_spline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'output'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#DEMS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for handling Digital Elevation Models (DEM) including DTM and DSM,
+fetching AHN data via WCS, filling missing data, resampling, cropping,
+and integrating building footprints for urban terrain modeling.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.buffer">
+<span class="sig-name descname"><span class="pre">buffer</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.buffer" title="Link to this definition">¶</a></dt>
+<dd><p>Buffer size in meters for bbox expansion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.bbox">
+<span class="sig-name descname"><span class="pre">bbox</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.bbox" title="Link to this definition">¶</a></dt>
+<dd><p>Bounding box coordinates (xmin, ymin, xmax, ymax).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.bufferbbox">
+<span class="sig-name descname"><span class="pre">bufferbbox</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.bufferbbox" title="Link to this definition">¶</a></dt>
+<dd><p>Buffered bounding box expanded by buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.building_data">
+<span class="sig-name descname"><span class="pre">building_data</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.building_data" title="Link to this definition">¶</a></dt>
+<dd><p>List of building geometries and attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.resolution">
+<span class="sig-name descname"><span class="pre">resolution</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.resolution" title="Link to this definition">¶</a></dt>
+<dd><p>Desired output raster resolution in meters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.user_building_data">
+<span class="sig-name descname"><span class="pre">user_building_data</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.user_building_data" title="Link to this definition">¶</a></dt>
+<dd><p>User-provided building data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.output_dir">
+<span class="sig-name descname"><span class="pre">output_dir</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.output_dir" title="Link to this definition">¶</a></dt>
+<dd><p>Directory to save output files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.bridge">
+<span class="sig-name descname"><span class="pre">bridge</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.bridge" title="Link to this definition">¶</a></dt>
+<dd><p>Whether to include ‘overbruggingsdeel’ data in the DSM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.resampling">
+<span class="sig-name descname"><span class="pre">resampling</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.resampling" title="Link to this definition">¶</a></dt>
+<dd><p>Resampling method for raster operations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>rasterio.enums.Resampling</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.crs">
+<span class="sig-name descname"><span class="pre">crs</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.crs" title="Link to this definition">¶</a></dt>
+<dd><p>Coordinate reference system, default EPSG:28992.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CRS</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.dtm">
+<span class="sig-name descname"><span class="pre">dtm</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.dtm" title="Link to this definition">¶</a></dt>
+<dd><p>Digital Terrain Model raster data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.dsm">
+<span class="sig-name descname"><span class="pre">dsm</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.dsm" title="Link to this definition">¶</a></dt>
+<dd><p>Digital Surface Model raster data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.transform" title="Link to this definition">¶</a></dt>
+<dd><p>Affine transform for the rasters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Affine</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.og_dtm">
+<span class="sig-name descname"><span class="pre">og_dtm</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.og_dtm" title="Link to this definition">¶</a></dt>
+<dd><p>Original DTM before modifications.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.og_dsm">
+<span class="sig-name descname"><span class="pre">og_dsm</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.og_dsm" title="Link to this definition">¶</a></dt>
+<dd><p>Original DSM before modifications.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.is3D">
+<span class="sig-name descname"><span class="pre">is3D</span></span><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.is3D" title="Link to this definition">¶</a></dt>
+<dd><p>Flag indicating if DSM is 3D.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.create_dem">
+<span class="sig-name descname"><span class="pre">create_dem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#DEMS.create_dem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.create_dem" title="Link to this definition">¶</a></dt>
+<dd><p>Create Digital Elevation Model (DEM) from AHN data with optional building and overbrugginsdeel data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bbox</strong> (<em>tuple</em>) – Bounding box coordinates (xmin, ymin, xmax, ymax).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>cropped_dtm (np.ndarray)</em> – Filled, cropped DTM array.</p></li>
+<li><p><em>cropped_dsm (np.ndarray)</em> – Cropped DSM array with buildings and building heights, optional output.</p></li>
+<li><p><em>transform (Affine)</em> – Affine transform matrix of the rasters.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.crop_to_bbox">
+<span class="sig-name descname"><span class="pre">crop_to_bbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#DEMS.crop_to_bbox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.crop_to_bbox" title="Link to this definition">¶</a></dt>
+<dd><p>Crop a buffered raster array to the original bounding box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<em>np.ndarray</em>) – Raster data array with buffer.</p></li>
+<li><p><strong>transform</strong> (<em>Affine</em>) – Affine transform matrix of input array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>cropped_array (np.ndarray)</em> – Cropped raster array.</p></li>
+<li><p><em>new_transform (Affine)</em> – New Affine transform matrix for cropped raster.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.export_context">
+<span class="sig-name descname"><span class="pre">export_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dxf'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#DEMS.export_context"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.export_context" title="Link to this definition">¶</a></dt>
+<dd><p>Export buildings and DSM bounding box to a CAD-compatible file format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<em>str</em>) – Path and name of the file to export.</p></li>
+<li><p><strong>export_format</strong> (<em>str</em><em>, </em><em>optional</em>) – Export format. Options: ‘json’, ‘csv’, or ‘dxf’. Defaults to ‘dxf’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.extract_center_cells">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extract_center_cells</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geo_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-9999</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#DEMS.extract_center_cells"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.extract_center_cells" title="Link to this definition">¶</a></dt>
+<dd><p>Extract the values of each cell in the input data and save these with the x and y (row and col)
+indices. Thereby, make sure that the corners of the dataset are filled for a full coverage triangulation
+in the next step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>geo_array</strong> (<em>np.ndarray</em>) – Raster data array.</p></li>
+<li><p><strong>no_data</strong> (<em>int</em>) – No data value to identify invalid cells (default -9999).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of [x, y, z] cell values with corners interpolated if no data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.fetch_ahn_wcs">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fetch_ahn_wcs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bufferbbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coverage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dtm_05m'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wcs_resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#DEMS.fetch_ahn_wcs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.fetch_ahn_wcs" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch AHN WCS data for a given buffered bounding box and save as GeoTIFF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bufferbbox</strong> (<em>tuple</em>) – Buffered bounding box (xmin, ymin, xmax, ymax).</p></li>
+<li><p><strong>output_file</strong> (<em>str</em>) – Output filepath for the GeoTIFF (default “output/dtm.tif”).</p></li>
+<li><p><strong>coverage</strong> (<em>str</em>) – Coverage layer name, e.g. “dtm_05m” or “dsm_05m” (default “dtm_05m”).</p></li>
+<li><p><strong>wcs_resolution</strong> (<em>float</em>) – Resolution of WCS data in meters (default 0.5).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(rasterio dataset object, numpy array of raster data) if successful, else None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.fill_raster">
+<span class="sig-name descname"><span class="pre">fill_raster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geo_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodata_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#DEMS.fill_raster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.fill_raster" title="Link to this definition">¶</a></dt>
+<dd><p>Fill no-data values in a raster using Laplace interpolation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>geo_array</strong> (<em>np.ndarray</em>) – Cropped raster data array.</p></li>
+<li><p><strong>nodata_value</strong> (<em>int</em>) – No-data value to replace NaNs after interpolation.</p></li>
+<li><p><strong>transform</strong> (<em>Affine</em>) – Affine transform matrix of the raster.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filled raster array with no-data values replaced.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>new_data(np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.remove_buildings">
+<span class="sig-name descname"><span class="pre">remove_buildings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remove_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_user_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">building_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_building_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_buildings_higher</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#DEMS.remove_buildings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.remove_buildings" title="Link to this definition">¶</a></dt>
+<dd><p>Remove specified buildings from DSM by replacing their areas with DTM values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>remove_list</strong> (<em>list</em>) – List of parcel IDs to remove from the main building dataset.</p></li>
+<li><p><strong>remove_user_list</strong> (<em>list</em>) – List of parcel IDs to remove from the user building dataset.</p></li>
+<li><p><strong>building_data</strong> (<em>list</em>) – List of main building data dictionaries.</p></li>
+<li><p><strong>user_building_data</strong> (<em>list</em>) – List of user building data dictionaries.</p></li>
+<li><p><strong>user_buildings_higher</strong> (<em>list</em><em>, </em><em>optional</em>) – List of user buildings with higher layers to be removed as well.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.replace_buildings">
+<span class="sig-name descname"><span class="pre">replace_buildings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filled_dtm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dsm_buildings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buildings_geometries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bridge</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#DEMS.replace_buildings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.replace_buildings" title="Link to this definition">¶</a></dt>
+<dd><p>Replace filled DTM values with DSM building heights where buildings exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filled_dtm</strong> (<em>np.ndarray</em>) – Filled, cropped DTM array.</p></li>
+<li><p><strong>dsm_buildings</strong> (<em>np.ndarray</em>) – Filled, cropped DSM array with buildings.</p></li>
+<li><p><strong>buildings_geometries</strong> (<em>list</em>) – List of building geometries (dict or GeoJSON features).</p></li>
+<li><p><strong>transform</strong> (<em>Affine</em>) – Affine transform matrix of the rasters.</p></li>
+<li><p><strong>bridge</strong> (<em>bool</em>) – Whether to include ‘overbrugginsdeel’ geometries.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Final DSM array combining ground and building heights.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>final_dsm (np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.resample_raster">
+<span class="sig-name descname"><span class="pre">resample_raster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_transform</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_crs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_resolution</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#DEMS.resample_raster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.resample_raster" title="Link to this definition">¶</a></dt>
+<dd><p>Resample a raster to a different resolution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_array</strong> (<em>np.ndarray</em>) – Input raster data.</p></li>
+<li><p><strong>input_transform</strong> (<em>Affine</em>) – Affine transform of input raster.</p></li>
+<li><p><strong>input_crs</strong> (<em>CRS</em>) – Coordinate Reference System of input raster.</p></li>
+<li><p><strong>output_resolution</strong> (<em>float</em>) – Desired output resolution in meters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>resampled_array (np.ndarray)</em> – Resampled raster array.</p></li>
+<li><p><em>new_transform (Affine)</em> – New Affine transform matrix for resampled raster.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.update_building_height">
+<span class="sig-name descname"><span class="pre">update_building_height</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raise_height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_buildings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">building_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_array</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_arrays</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">higher_buildings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#DEMS.update_building_height"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.update_building_height" title="Link to this definition">¶</a></dt>
+<dd><p>Raise the height of specified user building(s) in the DSM by a given amount.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>raise_height</strong> (<em>float</em>) – Amount to raise the building height.</p></li>
+<li><p><strong>user_buildings</strong> (<em>list</em>) – List of user building data dictionaries.</p></li>
+<li><p><strong>building_id</strong> (<em>str</em><em>, </em><em>optional</em>) – ID of the building to raise. If None, raise_all should be used.</p></li>
+<li><p><strong>user_array</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Single 2D array with building height data.</p></li>
+<li><p><strong>user_arrays</strong> (<em>list</em><em> of </em><em>np.ndarray</em><em>, </em><em>optional</em>) – List of arrays representing multiple DSM layers.</p></li>
+<li><p><strong>higher_buildings</strong> (<em>list</em><em>, </em><em>optional</em>) – List of buildings with additional height layers for 3D DSM.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.DEMS.update_dsm">
+<span class="sig-name descname"><span class="pre">update_dsm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_buildings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_array</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_arrays</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">higher_buildings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#DEMS.update_dsm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.DEMS.update_dsm" title="Link to this definition">¶</a></dt>
+<dd><p>Update the DSM with new user building heights, supporting both 2D and 3D DSM arrays.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_buildings</strong> (<em>list</em>) – List of user building data dictionaries with geometries.</p></li>
+<li><p><strong>user_array</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Single 2D array with building height data.</p></li>
+<li><p><strong>user_arrays</strong> (<em>list</em><em> of </em><em>np.ndarray</em><em>, </em><em>optional</em>) – List of arrays representing multiple DSM layers.</p></li>
+<li><p><strong>higher_buildings</strong> (<em>list</em><em>, </em><em>optional</em>) – List of user buildings with additional height layers.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.edit_bounds">
+<span class="sig-prename descclassname"><span class="pre">src.j_dataprep.DEMs.</span></span><span class="sig-name descname"><span class="pre">edit_bounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shrink</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#edit_bounds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.edit_bounds" title="Link to this definition">¶</a></dt>
+<dd><p>Expands or shrinks bounding box coordinates by a buffer amount.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bounds</strong> (<em>tuple</em>) – Bounding box as (min_x, min_y, max_x, max_y).</p></li>
+<li><p><strong>buffer</strong> (<em>float</em>) – Amount to expand or shrink the bounding box.</p></li>
+<li><p><strong>shrink</strong> (<em>bool</em>) – If True, shrink the bounds by buffer; else expand (default False).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Modified bounding box as (min_x, min_y, max_x, max_y).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.j_dataprep.DEMs.write_output">
+<span class="sig-prename descclassname"><span class="pre">src.j_dataprep.DEMs.</span></span><span class="sig-name descname"><span class="pre">write_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">change_nodata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/DEMs.html#write_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.DEMs.write_output" title="Link to this definition">¶</a></dt>
+<dd><p>Writes a numpy array to a GeoTIFF file using rasterio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – Rasterio or laspy dataset (for metadata).</p></li>
+<li><p><strong>crs</strong> – Coordinate Reference System for the output raster.</p></li>
+<li><p><strong>output</strong> (<em>np.ndarray</em>) – Output numpy array grid to write.</p></li>
+<li><p><strong>transform</strong> – Affine transform mapping pixel to spatial coordinates.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Output filename (including path).</p></li>
+<li><p><strong>change_nodata</strong> (<em>bool</em>) – If True, use nodata value -9999; else use dataset’s nodata.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.j_dataprep.landcover">
+<span id="src-j-dataprep-landcover"></span><h2>src.j_dataprep.landcover<a class="headerlink" href="#module-src.j_dataprep.landcover" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.j_dataprep.landcover.</span></span><span class="sig-name descname"><span class="pre">LandCover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'http://www.opengis.net/def/crs/EPSG/0/28992'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_bgt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">main_roadtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">building_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buildings_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodata_fill</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roads_on_top</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">landcover_path_bgt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'src/databases/landcover_bgt.json'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">landcover_top</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'src/databases/landcover_top.json'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="simple">
+<dt>A class to process and rasterize land cover data from the PDOK Top10NL API, building geometries, and a DTM raster,</dt><dd><p>producing a land cover classification raster.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.bbox">
+<span class="sig-name descname"><span class="pre">bbox</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.bbox" title="Link to this definition">¶</a></dt>
+<dd><p>Bounding box (xmin, ymin, xmax, ymax) in EPSG:28992.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.crs">
+<span class="sig-name descname"><span class="pre">crs</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.crs" title="Link to this definition">¶</a></dt>
+<dd><p>CRS for requests and raster alignment, default is EPSG:28992.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.resolution">
+<span class="sig-name descname"><span class="pre">resolution</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.resolution" title="Link to this definition">¶</a></dt>
+<dd><p>Output raster resolution in meters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.main_road">
+<span class="sig-name descname"><span class="pre">main_road</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.main_road" title="Link to this definition">¶</a></dt>
+<dd><p>Default landcover code for hardened roads if TOP10NL is chosen as source.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.dtm_dataset">
+<span class="sig-name descname"><span class="pre">dtm_dataset</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.dtm_dataset" title="Link to this definition">¶</a></dt>
+<dd><p>DTM as rasterio dataset for alignment and dimensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>rasterio.open</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.base_url_top">
+<span class="sig-name descname"><span class="pre">base_url_top</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.base_url_top" title="Link to this definition">¶</a></dt>
+<dd><p>Base URL for the PDOK Top10NL API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.base_url_bgt">
+<span class="sig-name descname"><span class="pre">base_url_bgt</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.base_url_bgt" title="Link to this definition">¶</a></dt>
+<dd><p>Base URL for the PDOK Top10NL API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">water_mask,</span> <span class="pre">building_mask</span></span></dt>
+<dd><p>Optional binary masks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.buildings_path">
+<span class="sig-name descname"><span class="pre">buildings_path</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.buildings_path" title="Link to this definition">¶</a></dt>
+<dd><p>Optional path to building vector data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.layer">
+<span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.layer" title="Link to this definition">¶</a></dt>
+<dd><p>Layer name if using GPKG for building data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.building_data">
+<span class="sig-name descname"><span class="pre">building_data</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.building_data" title="Link to this definition">¶</a></dt>
+<dd><p>Optional preloaded building geometries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.landcover_path">
+<span class="sig-name descname"><span class="pre">landcover_path</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.landcover_path" title="Link to this definition">¶</a></dt>
+<dd><p>Path to JSON file mapping landcover codes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.landcover_mapping">
+<span class="sig-name descname"><span class="pre">landcover_mapping</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.landcover_mapping" title="Link to this definition">¶</a></dt>
+<dd><p>Mapping of landcover types to codes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">buildings,</span> <span class="pre">water,</span> <span class="pre">roads,</span> <span class="pre">terrains</span></span></dt>
+<dd><p>Extracted vector features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.array">
+<span class="sig-name descname"><span class="pre">array</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.array" title="Link to this definition">¶</a></dt>
+<dd><p>Output raster array of landcover values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.og_landcover">
+<span class="sig-name descname"><span class="pre">og_landcover</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.og_landcover" title="Link to this definition">¶</a></dt>
+<dd><p>Original unmodified landcover array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.landcover_withoutbuild">
+<span class="sig-name descname"><span class="pre">landcover_withoutbuild</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.landcover_withoutbuild" title="Link to this definition">¶</a></dt>
+<dd><p>Landcover array before building insertion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.transform" title="Link to this definition">¶</a></dt>
+<dd><p>Raster transform from DTM dataset.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.convert_to_raster_bgt">
+<span class="sig-name descname"><span class="pre">convert_to_raster_bgt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.convert_to_raster_bgt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.convert_to_raster_bgt" title="Link to this definition">¶</a></dt>
+<dd><p>Rasterize terrain, road, water, building, and overbrugging features from BGT onto the DTM sized grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2D array with land cover codes assigned per grid cell.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.convert_to_raster_top">
+<span class="sig-name descname"><span class="pre">convert_to_raster_top</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.convert_to_raster_top"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.convert_to_raster_top" title="Link to this definition">¶</a></dt>
+<dd><p>Rasterize the TOP10NL terrain, road, water, and building features onto the DTM-sized grid. Applies land cover codes to a numpy
+array according to feature geometries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>A 2D numpy array with land cover codes assigned per grid cell.</dt><dd><p>The array uses -9999 for nodata values where no features are present.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.dtm_dataset_prep">
+<span class="sig-name descname"><span class="pre">dtm_dataset_prep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.dtm_dataset_prep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.dtm_dataset_prep" title="Link to this definition">¶</a></dt>
+<dd><p>Prepare and return a DTM rasterio dataset object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_path</strong> (<em>str</em><em> or </em><em>Path</em><em>, </em><em>optional</em>) – File path to the DTM raster.</p></li>
+<li><p><strong>existing_dataset</strong> (<em>rasterio.io.DatasetReader</em><em>, </em><em>optional</em>) – An already-open rasterio dataset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The prepared DTM dataset.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>rasterio.io.DatasetReader</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.export_context">
+<span class="sig-name descname"><span class="pre">export_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dxf'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.export_context"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.export_context" title="Link to this definition">¶</a></dt>
+<dd><p>Export the current land cover and building context.dxf to a file in specified format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<em>str</em>) – The output file path.</p></li>
+<li><p><strong>export_format</strong> (<em>str</em><em>, </em><em>optional</em>) – Format of the export. Options are “json”, “csv”, or “dxf”. Defaults to “dxf”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.export_features_to_gpkg">
+<span class="sig-name descname"><span class="pre">export_features_to_gpkg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'features'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.export_features_to_gpkg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.export_features_to_gpkg" title="Link to this definition">¶</a></dt>
+<dd><p>Export a list of GeoJSON-like features to a GeoPackage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>features</strong> (<em>list</em>) – List of features with “geometry” and “properties”.</p></li>
+<li><p><strong>output_path</strong> (<em>str</em>) – File path to save the .gpkg.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – Name of the layer inside the GeoPackage.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.filter_active_bgt_features">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filter_active_bgt_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.filter_active_bgt_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.filter_active_bgt_features" title="Link to this definition">¶</a></dt>
+<dd><p>Filters BGT features where property “eind_registratie” is None (null).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>features</strong> (<em>list</em>) – List of GeoJSON feature dicts.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered features with “eind_registratie” == None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.get_bgt_features">
+<span class="sig-name descname"><span class="pre">get_bgt_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.get_bgt_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.get_bgt_features" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve features from the BGT API for the specified item type within the bounding box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>item_type</strong> (<em>str</em>) – The name of the BGT collection to query (e.g., “waterdeel_vlak”, “wegdeel_vlak”, “terrein_vlak”).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A GeoJSON-like dictionary with key “features” containing a list of feature dictionaries as returned by the API.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.get_features">
+<span class="sig-name descname"><span class="pre">get_features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.get_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.get_features" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.get_landcover_code">
+<span class="sig-name descname"><span class="pre">get_landcover_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">land_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isroad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.get_landcover_code"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.get_landcover_code" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve the numeric land cover code for a given land type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>land_type</strong> (<em>str</em>) – The land type string to look up .</p></li>
+<li><p><strong>isroad</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to look up in the “road” category (True) or “terrain” category (False). Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The land cover code for the given land type.</dt><dd><p>Returns -1 if the land type is not found in the specified category.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.get_top10nl">
+<span class="sig-name descname"><span class="pre">get_top10nl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.get_top10nl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.get_top10nl" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve features from the TOP10NL API for the specified item type within the bounding box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>item_type</strong> (<em>str</em>) – The name of the TOP10NL collection to query (e.g., “waterdeel_vlak”, “wegdeel_vlak”, “terrein_vlak”).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A GeoJSON-like dictionary with key “features” containing a list of feature dictionaries as returned by the API.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.load_buildings">
+<span class="sig-name descname"><span class="pre">load_buildings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.load_buildings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.load_buildings" title="Link to this definition">¶</a></dt>
+<dd><p>Load building features from a GeoPackage or use preloaded data if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>A list of dictionaries with keys:</dt><dd><ul class="simple">
+<li><p>”geometry”: GeoJSON-like geometry dictionary of the building footprint</p></li>
+<li><p>”parcel_id”: The building parcel identifier string</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns an empty list if no building data or path is provided.</p>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.load_landcover_mapping">
+<span class="sig-name descname"><span class="pre">load_landcover_mapping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.load_landcover_mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.load_landcover_mapping" title="Link to this definition">¶</a></dt>
+<dd><p>Load land cover mappings from a JSON file with explicit UTF-8 encoding.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>A dictionary representing land cover categories and their
+corresponding code mappings. For example:
+{</p>
+<blockquote>
+<div><p>”terrain”: {“grasland”: 5, “akker”: 6, …},
+“road”: {“onverhard”: 3, “halfverhard”: 4, …}</p>
+</div></blockquote>
+<p>}</p>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.process_overbrugging_bgt">
+<span class="sig-name descname"><span class="pre">process_overbrugging_bgt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.process_overbrugging_bgt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.process_overbrugging_bgt" title="Link to this definition">¶</a></dt>
+<dd><p>Function to process the BGT overbrugging features</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.process_road_features_bgt">
+<span class="sig-name descname"><span class="pre">process_road_features_bgt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.process_road_features_bgt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.process_road_features_bgt" title="Link to this definition">¶</a></dt>
+<dd><p>Loads and classifies BGT road features with landuse.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of GeoJSON-like feature dictionaries representing roads. Each feature contains “geometry” and “properties” with a “landuse” code.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.process_road_features_top">
+<span class="sig-name descname"><span class="pre">process_road_features_top</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.process_road_features_top"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.process_road_features_top" title="Link to this definition">¶</a></dt>
+<dd><p>Process road features from TOP10NL data and map road surface types to codes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of GeoJSON-like feature dictionaries representing roads. Each feature contains “geometry” and “properties” with a “landuse” code.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.process_terrain_features_bgt">
+<span class="sig-name descname"><span class="pre">process_terrain_features_bgt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.process_terrain_features_bgt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.process_terrain_features_bgt" title="Link to this definition">¶</a></dt>
+<dd><p>Process terrain features from BGT and assign land use codes from the terrain mapping.
+Keeps full original properties and adds “landuse”.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.process_terrain_features_top">
+<span class="sig-name descname"><span class="pre">process_terrain_features_top</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.process_terrain_features_top"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.process_terrain_features_top" title="Link to this definition">¶</a></dt>
+<dd><p>Process terrain features from TOP10NL data and map land use types to codes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of GeoJSON-like feature dictionaries representing terrain areas. Each feature contains “geometry” and “properties” with a “landuse” code.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.process_water_features_bgt">
+<span class="sig-name descname"><span class="pre">process_water_features_bgt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.process_water_features_bgt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.process_water_features_bgt" title="Link to this definition">¶</a></dt>
+<dd><p>Process water features from BGT. Keeps all original properties.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.process_water_features_top">
+<span class="sig-name descname"><span class="pre">process_water_features_top</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.process_water_features_top"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.process_water_features_top" title="Link to this definition">¶</a></dt>
+<dd><p>Process and filter water features from TOP10NL data.
+Filters out features with ‘hoogteniveau’ == -1 and keeps only Polygon or MultiPolygon geometries (line geometries are buffered).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of GeoJSON-like feature dictionaries representing water areas. Each feature has keys “type”, “geometry”, and “properties”.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.save_raster">
+<span class="sig-name descname"><span class="pre">save_raster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">change_nodata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.save_raster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.save_raster" title="Link to this definition">¶</a></dt>
+<dd><p>Save the current raster array to a GeoTIFF file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The output file path.</p></li>
+<li><p><strong>change_nodata</strong> (<em>bool</em>) – If True, nodata value is forced to -9999. Otherwise, uses the nodata value from the original dataset if present.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.update_build_landcover">
+<span class="sig-name descname"><span class="pre">update_build_landcover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_building_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.update_build_landcover"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.update_build_landcover" title="Link to this definition">¶</a></dt>
+<dd><p>Update the raster array by rasterizing new building geometries with landcover code 2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>new_building_data</strong> (<em>list</em>) – List of building feature dictionaries with “geometry”.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.update_landcover">
+<span class="sig-name descname"><span class="pre">update_landcover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">land_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.update_landcover"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.update_landcover" title="Link to this definition">¶</a></dt>
+<dd><p>Update the raster array for cells where input_array &gt; -1 with the given land type code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>land_type</strong> (<em>int</em>) – The land cover code to set.</p></li>
+<li><p><strong>input_array</strong> (<em>np.ndarray</em>) – Boolean or integer mask array indicating which cells to update.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.landcover.LandCover.visualize_raster">
+<span class="sig-name descname"><span class="pre">visualize_raster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raster_array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/landcover.html#LandCover.visualize_raster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.landcover.LandCover.visualize_raster" title="Link to this definition">¶</a></dt>
+<dd><p>Visualize the landcover raster.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>raster_array</strong> (<em>ndarray</em>) – Array of the landcover raster.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None, shows a Matplotlib plot for the raster array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.j_dataprep.user_input">
+<span id="src-j-dataprep-user-input"></span><h2>src.j_dataprep.user_input<a class="headerlink" href="#module-src.j_dataprep.user_input" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.j_dataprep.user_input.Building3d_input">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.j_dataprep.user_input.</span></span><span class="sig-name descname"><span class="pre">Building3d_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ncols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/user_input.html#Building3d_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.user_input.Building3d_input" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to handle 3D building input rasterization and create DSM layers with gaps.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.user_input.Building3d_input.cols">
+<span class="sig-name descname"><span class="pre">cols</span></span><a class="headerlink" href="#src.j_dataprep.user_input.Building3d_input.cols" title="Link to this definition">¶</a></dt>
+<dd><p>Number of columns in the raster grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.user_input.Building3d_input.rows">
+<span class="sig-name descname"><span class="pre">rows</span></span><a class="headerlink" href="#src.j_dataprep.user_input.Building3d_input.rows" title="Link to this definition">¶</a></dt>
+<dd><p>Number of rows in the raster grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.user_input.Building3d_input.res">
+<span class="sig-name descname"><span class="pre">res</span></span><a class="headerlink" href="#src.j_dataprep.user_input.Building3d_input.res" title="Link to this definition">¶</a></dt>
+<dd><p>Spatial resolution of each cell in the raster grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.user_input.Building3d_input.buildings_input">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">buildings_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_gaps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/user_input.html#Building3d_input.buildings_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.user_input.Building3d_input.buildings_input" title="Link to this definition">¶</a></dt>
+<dd><p>Generate 3D-layered DSM  representing building heights with gaps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arrays</strong> (<em>list</em><em> of </em><em>np.ndarray</em>) – List of input 2D arrays representing building heights and gap layers, output from Rusterizer.</p></li>
+<li><p><strong>num_gaps</strong> (<em>int</em>) – Number of gaps to include in the DSM layering.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>dsms (np.ndarray)</em> – 3D array with shape (layers, rows, cols) of DSM layers with gaps.</p></li>
+<li><p><em>base_array (np.ndarray)</em> – The base building height array from input for reference.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.user_input.Building3d_input.rasterize_3dbuilding">
+<span class="sig-name descname"><span class="pre">rasterize_3dbuilding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_gaps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/user_input.html#Building3d_input.rasterize_3dbuilding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.user_input.Building3d_input.rasterize_3dbuilding" title="Link to this definition">¶</a></dt>
+<dd><p>Rasterize a 3D building OBJ file into DSM layers with gaps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj_path</strong> (<em>str</em>) – File path to the 3D building OBJ file.</p></li>
+<li><p><strong>num_gaps</strong> (<em>int</em>) – Number of gaps to consider when layering DSMs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>dsms (np.ndarray)</em> – 3D array of DSM layers with gaps.</p></li>
+<li><p><em>highest_array (np.ndarray)</em> – The highest building height layer from input.</p></li>
+<li><p><em>input_arrays (list of np.ndarray)</em> – Raw input rasterized arrays from the OBJ.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.j_dataprep.user_input.Surface_input">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.j_dataprep.user_input.</span></span><span class="sig-name descname"><span class="pre">Surface_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ncols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/user_input.html#Surface_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.user_input.Surface_input" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to create a new land cover input from user input for the Landcover class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ncols</strong> (<em>int</em>) – Number of columns in the raster grid.</p></li>
+<li><p><strong>nrows</strong> (<em>int</em>) – Number of rows in the raster grid.</p></li>
+<li><p><strong>resolution</strong> (<em>float</em>) – Resolution of the raster grid cells.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.user_input.Surface_input.dictionary">
+<span class="sig-name descname"><span class="pre">dictionary</span></span><a class="headerlink" href="#src.j_dataprep.user_input.Surface_input.dictionary" title="Link to this definition">¶</a></dt>
+<dd><p>Loaded landcover category dictionary from ‘landcover_bgt.json’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.user_input.Surface_input.res">
+<span class="sig-name descname"><span class="pre">res</span></span><a class="headerlink" href="#src.j_dataprep.user_input.Surface_input.res" title="Link to this definition">¶</a></dt>
+<dd><p>Resolution of the raster grid cells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.user_input.Surface_input.ncols">
+<span class="sig-name descname"><span class="pre">ncols</span></span><a class="headerlink" href="#src.j_dataprep.user_input.Surface_input.ncols" title="Link to this definition">¶</a></dt>
+<dd><p>Number of columns in the raster grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.j_dataprep.user_input.Surface_input.nrows">
+<span class="sig-name descname"><span class="pre">nrows</span></span><a class="headerlink" href="#src.j_dataprep.user_input.Surface_input.nrows" title="Link to this definition">¶</a></dt>
+<dd><p>Number of rows in the raster grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.user_input.Surface_input.get_value">
+<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/user_input.html#Surface_input.get_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.user_input.Surface_input.get_value" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the integer value for a given category and key from the landcover dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>category</strong> (<em>str</em>) – The category name in the landcover dictionary.</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – The key within the category to look up.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The integer value corresponding to the category and key, or None if not found.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.j_dataprep.user_input.Surface_input.user_input_array">
+<span class="sig-name descname"><span class="pre">user_input_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/j_dataprep/user_input.html#Surface_input.user_input_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.j_dataprep.user_input.Surface_input.user_input_array" title="Link to this definition">¶</a></dt>
+<dd><p>Rasterizes a given input object path and retrieves a type number based on provided type info.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj_path</strong> (<em>str</em>) – Path to the input object to rasterize.</p></li>
+<li><p><strong>type</strong> (<em>list</em>) – List containing two elements [category, key] to fetch a type number.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Tuple containing:</dt><dd><ul class="simple">
+<li><p>np.ndarray:   Rasterized array from the input object.</p></li>
+<li><p>int or None:  Type number corresponding to the category and key.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="src-j-dataprep-wall-preprocess">
+<h2>src.j_dataprep.wall_preprocess<a class="headerlink" href="#src-j-dataprep-wall-preprocess" title="Link to this heading">¶</a></h2>
+<hr class="docutils" />
+<span class="target" id="module-src.j_dataprep"></span></section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="src.j_dataprep.climate.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">src.j_dataprep.climate</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="src.j_analysis.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">src.j_analysis</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, Jessica Monahan
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">src.j_dataprep</a><ul>
+<li><a class="reference internal" href="#directories">Directories</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-src.j_dataprep.DEMs">src.j_dataprep.DEMs</a><ul>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings"><code class="docutils literal notranslate"><span class="pre">Buildings</span></code></a><ul>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.bbox"><code class="docutils literal notranslate"><span class="pre">Buildings.bbox</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.bufferbbox"><code class="docutils literal notranslate"><span class="pre">Buildings.bufferbbox</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.wfs_url"><code class="docutils literal notranslate"><span class="pre">Buildings.wfs_url</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.layer_name"><code class="docutils literal notranslate"><span class="pre">Buildings.layer_name</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.data"><code class="docutils literal notranslate"><span class="pre">Buildings.data</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.building_geometries"><code class="docutils literal notranslate"><span class="pre">Buildings.building_geometries</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.removed_buildings"><code class="docutils literal notranslate"><span class="pre">Buildings.removed_buildings</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.user_buildings"><code class="docutils literal notranslate"><span class="pre">Buildings.user_buildings</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.user_buildings_higher"><code class="docutils literal notranslate"><span class="pre">Buildings.user_buildings_higher</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.removed_user_buildings"><code class="docutils literal notranslate"><span class="pre">Buildings.removed_user_buildings</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.is3D"><code class="docutils literal notranslate"><span class="pre">Buildings.is3D</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.download_wfs_data"><code class="docutils literal notranslate"><span class="pre">Buildings.download_wfs_data()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.insert_user_buildings"><code class="docutils literal notranslate"><span class="pre">Buildings.insert_user_buildings()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.load_buildings"><code class="docutils literal notranslate"><span class="pre">Buildings.load_buildings()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.remove_buildings"><code class="docutils literal notranslate"><span class="pre">Buildings.remove_buildings()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.remove_user_buildings"><code class="docutils literal notranslate"><span class="pre">Buildings.remove_user_buildings()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.retrieve_buildings"><code class="docutils literal notranslate"><span class="pre">Buildings.retrieve_buildings()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.Buildings.retrieve_user_buildings"><code class="docutils literal notranslate"><span class="pre">Buildings.retrieve_user_buildings()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM"><code class="docutils literal notranslate"><span class="pre">CHM</span></code></a><ul>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.bbox"><code class="docutils literal notranslate"><span class="pre">CHM.bbox</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.bufferedbbox"><code class="docutils literal notranslate"><span class="pre">CHM.bufferedbbox</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.crs"><code class="docutils literal notranslate"><span class="pre">CHM.crs</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.dtm"><code class="docutils literal notranslate"><span class="pre">CHM.dtm</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.dsm"><code class="docutils literal notranslate"><span class="pre">CHM.dsm</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.output_folder_chm"><code class="docutils literal notranslate"><span class="pre">CHM.output_folder_chm</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.gdf"><code class="docutils literal notranslate"><span class="pre">CHM.gdf</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.chm"><code class="docutils literal notranslate"><span class="pre">CHM.chm</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.tree_polygons"><code class="docutils literal notranslate"><span class="pre">CHM.tree_polygons</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.transform"><code class="docutils literal notranslate"><span class="pre">CHM.transform</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.trunk_array"><code class="docutils literal notranslate"><span class="pre">CHM.trunk_array</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.original_chm"><code class="docutils literal notranslate"><span class="pre">CHM.original_chm</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.og_polygons"><code class="docutils literal notranslate"><span class="pre">CHM.og_polygons</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.original_trunk"><code class="docutils literal notranslate"><span class="pre">CHM.original_trunk</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.chm_creation"><code class="docutils literal notranslate"><span class="pre">CHM.chm_creation()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.chm_finish"><code class="docutils literal notranslate"><span class="pre">CHM.chm_finish()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.download_las_tiles"><code class="docutils literal notranslate"><span class="pre">CHM.download_las_tiles()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.extract_vegetation_points"><code class="docutils literal notranslate"><span class="pre">CHM.extract_vegetation_points()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.filter_points_within_bounds"><code class="docutils literal notranslate"><span class="pre">CHM.filter_points_within_bounds()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.find_tiles"><code class="docutils literal notranslate"><span class="pre">CHM.find_tiles()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.init_chm"><code class="docutils literal notranslate"><span class="pre">CHM.init_chm()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.insert_random_tree"><code class="docutils literal notranslate"><span class="pre">CHM.insert_random_tree()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.insert_tree"><code class="docutils literal notranslate"><span class="pre">CHM.insert_tree()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.insert_type_tree"><code class="docutils literal notranslate"><span class="pre">CHM.insert_type_tree()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.interpolation_vegetation"><code class="docutils literal notranslate"><span class="pre">CHM.interpolation_vegetation()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.median_filter_chm"><code class="docutils literal notranslate"><span class="pre">CHM.median_filter_chm()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.merge_las_files"><code class="docutils literal notranslate"><span class="pre">CHM.merge_las_files()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.raster_center_coords"><code class="docutils literal notranslate"><span class="pre">CHM.raster_center_coords()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.remove_trees"><code class="docutils literal notranslate"><span class="pre">CHM.remove_trees()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.CHM.save_las"><code class="docutils literal notranslate"><span class="pre">CHM.save_las()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS"><code class="docutils literal notranslate"><span class="pre">DEMS</span></code></a><ul>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.buffer"><code class="docutils literal notranslate"><span class="pre">DEMS.buffer</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.bbox"><code class="docutils literal notranslate"><span class="pre">DEMS.bbox</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.bufferbbox"><code class="docutils literal notranslate"><span class="pre">DEMS.bufferbbox</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.building_data"><code class="docutils literal notranslate"><span class="pre">DEMS.building_data</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.resolution"><code class="docutils literal notranslate"><span class="pre">DEMS.resolution</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.user_building_data"><code class="docutils literal notranslate"><span class="pre">DEMS.user_building_data</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.output_dir"><code class="docutils literal notranslate"><span class="pre">DEMS.output_dir</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.bridge"><code class="docutils literal notranslate"><span class="pre">DEMS.bridge</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.resampling"><code class="docutils literal notranslate"><span class="pre">DEMS.resampling</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.crs"><code class="docutils literal notranslate"><span class="pre">DEMS.crs</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.dtm"><code class="docutils literal notranslate"><span class="pre">DEMS.dtm</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.dsm"><code class="docutils literal notranslate"><span class="pre">DEMS.dsm</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.transform"><code class="docutils literal notranslate"><span class="pre">DEMS.transform</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.og_dtm"><code class="docutils literal notranslate"><span class="pre">DEMS.og_dtm</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.og_dsm"><code class="docutils literal notranslate"><span class="pre">DEMS.og_dsm</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.is3D"><code class="docutils literal notranslate"><span class="pre">DEMS.is3D</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.create_dem"><code class="docutils literal notranslate"><span class="pre">DEMS.create_dem()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.crop_to_bbox"><code class="docutils literal notranslate"><span class="pre">DEMS.crop_to_bbox()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.export_context"><code class="docutils literal notranslate"><span class="pre">DEMS.export_context()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.extract_center_cells"><code class="docutils literal notranslate"><span class="pre">DEMS.extract_center_cells()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.fetch_ahn_wcs"><code class="docutils literal notranslate"><span class="pre">DEMS.fetch_ahn_wcs()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.fill_raster"><code class="docutils literal notranslate"><span class="pre">DEMS.fill_raster()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.remove_buildings"><code class="docutils literal notranslate"><span class="pre">DEMS.remove_buildings()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.replace_buildings"><code class="docutils literal notranslate"><span class="pre">DEMS.replace_buildings()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.resample_raster"><code class="docutils literal notranslate"><span class="pre">DEMS.resample_raster()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.update_building_height"><code class="docutils literal notranslate"><span class="pre">DEMS.update_building_height()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.DEMS.update_dsm"><code class="docutils literal notranslate"><span class="pre">DEMS.update_dsm()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.edit_bounds"><code class="docutils literal notranslate"><span class="pre">edit_bounds()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.DEMs.write_output"><code class="docutils literal notranslate"><span class="pre">write_output()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.j_dataprep.landcover">src.j_dataprep.landcover</a><ul>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover"><code class="docutils literal notranslate"><span class="pre">LandCover</span></code></a><ul>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.bbox"><code class="docutils literal notranslate"><span class="pre">LandCover.bbox</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.crs"><code class="docutils literal notranslate"><span class="pre">LandCover.crs</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.resolution"><code class="docutils literal notranslate"><span class="pre">LandCover.resolution</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.main_road"><code class="docutils literal notranslate"><span class="pre">LandCover.main_road</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.dtm_dataset"><code class="docutils literal notranslate"><span class="pre">LandCover.dtm_dataset</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.base_url_top"><code class="docutils literal notranslate"><span class="pre">LandCover.base_url_top</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.base_url_bgt"><code class="docutils literal notranslate"><span class="pre">LandCover.base_url_bgt</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.buildings_path"><code class="docutils literal notranslate"><span class="pre">LandCover.buildings_path</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.layer"><code class="docutils literal notranslate"><span class="pre">LandCover.layer</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.building_data"><code class="docutils literal notranslate"><span class="pre">LandCover.building_data</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.landcover_path"><code class="docutils literal notranslate"><span class="pre">LandCover.landcover_path</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.landcover_mapping"><code class="docutils literal notranslate"><span class="pre">LandCover.landcover_mapping</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.array"><code class="docutils literal notranslate"><span class="pre">LandCover.array</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.og_landcover"><code class="docutils literal notranslate"><span class="pre">LandCover.og_landcover</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.landcover_withoutbuild"><code class="docutils literal notranslate"><span class="pre">LandCover.landcover_withoutbuild</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.transform"><code class="docutils literal notranslate"><span class="pre">LandCover.transform</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.convert_to_raster_bgt"><code class="docutils literal notranslate"><span class="pre">LandCover.convert_to_raster_bgt()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.convert_to_raster_top"><code class="docutils literal notranslate"><span class="pre">LandCover.convert_to_raster_top()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.dtm_dataset_prep"><code class="docutils literal notranslate"><span class="pre">LandCover.dtm_dataset_prep()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.export_context"><code class="docutils literal notranslate"><span class="pre">LandCover.export_context()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.export_features_to_gpkg"><code class="docutils literal notranslate"><span class="pre">LandCover.export_features_to_gpkg()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.filter_active_bgt_features"><code class="docutils literal notranslate"><span class="pre">LandCover.filter_active_bgt_features()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.get_bgt_features"><code class="docutils literal notranslate"><span class="pre">LandCover.get_bgt_features()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.get_features"><code class="docutils literal notranslate"><span class="pre">LandCover.get_features()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.get_landcover_code"><code class="docutils literal notranslate"><span class="pre">LandCover.get_landcover_code()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.get_top10nl"><code class="docutils literal notranslate"><span class="pre">LandCover.get_top10nl()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.load_buildings"><code class="docutils literal notranslate"><span class="pre">LandCover.load_buildings()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.load_landcover_mapping"><code class="docutils literal notranslate"><span class="pre">LandCover.load_landcover_mapping()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.process_overbrugging_bgt"><code class="docutils literal notranslate"><span class="pre">LandCover.process_overbrugging_bgt()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.process_road_features_bgt"><code class="docutils literal notranslate"><span class="pre">LandCover.process_road_features_bgt()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.process_road_features_top"><code class="docutils literal notranslate"><span class="pre">LandCover.process_road_features_top()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.process_terrain_features_bgt"><code class="docutils literal notranslate"><span class="pre">LandCover.process_terrain_features_bgt()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.process_terrain_features_top"><code class="docutils literal notranslate"><span class="pre">LandCover.process_terrain_features_top()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.process_water_features_bgt"><code class="docutils literal notranslate"><span class="pre">LandCover.process_water_features_bgt()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.process_water_features_top"><code class="docutils literal notranslate"><span class="pre">LandCover.process_water_features_top()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.save_raster"><code class="docutils literal notranslate"><span class="pre">LandCover.save_raster()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.update_build_landcover"><code class="docutils literal notranslate"><span class="pre">LandCover.update_build_landcover()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.update_landcover"><code class="docutils literal notranslate"><span class="pre">LandCover.update_landcover()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.landcover.LandCover.visualize_raster"><code class="docutils literal notranslate"><span class="pre">LandCover.visualize_raster()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.j_dataprep.user_input">src.j_dataprep.user_input</a><ul>
+<li><a class="reference internal" href="#src.j_dataprep.user_input.Building3d_input"><code class="docutils literal notranslate"><span class="pre">Building3d_input</span></code></a><ul>
+<li><a class="reference internal" href="#src.j_dataprep.user_input.Building3d_input.cols"><code class="docutils literal notranslate"><span class="pre">Building3d_input.cols</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.user_input.Building3d_input.rows"><code class="docutils literal notranslate"><span class="pre">Building3d_input.rows</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.user_input.Building3d_input.res"><code class="docutils literal notranslate"><span class="pre">Building3d_input.res</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.user_input.Building3d_input.buildings_input"><code class="docutils literal notranslate"><span class="pre">Building3d_input.buildings_input()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.user_input.Building3d_input.rasterize_3dbuilding"><code class="docutils literal notranslate"><span class="pre">Building3d_input.rasterize_3dbuilding()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#src.j_dataprep.user_input.Surface_input"><code class="docutils literal notranslate"><span class="pre">Surface_input</span></code></a><ul>
+<li><a class="reference internal" href="#src.j_dataprep.user_input.Surface_input.dictionary"><code class="docutils literal notranslate"><span class="pre">Surface_input.dictionary</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.user_input.Surface_input.res"><code class="docutils literal notranslate"><span class="pre">Surface_input.res</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.user_input.Surface_input.ncols"><code class="docutils literal notranslate"><span class="pre">Surface_input.ncols</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.user_input.Surface_input.nrows"><code class="docutils literal notranslate"><span class="pre">Surface_input.nrows</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.user_input.Surface_input.get_value"><code class="docutils literal notranslate"><span class="pre">Surface_input.get_value()</span></code></a></li>
+<li><a class="reference internal" href="#src.j_dataprep.user_input.Surface_input.user_input_array"><code class="docutils literal notranslate"><span class="pre">Surface_input.user_input_array()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#src-j-dataprep-wall-preprocess">src.j_dataprep.wall_preprocess</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>

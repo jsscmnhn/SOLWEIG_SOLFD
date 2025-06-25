@@ -1,0 +1,1202 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>src.processor.solweig_algorithm_qgisless - SOLFD 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">SOLFD 1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">SOLFD 1.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../runningthecode.html">Running the Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howworks.html">How SOLFD works</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../src.html">src package</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of src package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../src.functions.html">src.functions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of src.functions</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../src.functions.SOLWEIGpython.html">functions.SOLWEIGpython</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of functions.SOLWEIGpython</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../src.functions.SOLWEIGpython.UTIL.html">src.functions.SOLWEIGpython.UTIL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src.j_analysis.html">src.j_analysis package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../src.j_dataprep.html">src.j_dataprep package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of src.j_dataprep package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../src.j_dataprep.climate.html">src.j_dataprep.climate package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../src.j_dataprep.geotiles.html">src.j_dataprep.geotiles package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src.j_output.html">src.j_output package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src.preprocessor.html">src.preprocessor package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src.processor.html">src.processor package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src.util.html">src.util package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Source code for src.processor.solweig_algorithm_qgisless</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">/***************************************************************************</span>
+<span class="sd"> ProcessingUMEP</span>
+<span class="sd">                                 A QGIS plugin</span>
+<span class="sd"> UMEP for processing toolbox</span>
+<span class="sd"> Generated by Plugin Builder: http://g-sherman.github.io/Qgis-Plugin-Builder/</span>
+<span class="sd">                              -------------------</span>
+<span class="sd">        begin                : 2020-04-02</span>
+<span class="sd">        copyright            : (C) 2020 by Fredrik Lindberg</span>
+<span class="sd">        email                : fredrikl@gvc.gu.se</span>
+
+<span class="sd">Modifications by:</span>
+<span class="sd">    Jessica Monahan 2025</span>
+<span class="sd">    Modified so code can run without QGIS</span>
+<span class="sd"> ***************************************************************************/</span>
+
+<span class="sd">/***************************************************************************</span>
+<span class="sd"> *                                                                         *</span>
+<span class="sd"> *   This program is free software; you can redistribute it and/or modify  *</span>
+<span class="sd"> *   it under the terms of the GNU General Public License as published by  *</span>
+<span class="sd"> *   the Free Software Foundation; either version 2 of the License, or     *</span>
+<span class="sd"> *   (at your option) any later version.                                   *</span>
+<span class="sd"> *                                                                         *</span>
+<span class="sd"> ***************************************************************************/</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Fredrik Lindberg&#39;</span>
+<span class="n">__date__</span> <span class="o">=</span> <span class="s1">&#39;2020-04-02&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;(C) 2020 by Fredrik Lindberg&#39;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">cProfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pstats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">osgeo</span><span class="w"> </span><span class="kn">import</span> <span class="n">gdal</span><span class="p">,</span> <span class="n">osr</span>
+<span class="c1"># import rasterio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="c1"># from qgis.PyQt.QtGui import QIcon</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.util.misc</span><span class="w"> </span><span class="kn">import</span> <span class="n">saveraster</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functions.SOLWEIGpython.UTIL.Solweig_v2015_metdata_noload</span><span class="w"> </span><span class="kn">import</span> <span class="n">Solweig_2015a_metdata_noload</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.functions.SOLWEIGpython.UTIL.clearnessindex_2013b</span><span class="w"> </span><span class="kn">import</span> <span class="n">clearnessindex_2013b</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.functions.SOLWEIGpython.Tgmaps_v1</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tgmaps_v1</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.functions.SOLWEIGpython</span><span class="w"> </span><span class="kn">import</span> <span class="n">Solweig_2022a_calc_forprocessing</span> <span class="k">as</span> <span class="n">so</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functions.SOLWEIGpython</span><span class="w"> </span><span class="kn">import</span> <span class="n">WriteMetadataSOLWEIG</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">shutil</span><span class="w"> </span><span class="kn">import</span> <span class="n">rmtree</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">shutil</span><span class="w"> </span><span class="kn">import</span> <span class="n">copyfile</span>
+
+<div class="viewcode-block" id="SOLWEIGAlgorithm">
+<a class="viewcode-back" href="../../../src.processor.html#src.processor.solweig_algorithm_qgisless.SOLWEIGAlgorithm">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SOLWEIGAlgorithm</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class to process the SOLWEIG algorithm inputs.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - INPUT_DSM:        Digital Surface Model (DSM) input file.</span>
+<span class="sd">    - INPUT_SVF:        ZIP Sky View Factor (SVF) input files.</span>
+<span class="sd">    - INPUT_CDSM:       Canopy DSM input file.</span>
+<span class="sd">    - INPUT_TDSM:       Trunk zone DSM input file.</span>
+<span class="sd">    - INPUT_HEIGHT:     Wall height input file.</span>
+<span class="sd">    - INPUT_ASPECT:     Wall aspect input file.</span>
+<span class="sd">    - TRANS_VEG:        Vegetation transmissivity value or input file.</span>
+<span class="sd">    - LEAF_START:       Start of the leaf-on period (date or DOY).</span>
+<span class="sd">    - LEAF_END:         End of the leaf-on period (date or DOY).</span>
+<span class="sd">    - CONIFER_TREES:    Boolean: if true trees are seen af coniferous</span>
+<span class="sd">    - INPUT_THEIGHT:    Trunk height (percentage, if no trunk zone DSM)</span>
+<span class="sd">    - INPUT_LC:         Land cover classification input file.</span>
+<span class="sd">    - USE_LC_BUILD:     Boolean indicating whether to use land cover for building footprints.</span>
+<span class="sd">    - INPUT_DEM:        Digital Elevation Model (DEM) input file.</span>
+<span class="sd">    - SAVE_BUILD:       Boolean indicating whether to save the processed building footprint.</span>
+<span class="sd">    - INPUT_ANISO:      Anisotropic input data or parameter.</span>
+<span class="sd">    - ALBEDO_WALLS:     ETC.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">INPUT_DSM</span><span class="p">,</span> <span class="n">INPUT_SVF</span><span class="p">,</span> <span class="n">INPUT_CDSM</span><span class="p">,</span>  <span class="n">INPUT_HEIGHT</span><span class="p">,</span> <span class="n">INPUT_ASPECT</span><span class="p">,</span>
+                 <span class="n">UTC</span><span class="p">,</span> <span class="n">OUTPUT_DIR</span><span class="p">,</span> <span class="n">INPUT_MET</span><span class="p">,</span> <span class="n">INPUT_LC</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="n">INPUT_DEM</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">INPUT_ANISO</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">CONIFER_TREES</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">INPUT_THEIGHT</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">INPUT_TDSM</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">TRANS_VEG</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">LEAF_START</span><span class="o">=</span><span class="mi">97</span><span class="p">,</span> <span class="n">LEAF_END</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+                 <span class="n">USE_LC_BUILD</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">SAVE_BUILD</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ALBEDO_WALLS</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">ALBEDO_GROUND</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>
+                 <span class="n">EMIS_WALLS</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">EMIS_GROUND</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">ABS_S</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">ABS_L</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">POSTURE</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="n">ONLYGLOBAL</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">OUTPUT_TMRT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">OUTPUT_LUP</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">OUTPUT_KUP</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">OUTPUT_KDOWN</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">OUTPUT_LDOWN</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">OUTPUT_SH</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">OUTPUT_TREEPLANTER</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">CYL</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="c1"># Initialize the class with all the provided inputs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_DSM</span> <span class="o">=</span> <span class="n">INPUT_DSM</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_SVF</span> <span class="o">=</span> <span class="n">INPUT_SVF</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_CDSM</span> <span class="o">=</span> <span class="n">INPUT_CDSM</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_TDSM</span> <span class="o">=</span> <span class="n">INPUT_TDSM</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_HEIGHT</span> <span class="o">=</span> <span class="n">INPUT_HEIGHT</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_ASPECT</span> <span class="o">=</span> <span class="n">INPUT_ASPECT</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TRANS_VEG</span> <span class="o">=</span> <span class="n">TRANS_VEG</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">LEAF_START</span> <span class="o">=</span> <span class="n">LEAF_START</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">LEAF_END</span> <span class="o">=</span> <span class="n">LEAF_END</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">CONIFER_TREES</span> <span class="o">=</span> <span class="n">CONIFER_TREES</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_THEIGHT</span> <span class="o">=</span> <span class="n">INPUT_THEIGHT</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_LC</span> <span class="o">=</span> <span class="n">INPUT_LC</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">USE_LC_BUILD</span> <span class="o">=</span> <span class="n">USE_LC_BUILD</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_DEM</span> <span class="o">=</span> <span class="n">INPUT_DEM</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SAVE_BUILD</span> <span class="o">=</span> <span class="n">SAVE_BUILD</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_ANISO</span> <span class="o">=</span> <span class="n">INPUT_ANISO</span>
+
+        <span class="c1"># Enivornmental parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ALBEDO_WALLS</span> <span class="o">=</span> <span class="n">ALBEDO_WALLS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ALBEDO_GROUND</span> <span class="o">=</span> <span class="n">ALBEDO_GROUND</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">EMIS_WALLS</span> <span class="o">=</span> <span class="n">EMIS_WALLS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">EMIS_GROUND</span> <span class="o">=</span> <span class="n">EMIS_GROUND</span>
+
+        <span class="c1"># Tmrt parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ABS_S</span> <span class="o">=</span> <span class="n">ABS_S</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ABS_L</span> <span class="o">=</span> <span class="n">ABS_L</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">POSTURE</span> <span class="o">=</span> <span class="n">POSTURE</span>
+
+        <span class="c1"># Meteorology</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_MET</span> <span class="o">=</span> <span class="n">INPUT_MET</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ONLYGLOBAL</span> <span class="o">=</span> <span class="n">ONLYGLOBAL</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">UTC</span> <span class="o">=</span> <span class="n">UTC</span>
+
+        <span class="c1"># Output</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">OUTPUT_DIR</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_TMRT</span> <span class="o">=</span> <span class="n">OUTPUT_TMRT</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_LUP</span> <span class="o">=</span> <span class="n">OUTPUT_LUP</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_KUP</span> <span class="o">=</span> <span class="n">OUTPUT_KUP</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_KDOWN</span> <span class="o">=</span> <span class="n">OUTPUT_KDOWN</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_LDOWN</span> <span class="o">=</span> <span class="n">OUTPUT_LDOWN</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_SH</span> <span class="o">=</span> <span class="n">OUTPUT_SH</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_TREEPLANTER</span> <span class="o">=</span> <span class="n">OUTPUT_TREEPLANTER</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">CYL</span> <span class="o">=</span> <span class="n">CYL</span>
+
+        <span class="c1"># TO DO: THIS IS NOW AN ABSOLUTE PATH</span>
+        <span class="n">temp_dir_name</span> <span class="o">=</span> <span class="s1">&#39;temp-&#39;</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;D:/Geomatics/&quot;</span><span class="p">,</span> <span class="n">temp_dir_name</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SOLWEIGAlgorithm.processAlgorithm">
+<a class="viewcode-back" href="../../../src.processor.html#src.processor.solweig_algorithm_qgisless.SOLWEIGAlgorithm.processAlgorithm">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">processAlgorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+ 
+        <span class="c1"># InputParameters</span>
+        <span class="n">filepath_dsm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_DSM</span>
+        <span class="n">transVeg</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">TRANS_VEG</span> <span class="o">/</span> <span class="mf">100.</span><span class="p">)</span>
+        <span class="n">firstdayleaf</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">LEAF_START</span><span class="p">)</span>
+        <span class="n">lastdayleaf</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">LEAF_START</span><span class="p">)</span>
+        <span class="n">conifer_bool</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CONIFER_TREES</span><span class="p">)</span>
+        <span class="n">vegdsm_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_CDSM</span>
+        <span class="n">vegdsm2_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_TDSM</span>
+        <span class="n">lcgrid_path</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_LC</span>
+        <span class="n">useLcBuild</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">USE_LC_BUILD</span><span class="p">)</span>
+        <span class="n">dem</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">inputSVF</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_SVF</span>
+        <span class="n">whlayer_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_HEIGHT</span>
+        <span class="n">walayer_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_ASPECT</span>
+        <span class="n">trunkr</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">INPUT_THEIGHT</span><span class="p">)</span>
+        <span class="n">onlyglobal</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">ONLYGLOBAL</span><span class="p">)</span>
+        <span class="n">utc</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">UTC</span><span class="p">)</span>
+        <span class="n">inputMet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_MET</span>
+        <span class="n">saveBuild</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SAVE_BUILD</span><span class="p">)</span>
+        <span class="n">demforbuild</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">folderPathPerez</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_ANISO</span>
+
+        <span class="c1"># Other parameters #</span>
+        <span class="n">absK</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ABS_S</span><span class="p">)</span>
+        <span class="n">absL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ABS_L</span><span class="p">)</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">POSTURE</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CYL</span><span class="p">):</span>
+            <span class="n">cyl</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cyl</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="n">pos</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">Fside</span> <span class="o">=</span> <span class="mf">0.22</span>
+            <span class="n">Fup</span> <span class="o">=</span> <span class="mf">0.06</span>
+            <span class="n">height</span> <span class="o">=</span> <span class="mf">1.1</span>
+            <span class="n">Fcyl</span> <span class="o">=</span> <span class="mf">0.28</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">Fside</span> <span class="o">=</span> <span class="mf">0.166666</span>
+            <span class="n">Fup</span> <span class="o">=</span> <span class="mf">0.166666</span>
+            <span class="n">height</span> <span class="o">=</span> <span class="mf">0.75</span>
+            <span class="n">Fcyl</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+        <span class="n">albedo_b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ALBEDO_WALLS</span><span class="p">)</span>
+        <span class="n">albedo_g</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ALBEDO_GROUND</span><span class="p">)</span>
+        <span class="n">ewall</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">EMIS_WALLS</span><span class="p">)</span>
+        <span class="n">eground</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">EMIS_GROUND</span><span class="p">)</span>
+        <span class="n">elvis</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># option removed 20200907 in processing UMEP</span>
+
+        <span class="n">outputDir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_DIR</span>
+        <span class="n">outputTmrt</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_TMRT</span><span class="p">)</span>
+        <span class="n">outputSh</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_SH</span><span class="p">)</span>
+        <span class="n">outputKup</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_KUP</span><span class="p">)</span>
+        <span class="n">outputKdown</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_KDOWN</span><span class="p">)</span>
+        <span class="n">outputLup</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_LUP</span><span class="p">)</span>
+        <span class="n">outputLdown</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_LDOWN</span><span class="p">)</span>
+        <span class="n">outputTreeplanter</span> <span class="o">=</span>  <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_TREEPLANTER</span><span class="p">)</span>
+        <span class="n">outputKdiff</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="c1">#outputSstr = False</span>
+
+        <span class="c1"># If &quot;Save necessary rasters for TreePlanter tool&quot; is ticked, save the following raster for TreePlanter or Spatial TC</span>
+        <span class="k">if</span> <span class="n">outputTreeplanter</span><span class="p">:</span>
+            <span class="n">outputTmrt</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">outputKup</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">outputKdown</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">outputLup</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">outputLdown</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">outputSh</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">saveBuild</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">outputKdiff</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="c1">#outputSstr = True</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">outputDir</span><span class="p">)):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">outputDir</span><span class="p">)</span>
+
+        <span class="n">gdal_dsm</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">filepath_dsm</span><span class="p">)</span>
+        <span class="n">dsm</span> <span class="o">=</span> <span class="n">gdal_dsm</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">sizex</span> <span class="o">=</span> <span class="n">dsm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">sizey</span> <span class="o">=</span> <span class="n">dsm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="n">dsm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="n">dsm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># response to issue #85</span>
+        <span class="n">nd</span> <span class="o">=</span> <span class="n">gdal_dsm</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">GetNoDataValue</span><span class="p">()</span>
+        <span class="n">dsm</span><span class="p">[</span><span class="n">dsm</span> <span class="o">==</span> <span class="n">nd</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="c1"># dsmcopy = np.copy(dsm)</span>
+        <span class="k">if</span> <span class="n">dsm</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">dsmraise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dsm</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+            <span class="n">dsm</span> <span class="o">=</span> <span class="n">dsm</span> <span class="o">+</span> <span class="n">dsmraise</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Digital Surface Model (DSM) included negative values. DSM raised with &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dsmraise</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;m.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dsmraise</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Get latlon from grid coordinate system</span>
+        <span class="n">old_cs</span> <span class="o">=</span> <span class="n">osr</span><span class="o">.</span><span class="n">SpatialReference</span><span class="p">()</span>
+        <span class="n">dsm_ref</span> <span class="o">=</span> <span class="n">gdal_dsm</span><span class="o">.</span><span class="n">GetProjection</span><span class="p">()</span>
+        <span class="n">old_cs</span><span class="o">.</span><span class="n">ImportFromWkt</span><span class="p">(</span><span class="n">dsm_ref</span><span class="p">)</span>
+
+        <span class="c1"># TO DO: IF CODE WORKS, CHANGE TO</span>
+        <span class="c1"># new_cs = osr.SpatialReference()</span>
+        <span class="c1"># new_cs.ImportFromEPSG(4326)</span>
+        <span class="n">wgs84_wkt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        GEOGCS[&quot;WGS 84&quot;,</span>
+<span class="s2">            DATUM[&quot;WGS_1984&quot;,</span>
+<span class="s2">                SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,</span>
+<span class="s2">                    AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],</span>
+<span class="s2">                AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],</span>
+<span class="s2">            PRIMEM[&quot;Greenwich&quot;,0,</span>
+<span class="s2">                AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],</span>
+<span class="s2">            UNIT[&quot;degree&quot;,0.01745329251994328,</span>
+<span class="s2">                AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],</span>
+<span class="s2">            AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]&quot;&quot;&quot;</span>
+
+        <span class="n">new_cs</span> <span class="o">=</span> <span class="n">osr</span><span class="o">.</span><span class="n">SpatialReference</span><span class="p">()</span>
+        <span class="n">new_cs</span><span class="o">.</span><span class="n">ImportFromWkt</span><span class="p">(</span><span class="n">wgs84_wkt</span><span class="p">)</span>
+
+        <span class="n">transform</span> <span class="o">=</span> <span class="n">osr</span><span class="o">.</span><span class="n">CoordinateTransformation</span><span class="p">(</span><span class="n">old_cs</span><span class="p">,</span> <span class="n">new_cs</span><span class="p">)</span>
+        <span class="n">widthx</span> <span class="o">=</span> <span class="n">gdal_dsm</span><span class="o">.</span><span class="n">RasterXSize</span>
+        <span class="n">heightx</span> <span class="o">=</span> <span class="n">gdal_dsm</span><span class="o">.</span><span class="n">RasterYSize</span>
+        <span class="n">geotransform</span> <span class="o">=</span> <span class="n">gdal_dsm</span><span class="o">.</span><span class="n">GetGeoTransform</span><span class="p">()</span>
+        <span class="n">minx</span> <span class="o">=</span> <span class="n">geotransform</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">miny</span> <span class="o">=</span> <span class="n">geotransform</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">widthx</span> <span class="o">*</span> <span class="n">geotransform</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">heightx</span> <span class="o">*</span> <span class="n">geotransform</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="n">lonlat</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">TransformPoint</span><span class="p">(</span><span class="n">minx</span><span class="p">,</span> <span class="n">miny</span><span class="p">)</span>
+        <span class="n">gdalver</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">gdal</span><span class="o">.</span><span class="n">__version__</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">gdalver</span> <span class="o">==</span> <span class="mf">3.</span><span class="p">:</span>
+            <span class="n">lon</span> <span class="o">=</span> <span class="n">lonlat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#changed to gdal 3</span>
+            <span class="n">lat</span> <span class="o">=</span> <span class="n">lonlat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#changed to gdal 3</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lon</span> <span class="o">=</span> <span class="n">lonlat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#changed to gdal 2</span>
+            <span class="n">lat</span> <span class="o">=</span> <span class="n">lonlat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#changed to gdal 2</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">geotransform</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">alt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">dsm</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">alt</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">alt</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Longitude derived from DSM: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lon</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Latitude derived from DSM: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lat</span><span class="p">))</span>
+
+        <span class="n">trunkfile</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">trunkratio</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># psi = transVeg / 100.0</span>
+
+        <span class="c1"># if useVegdem:</span>
+        <span class="k">if</span> <span class="n">vegdsm_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">usevegdem</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Vegetation scheme activated&#39;</span><span class="p">)</span>
+
+            <span class="n">gdal_vegdsm</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">vegdsm_path</span><span class="p">)</span>
+            <span class="n">vegdsm</span> <span class="o">=</span> <span class="n">gdal_vegdsm</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+            <span class="n">vegsizex</span> <span class="o">=</span> <span class="n">vegdsm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">vegsizey</span> <span class="o">=</span> <span class="n">vegdsm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">vegsizex</span> <span class="o">==</span> <span class="n">sizex</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">vegsizey</span> <span class="o">==</span> <span class="n">sizey</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error in Vegetation Canopy DSM: All rasters must be of same extent and resolution&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">vegdsm2_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">gdal_vegdsm2</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">vegdsm2_path</span><span class="p">)</span>
+                <span class="n">vegdsm</span> <span class="o">=</span> <span class="n">gdal_vegdsm</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">trunkratio</span> <span class="o">=</span> <span class="n">trunkr</span> <span class="o">/</span> <span class="mf">100.0</span>
+                <span class="n">vegdsm2</span> <span class="o">=</span> <span class="n">vegdsm</span> <span class="o">*</span> <span class="n">trunkratio</span>
+                <span class="n">vegdsm2_path</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="n">vegsizex</span> <span class="o">=</span> <span class="n">vegdsm2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">vegsizey</span> <span class="o">=</span> <span class="n">vegdsm2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">vegsizex</span> <span class="o">==</span> <span class="n">sizex</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">vegsizey</span> <span class="o">==</span> <span class="n">sizey</span><span class="p">):</span>  <span class="c1"># &amp;</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error in Trunk Zone DSM: All rasters must be of same extent and resolution&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">vegdsm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">])</span>
+            <span class="n">vegdsm2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">])</span>
+            <span class="n">usevegdem</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">vegdsm_path</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">vegdsm2_path</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Land cover</span>
+        <span class="k">if</span> <span class="n">lcgrid_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">landcover</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Land cover scheme activated&#39;</span><span class="p">)</span>
+
+            <span class="c1"># load raster</span>
+            <span class="n">gdal_lcgrid</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">lcgrid_path</span><span class="p">)</span>
+            <span class="n">lcgrid</span> <span class="o">=</span> <span class="n">gdal_lcgrid</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+            <span class="n">lcsizex</span> <span class="o">=</span> <span class="n">lcgrid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">lcsizey</span> <span class="o">=</span> <span class="n">lcgrid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">lcsizex</span> <span class="o">==</span> <span class="n">sizex</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">lcsizey</span> <span class="o">==</span> <span class="n">sizey</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error in land cover grid: All grids must be of same extent and resolution&quot;</span><span class="p">)</span>
+
+            <span class="n">baddataConifer</span> <span class="o">=</span> <span class="p">(</span><span class="n">lcgrid</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="n">baddataDecid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lcgrid</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">baddataConifer</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error in land cover grid: Land cover grid includes Confier land cover class. Ground cover information (underneath canopy) is required.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">baddataDecid</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error in land cover grid: Land cover grid includes Decidiuous land cover class. Ground cover information (underneath canopy) is required.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">lcgrid</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error in land cover grid: Land cover grid includes NaN values. Use the QGIS Fill NoData cells tool to remove NaN values.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lcgrid_path</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">landcover</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># DEM #</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">useLcBuild</span><span class="p">:</span>
+            <span class="n">demforbuild</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">dem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_DEM</span>
+
+            <span class="k">if</span> <span class="n">dem</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error: No valid DEM selected&quot;</span><span class="p">)</span>
+
+            <span class="c1"># load raster</span>
+            <span class="n">gdal</span><span class="o">.</span><span class="n">AllRegister</span><span class="p">()</span>
+            <span class="n">provider</span> <span class="o">=</span> <span class="n">dem</span><span class="o">.</span><span class="n">dataProvider</span><span class="p">()</span>
+            <span class="n">filePathOld</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">provider</span><span class="o">.</span><span class="n">dataSourceUri</span><span class="p">())</span>
+            <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">filePathOld</span><span class="p">)</span>
+            <span class="n">dem</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+            <span class="n">demsizex</span> <span class="o">=</span> <span class="n">dem</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">demsizey</span> <span class="o">=</span> <span class="n">dem</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">demsizex</span> <span class="o">==</span> <span class="n">sizex</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">demsizey</span> <span class="o">==</span> <span class="n">sizey</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span> <span class="s2">&quot;Error in DEM: All grids must be of same extent and resolution&quot;</span><span class="p">)</span>
+
+            <span class="c1"># response to issue and #230</span>
+            <span class="n">nd</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">GetNoDataValue</span><span class="p">()</span>
+            <span class="n">dem</span><span class="p">[</span><span class="n">dem</span> <span class="o">==</span> <span class="n">nd</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+            <span class="k">if</span> <span class="n">dem</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">demraise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dem</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+                <span class="n">dem</span> <span class="o">=</span> <span class="n">dem</span> <span class="o">+</span> <span class="n">demraise</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Digital Evevation Model (DEM) included negative values. DEM raised with &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">demraise</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;m.&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">demraise</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="n">alt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">dem</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">alt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">alt</span> <span class="o">=</span> <span class="mf">3.</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">dsmraise</span> <span class="o">!=</span> <span class="n">demraise</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">dsmraise</span> <span class="o">-</span> <span class="n">demraise</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;WARNiNG! DEM and DSM was raised unequally (difference &gt; 0.5 m). Check your input data!&#39;</span><span class="p">)</span>
+
+        <span class="c1">#SVFs</span>
+        <span class="nb">zip</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">inputSVF</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="nb">zip</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span><span class="p">)</span>
+        <span class="nb">zip</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svf.tif&quot;</span><span class="p">)</span>
+            <span class="n">svf</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+            <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svfN.tif&quot;</span><span class="p">)</span>
+            <span class="n">svfN</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+            <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svfS.tif&quot;</span><span class="p">)</span>
+            <span class="n">svfS</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+            <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svfE.tif&quot;</span><span class="p">)</span>
+            <span class="n">svfE</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+            <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svfW.tif&quot;</span><span class="p">)</span>
+            <span class="n">svfW</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">usevegdem</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svfveg.tif&quot;</span><span class="p">)</span>
+                <span class="n">svfveg</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+                <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svfNveg.tif&quot;</span><span class="p">)</span>
+                <span class="n">svfNveg</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+                <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svfSveg.tif&quot;</span><span class="p">)</span>
+                <span class="n">svfSveg</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+                <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svfEveg.tif&quot;</span><span class="p">)</span>
+                <span class="n">svfEveg</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+                <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svfWveg.tif&quot;</span><span class="p">)</span>
+                <span class="n">svfWveg</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+                <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svfaveg.tif&quot;</span><span class="p">)</span>
+                <span class="n">svfaveg</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+                <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svfNaveg.tif&quot;</span><span class="p">)</span>
+                <span class="n">svfNaveg</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+                <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svfSaveg.tif&quot;</span><span class="p">)</span>
+                <span class="n">svfSaveg</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+                <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svfEaveg.tif&quot;</span><span class="p">)</span>
+                <span class="n">svfEaveg</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+                <span class="n">dataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">+</span> <span class="s2">&quot;/svfWaveg.tif&quot;</span><span class="p">)</span>
+                <span class="n">svfWaveg</span> <span class="o">=</span> <span class="n">dataSet</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">svfveg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+                <span class="n">svfNveg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+                <span class="n">svfSveg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+                <span class="n">svfEveg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+                <span class="n">svfWveg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+                <span class="n">svfaveg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+                <span class="n">svfNaveg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+                <span class="n">svfSaveg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+                <span class="n">svfEaveg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+                <span class="n">svfWaveg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;SVF import error: The zipfile including the SVFs seems corrupt. Retry calcualting the SVFs in the Pre-processor or choose another file.&quot;</span><span class="p">)</span>
+
+        <span class="n">svfsizex</span> <span class="o">=</span> <span class="n">svf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">svfsizey</span> <span class="o">=</span> <span class="n">svf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">svfsizex</span> <span class="o">==</span> <span class="n">sizex</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">svfsizey</span> <span class="o">==</span> <span class="n">sizey</span><span class="p">):</span>  <span class="c1"># &amp;</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error in svf rasters: All grids must be of same extent and resolution&quot;</span><span class="p">)</span>
+
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">svf</span> <span class="o">+</span> <span class="n">svfveg</span> <span class="o">-</span> <span class="mf">1.</span>
+        <span class="n">tmp</span><span class="p">[</span><span class="n">tmp</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="c1"># %matlab crazyness around 0</span>
+        <span class="n">svfalfa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">tmp</span><span class="p">))</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">)))</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sky View Factor rasters loaded&#39;</span><span class="p">)</span>
+
+        <span class="c1"># wall height layer</span>
+        <span class="k">if</span> <span class="n">whlayer_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error: No valid wall height raster layer is selected&quot;</span><span class="p">)</span>
+        <span class="n">gdal_wallheight</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">whlayer_path</span><span class="p">)</span>
+        <span class="n">wallheight</span> <span class="o">=</span> <span class="n">gdal_wallheight</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+        <span class="n">vhsizex</span> <span class="o">=</span> <span class="n">wallheight</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">vhsizey</span> <span class="o">=</span> <span class="n">wallheight</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">vhsizex</span> <span class="o">==</span> <span class="n">sizex</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">vhsizey</span> <span class="o">==</span> <span class="n">sizey</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error in Wall height raster: All rasters must be of same extent and resolution&quot;</span><span class="p">)</span>
+
+        <span class="c1"># wall aspectlayer</span>
+        <span class="k">if</span> <span class="n">walayer_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error: No valid wall aspect raster layer is selected&quot;</span><span class="p">)</span>
+        <span class="n">gdal_wallaspect</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">walayer_path</span><span class="p">)</span>
+        <span class="n">wallaspect</span> <span class="o">=</span> <span class="n">gdal_wallaspect</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+        <span class="n">vasizex</span> <span class="o">=</span> <span class="n">wallaspect</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">vasizey</span> <span class="o">=</span> <span class="n">wallaspect</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">vasizex</span> <span class="o">==</span> <span class="n">sizex</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">vasizey</span> <span class="o">==</span> <span class="n">sizey</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error in Wall aspect raster: All rasters must be of same extent and resolution&quot;</span><span class="p">)</span>
+
+        <span class="n">voxelheight</span> <span class="o">=</span> <span class="n">geotransform</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># float</span>
+
+        <span class="c1"># Metdata</span>
+        <span class="n">headernum</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">delim</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span>
+        <span class="n">Twater</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">metdata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">inputMet</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="n">headernum</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="n">delim</span><span class="p">)</span>
+            <span class="n">metfileexist</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error: Make sure format of meteorological file is correct. You can&quot;</span>
+                                                        <span class="s2">&quot;prepare your data by using &#39;Prepare Existing Data&#39; in &quot;</span>
+                                                        <span class="s2">&quot;the Pre-processor&quot;</span><span class="p">)</span>
+
+        <span class="n">testwhere</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">metdata</span><span class="p">[:,</span> <span class="mi">14</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metdata</span><span class="p">[:,</span> <span class="mi">14</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1300.0</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">testwhere</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error: Kdown - beyond what is expected at line: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">testwhere</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">metdata</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">24</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Meteorological data successfully loaded&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error: Wrong number of columns in meteorological data.&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculating sun positions for each time step&quot;</span><span class="p">)</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;longitude&#39;</span><span class="p">:</span> <span class="n">lon</span><span class="p">,</span> <span class="s1">&#39;latitude&#39;</span><span class="p">:</span> <span class="n">lat</span><span class="p">,</span> <span class="s1">&#39;altitude&#39;</span><span class="p">:</span> <span class="n">alt</span><span class="p">}</span>
+        <span class="n">YYYY</span><span class="p">,</span> <span class="n">altitude</span><span class="p">,</span> <span class="n">azimuth</span><span class="p">,</span> <span class="n">zen</span><span class="p">,</span> <span class="n">jday</span><span class="p">,</span> <span class="n">leafon</span><span class="p">,</span> <span class="n">dectime</span><span class="p">,</span> <span class="n">altmax</span> <span class="o">=</span> \
+            <span class="n">Solweig_2015a_metdata_noload</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metdata</span><span class="p">,</span><span class="n">location</span><span class="p">,</span> <span class="n">utc</span><span class="p">)</span>
+
+        <span class="c1"># Creating vectors from meteorological input</span>
+        <span class="n">DOY</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metdata</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">hours</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metdata</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">minu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metdata</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span>
+        <span class="n">Ta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metdata</span><span class="p">[:,</span> <span class="mi">11</span><span class="p">]</span>
+        <span class="n">RH</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metdata</span><span class="p">[:,</span> <span class="mi">10</span><span class="p">]</span>
+        <span class="n">radG</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metdata</span><span class="p">[:,</span> <span class="mi">14</span><span class="p">]</span>
+        <span class="n">radD</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metdata</span><span class="p">[:,</span> <span class="mi">21</span><span class="p">]</span>
+        <span class="n">radI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metdata</span><span class="p">[:,</span> <span class="mi">22</span><span class="p">]</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metdata</span><span class="p">[:,</span> <span class="mi">12</span><span class="p">]</span>
+        
+        <span class="c1"># Check if diffuse and direct radiation exist</span>
+        <span class="k">if</span> <span class="n">onlyglobal</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">radD</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">999</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Diffuse radiation include NoData values&quot;</span><span class="p">,</span>
+                                        <span class="s1">&#39;Tick in the box &quot;Estimate diffuse and direct shortwave...&quot; or aqcuire &#39;</span>
+                                        <span class="s1">&#39;observed values from external data sources.&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">radI</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">999</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Direct radiation include NoData values&quot;</span><span class="p">,</span>
+                                        <span class="s1">&#39;Tick in the box &quot;Estimate diffuse and direct shortwave...&quot; or aqcuire &#39;</span>
+                                        <span class="s1">&#39;observed values from external data sources.&#39;</span><span class="p">)</span>
+
+
+        <span class="c1"># %Parameterisarion for Lup</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">height</span><span class="p">:</span>
+            <span class="n">height</span> <span class="o">=</span> <span class="mf">1.1</span>
+
+        <span class="c1"># %Radiative surface influence, Rule of thumb by Schmid et al. (1990).</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">first</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="n">first</span> <span class="o">=</span> <span class="mf">1.</span>
+        <span class="n">second</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="n">height</span> <span class="o">*</span> <span class="mf">20.</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">usevegdem</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># Conifer or deciduous</span>
+            <span class="k">if</span> <span class="n">conifer_bool</span><span class="p">:</span>
+                <span class="n">leafon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">DOY</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">leafon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">DOY</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                <span class="k">if</span> <span class="n">firstdayleaf</span> <span class="o">&gt;</span> <span class="n">lastdayleaf</span><span class="p">:</span>
+                    <span class="n">leaf_bool</span> <span class="o">=</span> <span class="p">((</span><span class="n">DOY</span> <span class="o">&gt;</span> <span class="n">firstdayleaf</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">DOY</span> <span class="o">&lt;</span> <span class="n">lastdayleaf</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">leaf_bool</span> <span class="o">=</span> <span class="p">((</span><span class="n">DOY</span> <span class="o">&gt;</span> <span class="n">firstdayleaf</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">DOY</span> <span class="o">&lt;</span> <span class="n">lastdayleaf</span><span class="p">))</span>
+                <span class="n">leafon</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">leaf_bool</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+            <span class="c1"># % Vegetation transmisivity of shortwave radiation</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">leafon</span> <span class="o">*</span> <span class="n">transVeg</span>
+            <span class="n">psi</span><span class="p">[</span><span class="n">leafon</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+            <span class="c1"># amaxvalue</span>
+            <span class="n">vegmax</span> <span class="o">=</span> <span class="n">vegdsm</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="n">amaxvalue</span> <span class="o">=</span> <span class="n">dsm</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">dsm</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+            <span class="n">amaxvalue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">amaxvalue</span><span class="p">,</span> <span class="n">vegmax</span><span class="p">)</span>
+
+            <span class="c1"># Elevation vegdsms if buildingDEM includes ground heights</span>
+            <span class="n">vegdsm</span> <span class="o">=</span> <span class="n">vegdsm</span> <span class="o">+</span> <span class="n">dsm</span>
+            <span class="n">vegdsm</span><span class="p">[</span><span class="n">vegdsm</span> <span class="o">==</span> <span class="n">dsm</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">vegdsm2</span> <span class="o">=</span> <span class="n">vegdsm2</span> <span class="o">+</span> <span class="n">dsm</span>
+            <span class="n">vegdsm2</span><span class="p">[</span><span class="n">vegdsm2</span> <span class="o">==</span> <span class="n">dsm</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c1"># % Bush separation</span>
+            <span class="n">bush</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">((</span><span class="n">vegdsm2</span> <span class="o">*</span> <span class="n">vegdsm</span><span class="p">))</span> <span class="o">*</span> <span class="n">vegdsm</span>
+
+            <span class="n">svfbuveg</span> <span class="o">=</span> <span class="p">(</span><span class="n">svf</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">svfveg</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">transVeg</span><span class="p">))</span>  <span class="c1"># % major bug fixed 20141203</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">leafon</span> <span class="o">*</span> <span class="mf">0.</span> <span class="o">+</span> <span class="mf">1.</span>
+            <span class="n">svfbuveg</span> <span class="o">=</span> <span class="n">svf</span>
+            <span class="n">bush</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">])</span>
+            <span class="n">amaxvalue</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># %Initialization of maps</span>
+        <span class="n">Knight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+        <span class="n">Tgmap1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+        <span class="n">Tgmap1E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+        <span class="n">Tgmap1S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+        <span class="n">Tgmap1W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+        <span class="n">Tgmap1N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+        
+        <span class="c1"># building grid and land cover preparation</span>
+        <span class="c1"># TO DO: MAYBE NOT HAVE HARD CODED?</span>
+        <span class="n">sitein</span> <span class="o">=</span> <span class="s2">&quot;landcoverclasses_2016a.txt&quot;</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">sitein</span><span class="p">)</span>
+        <span class="n">lin</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="n">lc_class</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">lin</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">lin</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()):</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="n">lin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+                <span class="n">lc_class</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="n">demforbuild</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">buildings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">lcgrid</span><span class="p">)</span>
+            <span class="n">buildings</span><span class="p">[</span><span class="n">buildings</span> <span class="o">==</span> <span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">buildings</span><span class="p">[</span><span class="n">buildings</span> <span class="o">==</span> <span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">buildings</span><span class="p">[</span><span class="n">buildings</span> <span class="o">==</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">buildings</span><span class="p">[</span><span class="n">buildings</span> <span class="o">==</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">buildings</span><span class="p">[</span><span class="n">buildings</span> <span class="o">==</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">buildings</span><span class="p">[</span><span class="n">buildings</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">buildings</span> <span class="o">=</span> <span class="n">dsm</span> <span class="o">-</span> <span class="n">dem</span>
+            <span class="n">buildings</span><span class="p">[</span><span class="n">buildings</span> <span class="o">&lt;</span> <span class="mf">2.</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+            <span class="n">buildings</span><span class="p">[</span><span class="n">buildings</span> <span class="o">&gt;=</span> <span class="mf">2.</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+
+        <span class="k">if</span> <span class="n">saveBuild</span><span class="p">:</span>
+            <span class="n">saveraster</span><span class="p">(</span><span class="n">gdal_dsm</span><span class="p">,</span> <span class="n">outputDir</span> <span class="o">+</span> <span class="s1">&#39;/buildings.tif&#39;</span><span class="p">,</span> <span class="n">buildings</span><span class="p">)</span>
+
+        <span class="c1"># Import shadow matrices (Anisotropic sky)</span>
+        <span class="k">if</span> <span class="n">folderPathPerez</span><span class="p">:</span>  <span class="c1">#UseAniso</span>
+            <span class="n">anisotropic_sky</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">folderPathPerez</span><span class="p">)</span>
+            <span class="n">shmat</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;shadowmat&#39;</span><span class="p">]</span>
+            <span class="n">vegshmat</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vegshadowmat&#39;</span><span class="p">]</span>
+            <span class="n">vbshvegshmat</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vbshmat&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">usevegdem</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">diffsh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">shmat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">shmat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+                    <span class="n">diffsh</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">shmat</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">vegshmat</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">transVeg</span><span class="p">)</span> <span class="c1"># changes in psi not implemented yet</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">diffsh</span> <span class="o">=</span> <span class="n">shmat</span>
+                <span class="n">vegshmat</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">vbshvegshmat</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="c1"># Estimate number of patches based on shadow matrices</span>
+            <span class="k">if</span> <span class="n">shmat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">145</span><span class="p">:</span>
+                <span class="n">patch_option</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># patch_option = 1 # 145 patches</span>
+            <span class="k">elif</span> <span class="n">shmat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">153</span><span class="p">:</span>
+                <span class="n">patch_option</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># patch_option = 2 # 153 patches</span>
+            <span class="k">elif</span> <span class="n">shmat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">306</span><span class="p">:</span>
+                <span class="n">patch_option</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># patch_option = 3 # 306 patches</span>
+            <span class="k">elif</span> <span class="n">shmat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">612</span><span class="p">:</span>
+                <span class="n">patch_option</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># patch_option = 4 # 612 patches</span>
+
+            <span class="c1"># asvf to calculate sunlit and shaded patches</span>
+            <span class="n">asvf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">svf</span><span class="p">))</span>
+
+            <span class="n">anisotropic_feedback</span> <span class="o">=</span> <span class="s2">&quot;Sky divided into &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">shmat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span> <span class="o">+</span> <span class="s2">&quot; patches</span><span class="se">\n</span><span class="s2"> </span><span class="se">\</span>
+<span class="s2">                                    Anisotropic sky for diffuse shortwave radiation (Perez et al., 1993) and longwave radiation (Martin &amp; Berdahl, 1984)&quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">anisotropic_feedback</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Isotropic sky&quot;</span><span class="p">)</span>
+            <span class="n">anisotropic_sky</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">diffsh</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">shmat</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">vegshmat</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">vbshvegshmat</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">asvf</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">patch_option</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># % Ts parameterisation maps</span>
+        <span class="k">if</span> <span class="n">landcover</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">lcgrid</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">21</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">lcgrid</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;The land cover grid includes integer values higher (or lower) than UMEP-formatted&quot;</span> 
+                    <span class="s2">&quot;land cover grid (should be integer between 0 and 7). If other LC-classes should be included they also need to be included in landcoverclasses_2016a.txt&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">lcgrid</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">lcgrid</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;The land cover grid includes values (decidouos and/or conifer) not appropriate for SOLWEIG-formatted land cover grid (should not include 3 or 4).&quot;</span><span class="p">)</span>
+
+            <span class="p">[</span><span class="n">TgK</span><span class="p">,</span> <span class="n">Tstart</span><span class="p">,</span> <span class="n">alb_grid</span><span class="p">,</span> <span class="n">emis_grid</span><span class="p">,</span> <span class="n">TgK_wall</span><span class="p">,</span> <span class="n">Tstart_wall</span><span class="p">,</span> <span class="n">TmaxLST</span><span class="p">,</span> <span class="n">TmaxLST_wall</span><span class="p">]</span> <span class="o">=</span> <span class="n">Tgmaps_v1</span><span class="p">(</span><span class="n">lcgrid</span><span class="p">,</span> <span class="n">lc_class</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">TgK</span> <span class="o">=</span> <span class="n">Knight</span> <span class="o">+</span> <span class="mf">0.37</span>
+            <span class="n">Tstart</span> <span class="o">=</span> <span class="n">Knight</span> <span class="o">-</span> <span class="mf">3.41</span>
+            <span class="n">alb_grid</span> <span class="o">=</span> <span class="n">Knight</span> <span class="o">+</span> <span class="n">albedo_g</span>
+            <span class="n">emis_grid</span> <span class="o">=</span> <span class="n">Knight</span> <span class="o">+</span> <span class="n">eground</span>
+            <span class="n">TgK_wall</span> <span class="o">=</span> <span class="mf">0.37</span>
+            <span class="n">Tstart_wall</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.41</span>
+            <span class="n">TmaxLST</span> <span class="o">=</span> <span class="mf">15.</span>
+            <span class="n">TmaxLST_wall</span> <span class="o">=</span> <span class="mf">15.</span>
+
+         <span class="c1"># Initialisation of time related variables</span>
+        <span class="k">if</span> <span class="n">Ta</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">timestepdec</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">timestepdec</span> <span class="o">=</span> <span class="n">dectime</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">dectime</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">timeadd</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="n">timeaddE</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="n">timeaddS</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="n">timeaddW</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="n">timeaddN</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="n">firstdaytime</span> <span class="o">=</span> <span class="mf">1.</span>
+
+        <span class="n">WriteMetadataSOLWEIG</span><span class="o">.</span><span class="n">writeRunInfo</span><span class="p">(</span><span class="n">outputDir</span><span class="p">,</span> <span class="n">filepath_dsm</span><span class="p">,</span> <span class="n">gdal_dsm</span><span class="p">,</span> <span class="n">usevegdem</span><span class="p">,</span>
+                                          <span class="n">vegdsm_path</span><span class="p">,</span> <span class="n">trunkfile</span><span class="p">,</span> <span class="n">vegdsm2_path</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">utc</span><span class="p">,</span> <span class="n">landcover</span><span class="p">,</span>
+                                          <span class="n">lcgrid_path</span><span class="p">,</span> <span class="n">metfileexist</span><span class="p">,</span> <span class="n">inputMet</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metdata</span><span class="p">,</span>
+                                          <span class="n">absK</span><span class="p">,</span> <span class="n">absL</span><span class="p">,</span> <span class="n">albedo_b</span><span class="p">,</span> <span class="n">albedo_g</span><span class="p">,</span> <span class="n">ewall</span><span class="p">,</span> <span class="n">eground</span><span class="p">,</span> <span class="n">onlyglobal</span><span class="p">,</span> <span class="n">trunkratio</span><span class="p">,</span>
+                                          <span class="n">transVeg</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">elvis</span><span class="p">,</span> <span class="n">cyl</span><span class="p">,</span> <span class="n">demforbuild</span><span class="p">,</span> <span class="n">anisotropic_sky</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Writing settings for this model run to specified output folder (Filename: RunInfoSOLWEIG_YYYY_DOY_HHMM.txt)&quot;</span><span class="p">)</span>
+
+        <span class="c1">#  If metfile starts at night</span>
+        <span class="n">CI</span> <span class="o">=</span> <span class="mf">1.</span>
+
+        <span class="c1"># Main function</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Executing main model&quot;</span><span class="p">)</span>
+    
+        <span class="n">tmrtplot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+        <span class="n">TgOut1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+
+        <span class="c1"># Initiate array for I0 values</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">DOY</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">unique_days</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">DOY</span><span class="p">)</span>
+            <span class="n">first_unique_day</span> <span class="o">=</span> <span class="n">DOY</span><span class="p">[</span><span class="n">DOY</span> <span class="o">==</span> <span class="n">unique_days</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">I0_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">first_unique_day</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">first_unique_day</span> <span class="o">=</span> <span class="n">DOY</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">I0_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">DOY</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+        <span class="n">numformat</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> </span><span class="si">%d</span><span class="s1"> </span><span class="si">%d</span><span class="s1"> </span><span class="si">%d</span><span class="s1"> </span><span class="si">%.5f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> &#39;</span> \
+                    <span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> &#39;</span> \
+                        <span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Ta</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="p">(</span><span class="mf">100.</span> <span class="o">/</span> <span class="n">Ta</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())))</span> <span class="c1"># move progressbar forward</span>
+            <span class="c1"># Daily water body temperature</span>
+            <span class="k">if</span> <span class="n">landcover</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">((</span><span class="n">dectime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">dectime</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                    <span class="n">Twater</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Ta</span><span class="p">[</span><span class="n">jday</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">dectime</span><span class="p">[</span><span class="n">i</span><span class="p">])])</span>
+            <span class="c1"># Nocturnal cloudfraction from Offerle et al. 2003</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">dectime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">dectime</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">daylines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">dectime</span><span class="p">)</span> <span class="o">==</span> <span class="n">dectime</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">daylines</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">alt</span> <span class="o">=</span> <span class="n">altitude</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">daylines</span><span class="p">]</span>
+                    <span class="n">alt2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">alt</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="n">rise</span> <span class="o">=</span> <span class="n">alt2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="p">[</span><span class="n">_</span><span class="p">,</span> <span class="n">CI</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">]</span> <span class="o">=</span> <span class="n">clearnessindex_2013b</span><span class="p">(</span><span class="n">zen</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">rise</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">jday</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">rise</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
+                                                            <span class="n">Ta</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">rise</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
+                                                            <span class="n">RH</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">rise</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mf">100.</span><span class="p">,</span> <span class="n">radG</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">rise</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">location</span><span class="p">,</span>
+                                                            <span class="n">P</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">rise</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># i+rise+1 to match matlab code. correct?</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">CI</span> <span class="o">&gt;</span> <span class="mf">1.</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">CI</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+                        <span class="n">CI</span> <span class="o">=</span> <span class="mf">1.</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">CI</span> <span class="o">=</span> <span class="mf">1.</span>
+
+            <span class="c1"># radI[i] = radI[i]/np.sin(altitude[0][i] * np.pi/180)</span>
+
+            <span class="n">Tmrt</span><span class="p">,</span> <span class="n">Kdown</span><span class="p">,</span> <span class="n">Kup</span><span class="p">,</span> <span class="n">Ldown</span><span class="p">,</span> <span class="n">Lup</span><span class="p">,</span> <span class="n">Tg</span><span class="p">,</span> <span class="n">ea</span><span class="p">,</span> <span class="n">esky</span><span class="p">,</span> <span class="n">I0</span><span class="p">,</span> <span class="n">CI</span><span class="p">,</span> <span class="n">shadow</span><span class="p">,</span> <span class="n">firstdaytime</span><span class="p">,</span> <span class="n">timestepdec</span><span class="p">,</span> <span class="n">timeadd</span><span class="p">,</span> \
+                    <span class="n">Tgmap1</span><span class="p">,</span> <span class="n">Tgmap1E</span><span class="p">,</span> <span class="n">Tgmap1S</span><span class="p">,</span> <span class="n">Tgmap1W</span><span class="p">,</span> <span class="n">Tgmap1N</span><span class="p">,</span> <span class="n">Keast</span><span class="p">,</span> <span class="n">Ksouth</span><span class="p">,</span> <span class="n">Kwest</span><span class="p">,</span> <span class="n">Knorth</span><span class="p">,</span> <span class="n">Least</span><span class="p">,</span> \
+                    <span class="n">Lsouth</span><span class="p">,</span> <span class="n">Lwest</span><span class="p">,</span> <span class="n">Lnorth</span><span class="p">,</span> <span class="n">KsideI</span><span class="p">,</span> <span class="n">TgOut1</span><span class="p">,</span> <span class="n">TgOut</span><span class="p">,</span> <span class="n">radIout</span><span class="p">,</span> <span class="n">radDout</span><span class="p">,</span> \
+                    <span class="n">Lside</span><span class="p">,</span> <span class="n">Lsky_patch_characteristics</span><span class="p">,</span> <span class="n">CI_Tg</span><span class="p">,</span> <span class="n">CI_TgG</span><span class="p">,</span> <span class="n">KsideD</span><span class="p">,</span> \
+                        <span class="n">dRad</span><span class="p">,</span> <span class="n">Kside</span> <span class="o">=</span> <span class="n">so</span><span class="o">.</span><span class="n">Solweig_2022a_calc</span><span class="p">(</span>
+                        <span class="n">i</span><span class="p">,</span> <span class="n">dsm</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">svf</span><span class="p">,</span> <span class="n">svfN</span><span class="p">,</span> <span class="n">svfW</span><span class="p">,</span> <span class="n">svfE</span><span class="p">,</span> <span class="n">svfS</span><span class="p">,</span> <span class="n">svfveg</span><span class="p">,</span>
+                        <span class="n">svfNveg</span><span class="p">,</span> <span class="n">svfEveg</span><span class="p">,</span> <span class="n">svfSveg</span><span class="p">,</span> <span class="n">svfWveg</span><span class="p">,</span> <span class="n">svfaveg</span><span class="p">,</span> <span class="n">svfEaveg</span><span class="p">,</span> <span class="n">svfSaveg</span><span class="p">,</span> <span class="n">svfWaveg</span><span class="p">,</span> <span class="n">svfNaveg</span><span class="p">,</span>
+                        <span class="n">vegdsm</span><span class="p">,</span> <span class="n">vegdsm2</span><span class="p">,</span> <span class="n">albedo_b</span><span class="p">,</span> <span class="n">absK</span><span class="p">,</span> <span class="n">absL</span><span class="p">,</span> <span class="n">ewall</span><span class="p">,</span> <span class="n">Fside</span><span class="p">,</span> <span class="n">Fup</span><span class="p">,</span> <span class="n">Fcyl</span><span class="p">,</span> <span class="n">altitude</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
+                        <span class="n">azimuth</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">zen</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">jday</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">usevegdem</span><span class="p">,</span> <span class="n">onlyglobal</span><span class="p">,</span> <span class="n">buildings</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span>
+                        <span class="n">psi</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">landcover</span><span class="p">,</span> <span class="n">lcgrid</span><span class="p">,</span> <span class="n">dectime</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">altmax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">wallaspect</span><span class="p">,</span>
+                        <span class="n">wallheight</span><span class="p">,</span> <span class="n">cyl</span><span class="p">,</span> <span class="n">elvis</span><span class="p">,</span> <span class="n">Ta</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">RH</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">radG</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">radD</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">radI</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">amaxvalue</span><span class="p">,</span>
+                        <span class="n">bush</span><span class="p">,</span> <span class="n">Twater</span><span class="p">,</span> <span class="n">TgK</span><span class="p">,</span> <span class="n">Tstart</span><span class="p">,</span> <span class="n">alb_grid</span><span class="p">,</span> <span class="n">emis_grid</span><span class="p">,</span> <span class="n">TgK_wall</span><span class="p">,</span> <span class="n">Tstart_wall</span><span class="p">,</span> <span class="n">TmaxLST</span><span class="p">,</span>
+                        <span class="n">TmaxLST_wall</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">,</span> <span class="n">svfalfa</span><span class="p">,</span> <span class="n">svfbuveg</span><span class="p">,</span> <span class="n">firstdaytime</span><span class="p">,</span> <span class="n">timeadd</span><span class="p">,</span> <span class="n">timestepdec</span><span class="p">,</span> 
+                        <span class="n">Tgmap1</span><span class="p">,</span> <span class="n">Tgmap1E</span><span class="p">,</span> <span class="n">Tgmap1S</span><span class="p">,</span> <span class="n">Tgmap1W</span><span class="p">,</span> <span class="n">Tgmap1N</span><span class="p">,</span> <span class="n">CI</span><span class="p">,</span> <span class="n">TgOut1</span><span class="p">,</span> <span class="n">diffsh</span><span class="p">,</span> <span class="n">shmat</span><span class="p">,</span> <span class="n">vegshmat</span><span class="p">,</span> <span class="n">vbshvegshmat</span><span class="p">,</span> 
+                        <span class="n">anisotropic_sky</span><span class="p">,</span> <span class="n">asvf</span><span class="p">,</span> <span class="n">patch_option</span><span class="p">)</span>
+
+            <span class="c1"># Save I0 for I0 vs. Kdown output plot to check if UTC is off</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">first_unique_day</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">I0_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">I0</span>
+
+            <span class="n">tmrtplot</span> <span class="o">=</span> <span class="n">tmrtplot</span> <span class="o">+</span> <span class="n">Tmrt</span>
+
+            <span class="k">if</span> <span class="n">altitude</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="s1">&#39;D&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="s1">&#39;N&#39;</span>
+
+            <span class="k">if</span> <span class="n">hours</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">XH</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">XH</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">if</span> <span class="n">minu</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">XM</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">XM</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+            <span class="k">if</span> <span class="n">outputTmrt</span><span class="p">:</span>
+                <span class="n">saveraster</span><span class="p">(</span><span class="n">gdal_dsm</span><span class="p">,</span> <span class="n">outputDir</span> <span class="o">+</span> <span class="s1">&#39;/Tmrt_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">YYYY</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">DOY</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+                                <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">XH</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">hours</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">XM</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">minu</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">w</span> <span class="o">+</span> <span class="s1">&#39;.tif&#39;</span><span class="p">,</span> <span class="n">Tmrt</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">outputKup</span><span class="p">:</span>
+                <span class="n">saveraster</span><span class="p">(</span><span class="n">gdal_dsm</span><span class="p">,</span> <span class="n">outputDir</span> <span class="o">+</span> <span class="s1">&#39;/Kup_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">YYYY</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">DOY</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+                                <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">XH</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">hours</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">XM</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">minu</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">w</span> <span class="o">+</span> <span class="s1">&#39;.tif&#39;</span><span class="p">,</span> <span class="n">Kup</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">outputKdown</span><span class="p">:</span>
+                <span class="n">saveraster</span><span class="p">(</span><span class="n">gdal_dsm</span><span class="p">,</span> <span class="n">outputDir</span> <span class="o">+</span> <span class="s1">&#39;/Kdown_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">YYYY</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">DOY</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+                                <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">XH</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">hours</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">XM</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">minu</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">w</span> <span class="o">+</span> <span class="s1">&#39;.tif&#39;</span><span class="p">,</span> <span class="n">Kdown</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">outputLup</span><span class="p">:</span>
+                <span class="n">saveraster</span><span class="p">(</span><span class="n">gdal_dsm</span><span class="p">,</span> <span class="n">outputDir</span> <span class="o">+</span> <span class="s1">&#39;/Lup_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">YYYY</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">DOY</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+                                <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">XH</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">hours</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">XM</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">minu</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">w</span> <span class="o">+</span> <span class="s1">&#39;.tif&#39;</span><span class="p">,</span> <span class="n">Lup</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">outputLdown</span><span class="p">:</span>
+                <span class="n">saveraster</span><span class="p">(</span><span class="n">gdal_dsm</span><span class="p">,</span> <span class="n">outputDir</span> <span class="o">+</span> <span class="s1">&#39;/Ldown_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">YYYY</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">DOY</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+                                <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">XH</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">hours</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">XM</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">minu</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">w</span> <span class="o">+</span> <span class="s1">&#39;.tif&#39;</span><span class="p">,</span> <span class="n">Ldown</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">outputSh</span><span class="p">:</span>
+                <span class="n">saveraster</span><span class="p">(</span><span class="n">gdal_dsm</span><span class="p">,</span> <span class="n">outputDir</span> <span class="o">+</span> <span class="s1">&#39;/Shadow_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">YYYY</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">DOY</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+                                <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">XH</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">hours</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">XM</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">minu</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">w</span> <span class="o">+</span> <span class="s1">&#39;.tif&#39;</span><span class="p">,</span> <span class="n">shadow</span><span class="p">)</span>
+                
+            <span class="k">if</span> <span class="n">outputKdiff</span><span class="p">:</span>
+                <span class="n">saveraster</span><span class="p">(</span><span class="n">gdal_dsm</span><span class="p">,</span> <span class="n">outputDir</span> <span class="o">+</span> <span class="s1">&#39;/Kdiff_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">YYYY</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">DOY</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+                                <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">XH</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">hours</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">XM</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">minu</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">w</span> <span class="o">+</span> <span class="s1">&#39;.tif&#39;</span><span class="p">,</span> <span class="n">dRad</span><span class="p">)</span>
+
+        <span class="c1"># Save files for Tree Planter</span>
+        <span class="k">if</span> <span class="n">outputTreeplanter</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saving files for Tree Planter tool&quot;</span><span class="p">)</span>
+            <span class="c1"># Save DSM</span>
+            <span class="n">copyfile</span><span class="p">(</span><span class="n">filepath_dsm</span><span class="p">,</span> <span class="n">outputDir</span> <span class="o">+</span> <span class="s1">&#39;/DSM.tif&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Save met file</span>
+            <span class="c1">#copyfile(inputMet, outputDir + &#39;/metfile.txt&#39;)</span>
+
+            <span class="c1"># Save CDSM</span>
+            <span class="k">if</span> <span class="n">usevegdem</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">copyfile</span><span class="p">(</span><span class="n">vegdsm_path</span><span class="p">,</span> <span class="n">outputDir</span> <span class="o">+</span> <span class="s1">&#39;/CDSM.tif&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Saving settings from SOLWEIG for SOLWEIG1D in TreePlanter</span>
+            <span class="n">settingsHeader</span> <span class="o">=</span> <span class="s1">&#39;UTC, posture, onlyglobal, landcover, anisotropic, cylinder, albedo_walls, albedo_ground, emissivity_walls, emissivity_ground, absK, absL, elevation, patch_option&#39;</span>
+            <span class="n">settingsFmt</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%i</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%i</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%i</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%i</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%i</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%i</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%1.2f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%1.2f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%1.2f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%1.2f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%1.2f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%1.2f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%1.2f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%i</span><span class="s1">&#39;</span>
+            <span class="n">settingsData</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">utc</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">onlyglobal</span><span class="p">,</span> <span class="n">landcover</span><span class="p">,</span> <span class="n">anisotropic_sky</span><span class="p">,</span> <span class="n">cyl</span><span class="p">,</span> <span class="n">albedo_b</span><span class="p">,</span> <span class="n">albedo_g</span><span class="p">,</span> <span class="n">ewall</span><span class="p">,</span> <span class="n">eground</span><span class="p">,</span> <span class="n">absK</span><span class="p">,</span> <span class="n">absL</span><span class="p">,</span> <span class="n">alt</span><span class="p">,</span> <span class="n">patch_option</span><span class="p">]])</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">outputDir</span> <span class="o">+</span> <span class="s1">&#39;/treeplantersettings.txt&#39;</span><span class="p">,</span> <span class="n">settingsData</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">settingsFmt</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">settingsHeader</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+        <span class="c1"># Output I0 vs. Kglobal plot</span>
+        <span class="n">radG_for_plot</span> <span class="o">=</span> <span class="n">radG</span><span class="p">[</span><span class="n">DOY</span> <span class="o">==</span> <span class="n">first_unique_day</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">hours_for_plot</span> <span class="o">=</span> <span class="n">hours</span><span class="p">[</span><span class="n">DOY</span> <span class="o">==</span> <span class="n">first_unique_day</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hours_for_plot</span><span class="p">,</span> <span class="n">I0_array</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;I0&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hours_for_plot</span><span class="p">,</span> <span class="n">radG_for_plot</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Kglobal&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Shortwave radiation [$Wm^{-2}$]&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Hours&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;UTC&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">utc</span><span class="p">)))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">outputDir</span> <span class="o">+</span> <span class="s1">&#39;/metCheck.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+
+        <span class="c1"># Copying met file for SpatialTC</span>
+        <span class="n">copyfile</span><span class="p">(</span><span class="n">inputMet</span><span class="p">,</span> <span class="n">outputDir</span> <span class="o">+</span> <span class="s1">&#39;/metforcing.txt&#39;</span><span class="p">)</span>
+        
+        <span class="n">tmrtplot</span> <span class="o">=</span> <span class="n">tmrtplot</span> <span class="o">/</span> <span class="n">Ta</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>  <span class="c1"># fix average Tmrt instead of sum, 20191022</span>
+        <span class="n">saveraster</span><span class="p">(</span><span class="n">gdal_dsm</span><span class="p">,</span> <span class="n">outputDir</span> <span class="o">+</span> <span class="s1">&#39;/Tmrt_average.tif&#39;</span><span class="p">,</span> <span class="n">tmrtplot</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SOLWEIG: Model calculation finished.&quot;</span><span class="p">)</span>
+
+        <span class="n">rmtree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+     
+        <span class="k">return</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT_DIR</span><span class="p">:</span> <span class="n">outputDir</span><span class="p">}</span></div>
+</div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="s1">&#39;D&#39;</span>
+    <span class="c1"># folder_list = [&#39;2000&#39;]</span>
+    <span class="n">front</span> <span class="o">=</span> <span class="s2">&quot;D:/Geomatics/optimization_tests&quot;</span>
+    <span class="n">front2</span> <span class="o">=</span> <span class="s2">&quot;D:/Geomatics/optimization_tests_laptop&quot;</span>
+    <span class="n">INPUT_MET</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">D</span><span class="si">}</span><span class="s2">:/Geomatics/thesis/heattryout/preprocess/climatedata/UMEPclimate_oneday.txt&quot;</span>
+    <span class="c1">#</span>
+    <span class="c1"># # f&quot;{D}:/Geomatics/optimization_tests/</span>
+    <span class="c1"># for folder in folder_list:</span>
+    <span class="c1">#     INPUT_DSM = f&quot;{front}/{folder}/final_dsm_over.tif&quot;</span>
+    <span class="c1">#     INPUT_SVF = f&quot;{front}/{folder}/svf_umep_trees/svfs.zip&quot;</span>
+    <span class="c1">#     INPUT_ANISO = f&quot;{front}/{folder}/svf_umep_trees/shadowmats.npz&quot;</span>
+    <span class="c1">#     INPUT_LC = f&quot;{front}/{folder}/landcover.tif&quot;</span>
+    <span class="c1">#     INPUT_CDSM = f&quot;{front}/{folder}/CHM.tif&quot;</span>
+    <span class="c1">#     INPUT_HEIGHT = f&quot;{front}/{folder}/wallheight.tif&quot;</span>
+    <span class="c1">#     INPUT_ASPECT = f&quot;{front}/{folder}/wallaspect.tif&quot;</span>
+    <span class="c1">#     UTC = 0</span>
+    <span class="c1">#     OUTPUT_DIR =f&quot;{front2}/{folder}/solweig_umep_chm&quot;</span>
+    <span class="c1">#</span>
+    <span class="c1">#     dump_stats = f&quot;{front2}/profile_results_umep_chm.prof&quot;</span>
+    <span class="c1">#</span>
+    <span class="c1">#     test = SOLWEIGAlgorithm(INPUT_DSM, INPUT_SVF, INPUT_CDSM, INPUT_HEIGHT, INPUT_ASPECT, UTC, OUTPUT_DIR, INPUT_MET, INPUT_LC=INPUT_LC, INPUT_ANISO=INPUT_ANISO)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     with cProfile.Profile() as profiler:</span>
+    <span class="c1">#         test.processAlgorithm()</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Print profiling results</span>
+    <span class="c1">#     stats = pstats.Stats(profiler)</span>
+    <span class="c1">#     stats.sort_stats(&#39;cumulative&#39;)</span>
+    <span class="c1">#     stats.print_stats(20)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     stats.dump_stats(dump_stats)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     txt_output = f&quot;{front2}/{folder}/profile_results_umep_chm.txt&quot;</span>
+    <span class="c1">#     with open(txt_output, &quot;w&quot;) as f:</span>
+    <span class="c1">#         stats = pstats.Stats(profiler, stream=f)</span>
+    <span class="c1">#         stats.sort_stats(&#39;cumulative&#39;)</span>
+    <span class="c1">#         stats.print_stats(20)</span>
+
+    <span class="n">folder_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2000&#39;</span><span class="p">,</span> <span class="s1">&#39;3000&#39;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">folder_list</span><span class="p">:</span>
+        <span class="n">INPUT_DSM</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">front</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">/final_dsm_over.tif&quot;</span>
+        <span class="n">INPUT_SVF</span> <span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">front2</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">/svf_umep/svfs.zip&quot;</span>
+        <span class="n">INPUT_ANISO</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">front2</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">/svf_umep/shadowmats.npz&quot;</span>
+        <span class="n">INPUT_LC</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">front</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">/landcover.tif&quot;</span>
+        <span class="n">INPUT_CDSM</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">INPUT_HEIGHT</span> <span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">front</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">/wallheight.tif&quot;</span>
+        <span class="n">INPUT_ASPECT</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">front</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">/wallaspect.tif&quot;</span>
+        <span class="n">UTC</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">OUTPUT_DIR</span> <span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">front2</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">/solweig_umep&quot;</span>
+
+        <span class="n">dump_stats</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">front2</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">/profile_results_umep.prof&quot;</span>
+
+        <span class="n">test</span> <span class="o">=</span> <span class="n">SOLWEIGAlgorithm</span><span class="p">(</span><span class="n">INPUT_DSM</span><span class="p">,</span> <span class="n">INPUT_SVF</span><span class="p">,</span> <span class="n">INPUT_CDSM</span><span class="p">,</span> <span class="n">INPUT_HEIGHT</span><span class="p">,</span> <span class="n">INPUT_ASPECT</span><span class="p">,</span> <span class="n">UTC</span><span class="p">,</span> <span class="n">OUTPUT_DIR</span><span class="p">,</span> <span class="n">INPUT_MET</span><span class="p">,</span> <span class="n">INPUT_LC</span><span class="o">=</span><span class="n">INPUT_LC</span><span class="p">,</span> <span class="n">INPUT_ANISO</span><span class="o">=</span><span class="n">INPUT_ANISO</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">cProfile</span><span class="o">.</span><span class="n">Profile</span><span class="p">()</span> <span class="k">as</span> <span class="n">profiler</span><span class="p">:</span>
+            <span class="n">test</span><span class="o">.</span><span class="n">processAlgorithm</span><span class="p">()</span>
+
+        <span class="c1"># Print profiling results</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">pstats</span><span class="o">.</span><span class="n">Stats</span><span class="p">(</span><span class="n">profiler</span><span class="p">)</span>
+        <span class="n">stats</span><span class="o">.</span><span class="n">sort_stats</span><span class="p">(</span><span class="s1">&#39;cumulative&#39;</span><span class="p">)</span>
+        <span class="n">stats</span><span class="o">.</span><span class="n">print_stats</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+
+        <span class="n">stats</span><span class="o">.</span><span class="n">dump_stats</span><span class="p">(</span><span class="n">dump_stats</span><span class="p">)</span>
+
+        <span class="n">txt_output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">front2</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">/profile_results_umep.txt&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">txt_output</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">stats</span> <span class="o">=</span> <span class="n">pstats</span><span class="o">.</span><span class="n">Stats</span><span class="p">(</span><span class="n">profiler</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">stats</span><span class="o">.</span><span class="n">sort_stats</span><span class="p">(</span><span class="s1">&#39;cumulative&#39;</span><span class="p">)</span>
+            <span class="n">stats</span><span class="o">.</span><span class="n">print_stats</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, Jessica Monahan
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>
